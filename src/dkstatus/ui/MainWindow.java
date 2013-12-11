@@ -6,7 +6,9 @@
 
 package dkstatus.ui;
 
+import dkstatus.DKStatus;
 import dkstatus.world.World;
+import java.awt.Color;
 
 /**
  *
@@ -37,6 +39,17 @@ public class MainWindow extends javax.swing.JFrame {
         lblWood = new javax.swing.JLabel();
         lblStone = new javax.swing.JLabel();
         lblIron = new javax.swing.JLabel();
+        lblStorage = new javax.swing.JLabel();
+        jpVillage = new javax.swing.JPanel();
+        lblVillage = new javax.swing.JLabel();
+        lblVillageNamePos = new javax.swing.JLabel();
+        jpAnnounce = new javax.swing.JPanel();
+        lblIncomingAttacks = new javax.swing.JLabel();
+        lblIncomingAttacksCount = new javax.swing.JLabel();
+        jpUpdate = new javax.swing.JPanel();
+        lblUpdateText = new javax.swing.JLabel();
+        lblUpdateTime = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DK Status");
@@ -45,25 +58,29 @@ public class MainWindow extends javax.swing.JFrame {
         jtaMainText.setRows(5);
         jspMainText.setViewportView(jtaMainText);
 
-        lblWood.setText("jLabel1");
+        lblWood.setText("0");
 
-        lblStone.setText("jLabel1");
+        lblStone.setText("0");
         lblStone.setName(""); // NOI18N
 
-        lblIron.setText("jLabel1");
+        lblIron.setText("0");
+
+        lblStorage.setText("0");
 
         javax.swing.GroupLayout jpResourcesLayout = new javax.swing.GroupLayout(jpResources);
         jpResources.setLayout(jpResourcesLayout);
         jpResourcesLayout.setHorizontalGroup(
             jpResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpResourcesLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(32, 32, 32)
                 .addComponent(lblWood)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(lblStone)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(lblIron)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(lblStorage)
+                .addContainerGap())
         );
         jpResourcesLayout.setVerticalGroup(
             jpResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,11 +89,101 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jpResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWood)
                     .addComponent(lblStone)
-                    .addComponent(lblIron))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(lblIron)
+                    .addComponent(lblStorage))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblStone.getAccessibleContext().setAccessibleName("0");
+
+        lblVillage.setText("Vesnice:");
+
+        javax.swing.GroupLayout jpVillageLayout = new javax.swing.GroupLayout(jpVillage);
+        jpVillage.setLayout(jpVillageLayout);
+        jpVillageLayout.setHorizontalGroup(
+            jpVillageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpVillageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblVillage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVillageNamePos, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpVillageLayout.setVerticalGroup(
+            jpVillageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpVillageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpVillageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVillage)
+                    .addComponent(lblVillageNamePos))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblIncomingAttacks.setText("Příchozí útoky");
+
+        lblIncomingAttacksCount.setText("0");
+
+        javax.swing.GroupLayout jpAnnounceLayout = new javax.swing.GroupLayout(jpAnnounce);
+        jpAnnounce.setLayout(jpAnnounceLayout);
+        jpAnnounceLayout.setHorizontalGroup(
+            jpAnnounceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAnnounceLayout.createSequentialGroup()
+                .addGroup(jpAnnounceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpAnnounceLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblIncomingAttacks))
+                    .addGroup(jpAnnounceLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(lblIncomingAttacksCount)))
+                .addContainerGap(125, Short.MAX_VALUE))
+        );
+        jpAnnounceLayout.setVerticalGroup(
+            jpAnnounceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAnnounceLayout.createSequentialGroup()
+                .addComponent(lblIncomingAttacks)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIncomingAttacksCount)
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+
+        lblUpdateText.setText("Aktualizace za:");
+
+        lblUpdateTime.setText("0");
+
+        btnUpdate.setText("Aktualizovat");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpUpdateLayout = new javax.swing.GroupLayout(jpUpdate);
+        jpUpdate.setLayout(jpUpdateLayout);
+        jpUpdateLayout.setHorizontalGroup(
+            jpUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpUpdateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUpdateText)
+                    .addGroup(jpUpdateLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(lblUpdateTime)))
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate)
+                .addContainerGap(225, Short.MAX_VALUE))
+        );
+        jpUpdateLayout.setVerticalGroup(
+            jpUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpUpdateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate)
+                    .addGroup(jpUpdateLayout.createSequentialGroup()
+                        .addComponent(lblUpdateText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblUpdateTime)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jpMainLayout = new javax.swing.GroupLayout(jpMain);
         jpMain.setLayout(jpMainLayout);
@@ -85,19 +192,30 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jpMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jspMainText)
                     .addGroup(jpMainLayout.createSequentialGroup()
-                        .addComponent(jpResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpAnnounce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jspMainText, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
+                    .addGroup(jpMainLayout.createSequentialGroup()
+                        .addComponent(jpVillage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jpUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpMainLayout.setVerticalGroup(
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
-                .addComponent(jspMainText, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpResources, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpVillage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jpAnnounce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jspMainText, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -115,48 +233,28 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
-        });
-    }
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        DKStatus.UpdateData();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JPanel jpAnnounce;
     private javax.swing.JPanel jpMain;
     private javax.swing.JPanel jpResources;
+    private javax.swing.JPanel jpUpdate;
+    private javax.swing.JPanel jpVillage;
     private javax.swing.JScrollPane jspMainText;
     private javax.swing.JTextArea jtaMainText;
+    private javax.swing.JLabel lblIncomingAttacks;
+    private javax.swing.JLabel lblIncomingAttacksCount;
     private javax.swing.JLabel lblIron;
     private javax.swing.JLabel lblStone;
+    private javax.swing.JLabel lblStorage;
+    private javax.swing.JLabel lblUpdateText;
+    private javax.swing.JLabel lblUpdateTime;
+    private javax.swing.JLabel lblVillage;
+    private javax.swing.JLabel lblVillageNamePos;
     private javax.swing.JLabel lblWood;
     // End of variables declaration//GEN-END:variables
 
@@ -168,5 +266,16 @@ public class MainWindow extends javax.swing.JFrame {
         lblWood.setText(String.valueOf(world.getResources().Wood));
         lblStone.setText(String.valueOf(world.getResources().Stone));
         lblIron.setText(String.valueOf(world.getResources().Iron));
+        lblStorage.setText(String.valueOf(world.getResources().Storage));
+        
+        lblVillageNamePos.setText(String.format("%s (%d|%d)", world.getPlayer().VillageName, world.getPlayer().VillagePosX, world.getPlayer().VillagePosY));
+        
+        lblUpdateTime.setText(String.valueOf(world.getNexUpdateTime() / 1000.0f));
+        
+        lblIncomingAttacksCount.setText(String.valueOf(world.getPlayer().IncomingAttacks));
+        if (world.getPlayer().IsAttacked())
+            lblIncomingAttacksCount.setForeground(Color.red);
+        else
+            lblIncomingAttacksCount.setForeground(Color.black);
     }
 }

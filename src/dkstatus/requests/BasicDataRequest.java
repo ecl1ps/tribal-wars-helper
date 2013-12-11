@@ -51,5 +51,13 @@ public class BasicDataRequest {
         Element forumMessage = menu.select("#tribe_forum_indicator").first(); // players without tribe don't have this element
         world.getPlayer().HasForumMessage = forumMessage != null && !forumMessage.hasAttr("style");
         
+        world.getPlayer().VillageName = headerInfo.select("#menu_row2_village a").first().text();
+        String pos = headerInfo.select("#menu_row2 td b").first().text();
+        world.getPlayer().VillagePosX = Integer.parseInt(pos.substring(1, 4));
+        world.getPlayer().VillagePosY = Integer.parseInt(pos.substring(5, 8));
+        
+        world.getPlayer().IncomingAttacks = Integer.parseInt(headerInfo.select("#incomings_amount").first().text());
+        String supports = headerInfo.select("#supports_amount").first().text();
+        world.getPlayer().IncomingSupports = supports.isEmpty() ? 0 : Integer.parseInt(supports);
     }
 }

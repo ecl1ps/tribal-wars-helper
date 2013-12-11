@@ -9,4 +9,7 @@ public class Config {
     public static final int WORLD = 33;
     public static final String ROOT_DOMAIN = "divokekmeny.cz";
     public static final String VILLAGE_ID = "28262";
+    
+    public static final int UPDATE_MS = 3000;
+    public static final int UPDATE_JITTER = 3000;
 }

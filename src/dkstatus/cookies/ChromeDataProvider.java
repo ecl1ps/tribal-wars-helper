@@ -50,7 +50,7 @@ public class ChromeDataProvider implements IBrowserDataProvider {
                 /*if (!name.equals("sid") && !name.equals("cid") && !name.equals("user") && !name.equals("password"))
                     continue;*/
                 
-                Logger.getLogger(ChromeDataProvider.class.getName()).log(Level.INFO, "Cookie: " + host + " Name: " + name + " Value: " + value);
+                //Logger.getLogger(ChromeDataProvider.class.getName()).log(Level.INFO, "Cookie: " + host + " Name: " + name + " Value: " + value);
                 
                 BasicClientCookie cookie = new BasicClientCookie(name, value);
                 cookie.setDomain(host);
