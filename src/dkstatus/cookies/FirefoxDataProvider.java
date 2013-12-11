@@ -18,7 +18,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
  *
  * @author Johny
  */
-public class FirefoxCookieProvider implements ICookieProvider {
+public class FirefoxDataProvider implements IBrowserDataProvider {
 
     @Override
     public CookieStore getBrowserCookies() {
@@ -47,12 +47,17 @@ public class FirefoxCookieProvider implements ICookieProvider {
                 cookieStore.addCookie(cookie);                
             }  
         } catch(ClassNotFoundException | SQLException e) {
-            Logger.getLogger(FirefoxCookieProvider.class.toString()).log(Level.SEVERE, "error loading cookies", e);
+            Logger.getLogger(FirefoxDataProvider.class.toString()).log(Level.SEVERE, "error loading cookies", e);
         } 
 
 
         
         return cookieStore;
+    }
+
+    @Override
+    public String getUserAgent() {
+        return "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0";
     }
     
 }

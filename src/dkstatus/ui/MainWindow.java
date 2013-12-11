@@ -6,6 +6,8 @@
 
 package dkstatus.ui;
 
+import dkstatus.world.World;
+
 /**
  *
  * @author Johny
@@ -31,14 +33,50 @@ public class MainWindow extends javax.swing.JFrame {
         jpMain = new javax.swing.JPanel();
         jspMainText = new javax.swing.JScrollPane();
         jtaMainText = new javax.swing.JTextArea();
+        jpResources = new javax.swing.JPanel();
+        lblWood = new javax.swing.JLabel();
+        lblStone = new javax.swing.JLabel();
+        lblIron = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DK Status");
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jtaMainText.setColumns(20);
         jtaMainText.setRows(5);
         jspMainText.setViewportView(jtaMainText);
+
+        lblWood.setText("jLabel1");
+
+        lblStone.setText("jLabel1");
+        lblStone.setName(""); // NOI18N
+
+        lblIron.setText("jLabel1");
+
+        javax.swing.GroupLayout jpResourcesLayout = new javax.swing.GroupLayout(jpResources);
+        jpResources.setLayout(jpResourcesLayout);
+        jpResourcesLayout.setHorizontalGroup(
+            jpResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpResourcesLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblWood)
+                .addGap(18, 18, 18)
+                .addComponent(lblStone)
+                .addGap(18, 18, 18)
+                .addComponent(lblIron)
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+        jpResourcesLayout.setVerticalGroup(
+            jpResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpResourcesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWood)
+                    .addComponent(lblStone)
+                    .addComponent(lblIron))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        lblStone.getAccessibleContext().setAccessibleName("0");
 
         javax.swing.GroupLayout jpMainLayout = new javax.swing.GroupLayout(jpMain);
         jpMain.setLayout(jpMainLayout);
@@ -46,13 +84,19 @@ public class MainWindow extends javax.swing.JFrame {
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jspMainText, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpMainLayout.createSequentialGroup()
+                        .addComponent(jpResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jspMainText, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpMainLayout.setVerticalGroup(
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainLayout.createSequentialGroup()
-                .addGap(163, 163, 163)
+                .addContainerGap()
+                .addComponent(jpResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
                 .addComponent(jspMainText, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -108,11 +152,21 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jpMain;
+    private javax.swing.JPanel jpResources;
     private javax.swing.JScrollPane jspMainText;
     private javax.swing.JTextArea jtaMainText;
+    private javax.swing.JLabel lblIron;
+    private javax.swing.JLabel lblStone;
+    private javax.swing.JLabel lblWood;
     // End of variables declaration//GEN-END:variables
 
     public void setResponseText(String res) {
         jtaMainText.append(res);
+    }
+
+    public void updateWindow(World world) {
+        lblWood.setText(String.valueOf(world.getResources().Wood));
+        lblStone.setText(String.valueOf(world.getResources().Stone));
+        lblIron.setText(String.valueOf(world.getResources().Iron));
     }
 }

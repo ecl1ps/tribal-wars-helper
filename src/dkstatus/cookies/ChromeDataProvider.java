@@ -22,7 +22,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
  *
  * @author Johny
  */
-public class ChromeCookieProvider implements ICookieProvider {
+public class ChromeDataProvider implements IBrowserDataProvider {
 
     @Override
     public CookieStore getBrowserCookies() {
@@ -33,7 +33,7 @@ public class ChromeCookieProvider implements ICookieProvider {
         try {
             Files.copy(Paths.get(repositoryPath), Paths.get(repositoryPath + ".copy"), REPLACE_EXISTING);
         } catch (IOException ex) {
-            Logger.getLogger(ChromeCookieProvider.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChromeDataProvider.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {  
@@ -47,12 +47,10 @@ public class ChromeCookieProvider implements ICookieProvider {
                 String name = resultSet.getString("name");
                 String value = resultSet.getString("value");
                 
-                //System.out.println(host +" Name: " + name + " Value: " + value);
-                
                 /*if (!name.equals("sid") && !name.equals("cid") && !name.equals("user") && !name.equals("password"))
                     continue;*/
                 
-                System.out.println(host +" Name: " + name + " Value: " + value);
+                Logger.getLogger(ChromeDataProvider.class.getName()).log(Level.INFO, "Cookie: " + host + " Name: " + name + " Value: " + value);
                 
                 BasicClientCookie cookie = new BasicClientCookie(name, value);
                 cookie.setDomain(host);
@@ -65,10 +63,15 @@ public class ChromeCookieProvider implements ICookieProvider {
                 cookieStore.addCookie(cookie);                
             }  
         } catch(ClassNotFoundException | SQLException e) {
-            Logger.getLogger(ChromeCookieProvider.class.toString()).log(Level.SEVERE, "error loading cookies", e);
+            Logger.getLogger(ChromeDataProvider.class.toString()).log(Level.SEVERE, "error loading cookies", e);
         } 
         
         return cookieStore;
+    }
+
+    @Override
+    public String getUserAgent() {
+        return "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36";
     }
     
 }
