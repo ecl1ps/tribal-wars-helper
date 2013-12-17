@@ -1,23 +1,78 @@
 
 package dkstatus.world;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author Johny
  */
 public class Player {
-    public boolean HasAnnounce = false;
-    public boolean HasMessage = false;
-    public boolean HasForumMessage = false;
     
-    public int IncomingAttacks = 0;
-    public int IncomingSupports = 0;
+    private String name = "";
+    private int points = 0;
+    private boolean isLoggedIn = true;
+    private boolean hasAnnounce = false;
+    private boolean hasMessage = false;
+    private boolean hasForumMessage = false;
     
-    public String VillageName = "";
-    public int VillagePosX = 0;
-    public int VillagePosY = 0;
+    private final List<Village> villages = new LinkedList<>();
+
+    public List<Village> getVillages() {
+        return villages;
+    }
+
+    public void addVillage(Village village) {
+        villages.add(village);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+    }
+
+    public boolean hasAnnounce() {
+        return hasAnnounce;
+    }
+
+    public void hasAnnounce(boolean hasAnnounce) {
+        this.hasAnnounce = hasAnnounce;
+    }
+
+    public boolean hasMessage() {
+        return hasMessage;
+    }
+
+    public void hasMessage(boolean hasMessage) {
+        this.hasMessage = hasMessage;
+    }
+
+    public boolean hasForumMessage() {
+        return hasForumMessage;
+    }
+
+    public void hasForumMessage(boolean hasForumMessage) {
+        this.hasForumMessage = hasForumMessage;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
     
-    public boolean IsAttacked() {
-        return IncomingAttacks > 0;
-    }    
 }

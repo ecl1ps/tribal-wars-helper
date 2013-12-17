@@ -8,7 +8,6 @@ import dkstatus.world.World;
 import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +38,9 @@ public class DKStatus {
 
     public static void UpdateData() {
         try {
+            if (!world.getPlayer().isLoggedIn())
+                BrowserManager.refreshCookies();
+            
             BasicDataRequest.updateData(world);
             world.ProcessUpdate();
         } catch (IOException ex) {

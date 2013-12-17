@@ -1,5 +1,7 @@
 package dkstatus;
 
+import org.jsoup.nodes.Document;
+
 /**
  *
  * @author Johny
@@ -7,5 +9,9 @@ package dkstatus;
 public class Utils {
     public static String getRootLink() {
         return String.format("http://%s%s.%s/", Config.LANG, Config.WORLD, Config.ROOT_DOMAIN);
+    }
+
+    public static boolean isUserLogged(Document doc) {
+        return !doc.select(".top_bar").isEmpty();
     }
 }
