@@ -1,6 +1,5 @@
 package dkstatus.requests;
 
-import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.world.IncomingAttack;
 import dkstatus.world.Village;
@@ -27,7 +26,7 @@ public class BasicDataRequest implements IUpdateRequest {
         
         try (CloseableHttpClient httpclient = NetUtils.createClient()) {
             
-            HttpGet request = NetUtils.prepareGetRequest("game.php?village=" + villageId + "&screen=overview");
+            HttpGet request = NetUtils.prepareGetRequest("village=" + villageId + "&screen=overview");
 
             Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
             

@@ -2,8 +2,6 @@
 package dkstatus.ui;
 
 import dkstatus.world.Village;
-import java.awt.Color;
-import java.util.Vector;
 
 /**
  *
@@ -13,9 +11,17 @@ public class VillagePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form VillagePanel
+     * @param id
      */
-    public VillagePanel() {
+    public VillagePanel(int id) {
         initComponents();
+        
+        UIUtils.transformToHyperlink(lblWoodCount, "village=" + id + "&screen=wood");
+        UIUtils.transformToHyperlink(lblStoneCount, "village=" + id + "&screen=stone");
+        UIUtils.transformToHyperlink(lblIronCount, "village=" + id + "&screen=iron");
+        UIUtils.transformToHyperlink(lblStorageCount, "village=" + id + "&screen=storage");
+        
+        UIUtils.transformToHyperlink(lblVillageName, "village=" + id + "&screen=overview");
     }
 
     /**
@@ -58,7 +64,7 @@ public class VillagePanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblWoodCount)
-                        .addGap(35, 35, 35)
+                        .addGap(31, 31, 31)
                         .addComponent(lblStoneCount)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblIronCount))

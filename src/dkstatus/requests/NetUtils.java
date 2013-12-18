@@ -23,7 +23,7 @@ public class NetUtils {
     }
     
     public static HttpGet prepareGetRequest(String requestParams) {
-        HttpGet request = new HttpGet(Utils.getRootLink() + requestParams);
+        HttpGet request = new HttpGet(Utils.getLink(requestParams));
         request.setHeader("User-Agent", BrowserManager.getUserAgent());
         return request;
     }    

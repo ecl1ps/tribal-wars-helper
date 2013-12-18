@@ -28,7 +28,7 @@ public class VillageListRequest implements IUpdateRequest {
         
         try (CloseableHttpClient httpclient = NetUtils.createClient()) {
             
-            HttpGet request = NetUtils.prepareGetRequest("game.php?screen=overview_villages");
+            HttpGet request = NetUtils.prepareGetRequest("screen=overview_villages");
 
             Logger.getLogger(VillageListRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
             

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package dkstatus.ui;
 
 import dkstatus.DKStatus;
@@ -15,7 +9,6 @@ import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,6 +21,11 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        
+        UIUtils.transformToHyperlink(lblAnnounce, "screen=report");
+        UIUtils.transformToHyperlink(lblMessage, "screen=mail");
+        UIUtils.transformToHyperlink(lblAnnounce, "screen=ally");
+        
         pPlayer.setVisible(false);
     }
 
@@ -201,7 +199,7 @@ public class MainWindow extends javax.swing.JFrame {
             
             VillagePanel vp;
             if (!villagePanels.containsKey(v.getId())) {
-                vp = new VillagePanel();
+                vp = new VillagePanel(v.getId());
                 villagePanels.put(v.getId(), vp);
                 tpVillages.add(v.toString(), vp);
             } else {
