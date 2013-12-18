@@ -12,7 +12,7 @@ public class Player {
     
     private String name = "";
     private int points = 0;
-    private boolean isLoggedIn = true;
+    private boolean isLoggedIn = false;
     private boolean hasAnnounce = false;
     private boolean hasMessage = false;
     private boolean hasForumMessage = false;

@@ -49,15 +49,11 @@ public class ChromeDataProvider implements IBrowserDataProvider {
                             /*if (!name.equals("sid") && !name.equals("cid") && !name.equals("user") && !name.equals("password"))
                                 continue;*/
 
-                            Logger.getLogger(ChromeDataProvider.class.getName()).log(Level.INFO, "Cookie: " + host + " Name: " + name + " Value: " + value);
+                            Logger.getLogger(ChromeDataProvider.class.getName()).log(Level.FINER, "Cookie: " + host + " Name: " + name + " Value: " + value);
 
                             BasicClientCookie cookie = new BasicClientCookie(name, value);
                             cookie.setDomain(host);
                             cookie.setPath(resultSet.getString("path"));
-                            /*String date = resultSet.getString("expires_utc");
-                            if (!date.equals("0"))
-                                cookie.setExpiryDate(new java.util.Date(Long.parseLong(date)*1000l));*/
-                            cookie.setSecure(resultSet.getBoolean("secure"));
 
                             cookieStore.addCookie(cookie);                
                         }

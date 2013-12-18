@@ -16,15 +16,20 @@
           <SubComponents>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="rbmiChrome">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Chrome"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeSourceBrowserToChrome"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="rbmiFirefox">
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="rbmiFirefox">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Firefox"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeSourceBrowserToFirefox"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -91,7 +96,11 @@
                   <Component id="lblPointCount" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Component id="lblAnnounce" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="682" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lblMessage" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lblForum" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="542" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -104,6 +113,8 @@
                       <Component id="lblPlayerName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPointCount" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblAnnounce" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMessage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblForum" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
@@ -135,6 +146,22 @@
               <Image iconType="3" name="/resources/images/announce.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ozn&#xe1;men&#xed;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMessage">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/images/message.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Zpr&#xe1;vy"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblForum">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/images/forum_active.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Kmen"/>
           </Properties>
         </Component>
       </SubComponents>

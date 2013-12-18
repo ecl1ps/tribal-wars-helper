@@ -6,6 +6,10 @@
 
 package dkstatus.ui;
 
+import dkstatus.DKStatus;
+import dkstatus.cookies.BrowserManager;
+import dkstatus.cookies.ChromeDataProvider;
+import dkstatus.cookies.FirefoxDataProvider;
 import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
@@ -24,6 +28,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        pPlayer.setVisible(false);
     }
 
     /**
@@ -41,12 +46,14 @@ public class MainWindow extends javax.swing.JFrame {
         lblPlayerName = new javax.swing.JLabel();
         lblPointCount = new javax.swing.JLabel();
         lblAnnounce = new javax.swing.JLabel();
+        lblMessage = new javax.swing.JLabel();
+        lblForum = new javax.swing.JLabel();
         tbToolbar = new javax.swing.JToolBar();
         mbMenu = new javax.swing.JMenuBar();
         mSettings = new javax.swing.JMenu();
         mBrowser = new javax.swing.JMenu();
         rbmiChrome = new javax.swing.JRadioButtonMenuItem();
-        rbmiFirefox = new javax.swing.JCheckBoxMenuItem();
+        rbmiFirefox = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DK Status");
@@ -59,6 +66,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         lblAnnounce.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/announce.png"))); // NOI18N
         lblAnnounce.setText("Oznámení");
+
+        lblMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/message.png"))); // NOI18N
+        lblMessage.setText("Zprávy");
+
+        lblForum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/forum_active.png"))); // NOI18N
+        lblForum.setText("Kmen");
 
         javax.swing.GroupLayout pPlayerLayout = new javax.swing.GroupLayout(pPlayer);
         pPlayer.setLayout(pPlayerLayout);
@@ -73,7 +86,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(lblPointCount)
                 .addGap(58, 58, 58)
                 .addComponent(lblAnnounce)
-                .addContainerGap(682, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblMessage)
+                .addGap(18, 18, 18)
+                .addComponent(lblForum)
+                .addContainerGap(542, Short.MAX_VALUE))
         );
         pPlayerLayout.setVerticalGroup(
             pPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,7 +100,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(lblPlayer)
                     .addComponent(lblPlayerName)
                     .addComponent(lblPointCount)
-                    .addComponent(lblAnnounce))
+                    .addComponent(lblAnnounce)
+                    .addComponent(lblMessage)
+                    .addComponent(lblForum))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -94,12 +113,21 @@ public class MainWindow extends javax.swing.JFrame {
 
         mBrowser.setText("Browser");
 
-        rbmiChrome.setSelected(true);
         rbmiChrome.setText("Chrome");
+        rbmiChrome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeSourceBrowserToChrome(evt);
+            }
+        });
         mBrowser.add(rbmiChrome);
 
         rbmiFirefox.setSelected(true);
         rbmiFirefox.setText("Firefox");
+        rbmiFirefox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeSourceBrowserToFirefox(evt);
+            }
+        });
         mBrowser.add(rbmiFirefox);
 
         mbMenu.add(mBrowser);
@@ -127,8 +155,22 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void changeSourceBrowserToChrome(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSourceBrowserToChrome
+        BrowserManager.setProvider(new ChromeDataProvider());
+        DKStatus.RefreshUpdate();
+        rbmiFirefox.setSelected(false);
+    }//GEN-LAST:event_changeSourceBrowserToChrome
+
+    private void changeSourceBrowserToFirefox(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSourceBrowserToFirefox
+        BrowserManager.setProvider(new FirefoxDataProvider());
+        DKStatus.RefreshUpdate();
+        rbmiChrome.setSelected(false);
+    }//GEN-LAST:event_changeSourceBrowserToFirefox
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblAnnounce;
+    private javax.swing.JLabel lblForum;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblPlayer;
     private javax.swing.JLabel lblPlayerName;
     private javax.swing.JLabel lblPointCount;
@@ -137,20 +179,23 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar mbMenu;
     private javax.swing.JPanel pPlayer;
     private javax.swing.JRadioButtonMenuItem rbmiChrome;
-    private javax.swing.JCheckBoxMenuItem rbmiFirefox;
+    private javax.swing.JRadioButtonMenuItem rbmiFirefox;
     private javax.swing.JToolBar tbToolbar;
     private javax.swing.JTabbedPane tpVillages;
     // End of variables declaration//GEN-END:variables
 
     private final Map<Integer, VillagePanel> villagePanels = new HashMap<>();
-    private final ImageIcon announceIcon = new ImageIcon(getClass().getResource("/resources/images/announce.png"));
     
     public void updateWindow(World world) {
         Player plr = world.getPlayer();
         
         lblPlayerName.setText(plr.getName());
         lblPointCount.setText(String.valueOf(plr.getPoints()));
-        lblAnnounce.setIcon(plr.hasAnnounce() ? announceIcon : null);
+        lblAnnounce.setVisible(plr.hasAnnounce());
+        lblMessage.setVisible(plr.hasMessage());
+        lblForum.setVisible(plr.hasForumMessage());
+        
+        pPlayer.setVisible(true);
         
         for (Village v : plr.getVillages()) {
             
