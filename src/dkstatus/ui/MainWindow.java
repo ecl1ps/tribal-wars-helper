@@ -7,7 +7,10 @@ import dkstatus.cookies.FirefoxDataProvider;
 import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
+import java.awt.Component;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +27,9 @@ public class MainWindow extends javax.swing.JFrame {
         
         UIUtils.transformToHyperlink(lblAnnounce, "screen=report");
         UIUtils.transformToHyperlink(lblMessage, "screen=mail");
-        UIUtils.transformToHyperlink(lblAnnounce, "screen=ally");
+        UIUtils.transformToHyperlink(lblForum, "screen=ally&mode=forum");
+        UIUtils.transformToHyperlink(lblPlayerName, "screen=info_player");
+        UIUtils.transformToHyperlink(lblPointCount, "screen=ranking&mode=player");
         
         pPlayer.setVisible(false);
     }
@@ -182,8 +187,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tpVillages;
     // End of variables declaration//GEN-END:variables
 
-    private final Map<Integer, VillagePanel> villagePanels = new HashMap<>();
-    
     public void updateWindow(World world) {
         Player plr = world.getPlayer();
         
@@ -195,18 +198,43 @@ public class MainWindow extends javax.swing.JFrame {
         
         pPlayer.setVisible(true);
         
-        for (Village v : plr.getVillages()) {
-            
-            VillagePanel vp;
-            if (!villagePanels.containsKey(v.getId())) {
+        updateVillages(plr.getVillages());
+    }
+
+    private void updateVillages(List<Village> villages) {
+        List<Integer> newIds = new ArrayList<>();
+        for (Village v : villages) // get ids of all current villages
+            newIds.add(v.getId());
+        
+        for (int i = 0; i < tpVillages.getTabCount(); i++)
+        {
+           VillagePanel vp = (VillagePanel)tpVillages.getComponentAt(i);
+           if (!newIds.contains(vp.getId())) { // remove tabs with non-existing villages
+               tpVillages.remove(vp);
+               i--;
+           } else {
+               newIds.remove(vp.getId()); // otherwise set id as not new
+           }
+        }
+        
+        for (Village v : villages) {
+            VillagePanel vp = null;
+            if (newIds.contains(v.getId())) {
                 vp = new VillagePanel(v.getId());
-                villagePanels.put(v.getId(), vp);
                 tpVillages.add(v.toString(), vp);
             } else {
-                vp = villagePanels.get(v.getId());
+                for (int i = 0; i < tpVillages.getTabCount(); i++)
+                {
+                    VillagePanel tmp = (VillagePanel)tpVillages.getTabComponentAt(i);
+                    if (tmp.getId() == v.getId()) {
+                        vp = tmp;
+                        break;
+                    }
+                }
             }
             
-            vp.updateVillage(v);
+            if (vp != null)
+                vp.updateVillage(v);
         }
     }
 }

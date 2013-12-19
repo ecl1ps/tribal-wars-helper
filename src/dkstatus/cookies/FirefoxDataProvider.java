@@ -5,7 +5,9 @@ import dkstatus.Config;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileStore;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,9 +28,16 @@ public class FirefoxDataProvider implements IBrowserDataProvider {
         
         CookieStore cookieStore = new BasicCookieStore();
         
-        String repositoryPath = System.getenv("APPDATA") + "\\Mozilla\\Firefox\\Profiles\\2f9swmun.default\\sessionstore.js";
+        String repositoryPath = System.getenv("APPDATA") + "\\Mozilla\\Firefox\\Profiles\\";
         byte[] encoded = null;
+        
         try {
+            FileStore fs = Files.getFileStore(Paths.get(repositoryPath));
+                
+            
+            repositoryPath += "2f9swmun.default\\sessionstore.js";
+        
+
             encoded = Files.readAllBytes(Paths.get(repositoryPath));
         } catch (IOException ex) {
             Logger.getLogger(FirefoxDataProvider.class.getName()).log(Level.SEVERE, null, ex);

@@ -9,6 +9,8 @@ public class Config {
     public static final int WORLD = 33;
     public static final String ROOT_DOMAIN = "divokekmeny.cz";
     
+    public static final float WORLD_MARCH_SPEED = 0.8f;
+    
     public static final int UPDATE_MS = 5000;
     public static final int UPDATE_JITTER = 5000;
 }

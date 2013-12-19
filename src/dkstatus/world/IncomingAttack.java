@@ -1,6 +1,7 @@
 
 package dkstatus.world;
 
+import java.awt.Point;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,15 +11,18 @@ import java.util.Date;
  */
 public class IncomingAttack {
     private final Date attackStarted;
+    private final Date attackArrives;
     private final String attackerName;
-    private final int attackerPosX;
-    private final int attackerPosY;
+    private final Point origin;
+    private final ArmyType type;
 
-    public IncomingAttack(String attackerName, int attackerPosX, int attackerPosY) {
+    public IncomingAttack(String attackerName, int attackerPosX, int attackerPosY, Date attackArrives) {
         attackStarted = new Date();
+        this.attackArrives = attackArrives;
         this.attackerName = attackerName;
-        this.attackerPosX = attackerPosX;
-        this.attackerPosY = attackerPosY;
+        origin = new Point(attackerPosX, attackerPosY);
+        
+        type = calculateAttackType();
     }
     
     /**
@@ -36,22 +40,19 @@ public class IncomingAttack {
     }
 
     /**
-     * @return the attackerPosX
+     * @return the attacker origin
      */
-    public int getAttackerPosX() {
-        return attackerPosX;
-    }
-
-    /**
-     * @return the attackerPosY
-     */
-    public int getAttackerPosY() {
-        return attackerPosY;
+    public Point getAttackerPos() {
+        return origin;
     }
 
     @Override
     public String toString() {
-        return new SimpleDateFormat().format(attackStarted) + " zaútočil " + attackerName + " (" + attackerPosX + "|" + attackerPosY + ')';
+        return new SimpleDateFormat().format(attackStarted) + " zaútočil " + attackerName + " (" + origin.x + "|" + origin.y + ')';
+    }
+
+    private ArmyType calculateAttackType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

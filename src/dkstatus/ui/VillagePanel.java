@@ -9,11 +9,13 @@ import dkstatus.world.Village;
  */
 public class VillagePanel extends javax.swing.JPanel {
 
+    private Integer id;
+    
     /**
      * Creates new form VillagePanel
      * @param id
      */
-    public VillagePanel(int id) {
+    public VillagePanel(Integer id) {
         initComponents();
         
         UIUtils.transformToHyperlink(lblWoodCount, "village=" + id + "&screen=wood");
@@ -24,6 +26,10 @@ public class VillagePanel extends javax.swing.JPanel {
         UIUtils.transformToHyperlink(lblVillageName, "village=" + id + "&screen=overview");
     }
 
+    public Integer getId() {
+        return id;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

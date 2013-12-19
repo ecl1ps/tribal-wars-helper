@@ -6,6 +6,7 @@ import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.awt.Point;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,11 +86,14 @@ public class BasicDataRequest implements IUpdateRequest {
             v.setContinent(pos.substring(10, 13));
 
             int currentAttacks = Integer.parseInt(headerInfo.select("#incomings_amount").first().text());
+            
+            Element incoming = doc.select("#show_incoming_units").first();
+            
             List<IncomingAttack> recordedAttacks = v.getIncomingAttacks();
             if (currentAttacks != recordedAttacks.size()) {
                 if (currentAttacks > recordedAttacks.size())
                     for (int i = recordedAttacks.size(); i <= currentAttacks; ++i)
-                        recordedAttacks.add(new IncomingAttack("Name", 123, 456)); //TODO
+                        recordedAttacks.add(new IncomingAttack("Name", 123, 456, new Date())); //TODO
                 else
                     recordedAttacks.subList(0, currentAttacks + 1); // TODO
             }
