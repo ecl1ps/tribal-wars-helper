@@ -6,10 +6,10 @@ import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.awt.Point;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -90,8 +90,12 @@ public class BasicDataRequest implements IUpdateRequest {
                     continue;
                 
                 String link = a.attr("href"); ///game.php?village=9845&amp;id=3124812&amp;type=other&amp;screen=info_command
-                String[] atoms = link.split(".*id=(\\d+).*");
-                int id = Integer.parseInt(atoms[0]);
+                Pattern p = Pattern.compile(".*id=(\\d+).*");
+                Matcher m = p.matcher(link); 
+                if (!m.find())
+                    continue;
+                
+                int id = Integer.parseInt(m.group(1));
                 
                 IncomingAttack att = v.getCommandId(id);
                 if (att != null)

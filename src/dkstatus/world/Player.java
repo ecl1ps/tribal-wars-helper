@@ -82,5 +82,13 @@ public class Player {
         
         return null;
     }
+
+    public int getIncomingAttackCount() {
+        int incomingAttacks = 0;
+        for (Village v : villages) {
+            incomingAttacks += v.getIncomingAttacks().size();
+        }
+        return incomingAttacks;
+    }
     
 }

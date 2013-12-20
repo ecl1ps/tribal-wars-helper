@@ -1,7 +1,9 @@
 
 package dkstatus.ui;
 
+import dkstatus.Utils;
 import dkstatus.world.Village;
+import java.util.Vector;
 
 /**
  *
@@ -41,12 +43,15 @@ public class VillagePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pResources = new javax.swing.JPanel();
         lblVillageName = new javax.swing.JLabel();
         lblWoodCount = new javax.swing.JLabel();
         lblStoneCount = new javax.swing.JLabel();
         lblIronCount = new javax.swing.JLabel();
         lblStorageCount = new javax.swing.JLabel();
+        pAttacks = new javax.swing.JPanel();
+        spAttacks = new javax.swing.JScrollPane();
+        lstAttacks = new javax.swing.JList();
 
         lblVillageName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/village.png"))); // NOI18N
         lblVillageName.setText("Uber Vesnice (111|222) K01");
@@ -63,60 +68,81 @@ public class VillagePanel extends javax.swing.JPanel {
         lblStorageCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/storage.png"))); // NOI18N
         lblStorageCount.setText("0");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pResourcesLayout = new javax.swing.GroupLayout(pResources);
+        pResources.setLayout(pResourcesLayout);
+        pResourcesLayout.setHorizontalGroup(
+            pResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pResourcesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblVillageName)
+                    .addGroup(pResourcesLayout.createSequentialGroup()
                         .addComponent(lblWoodCount)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(lblStoneCount)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblIronCount))
-                    .addComponent(lblVillageName))
-                .addGap(35, 35, 35)
-                .addComponent(lblStorageCount)
-                .addContainerGap(618, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblIronCount)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblStorageCount)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pResourcesLayout.setVerticalGroup(
+            pResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pResourcesLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblVillageName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(pResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWoodCount)
                     .addComponent(lblStoneCount)
                     .addComponent(lblIronCount)
                     .addComponent(lblStorageCount))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        spAttacks.setViewportView(lstAttacks);
+
+        javax.swing.GroupLayout pAttacksLayout = new javax.swing.GroupLayout(pAttacks);
+        pAttacks.setLayout(pAttacksLayout);
+        pAttacksLayout.setHorizontalGroup(
+            pAttacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(spAttacks, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+        );
+        pAttacksLayout.setVerticalGroup(
+            pAttacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(spAttacks, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pResources, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pAttacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 364, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 405, Short.MAX_VALUE))
+                .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pAttacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 242, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblIronCount;
     private javax.swing.JLabel lblStoneCount;
     private javax.swing.JLabel lblStorageCount;
     private javax.swing.JLabel lblVillageName;
     private javax.swing.JLabel lblWoodCount;
+    private javax.swing.JList lstAttacks;
+    private javax.swing.JPanel pAttacks;
+    private javax.swing.JPanel pResources;
+    private javax.swing.JScrollPane spAttacks;
     // End of variables declaration//GEN-END:variables
 
     void updateVillage(Village v) {
@@ -127,22 +153,11 @@ public class VillagePanel extends javax.swing.JPanel {
         lblIronCount.setText(String.valueOf(v.getResources().getIron()));
         lblStorageCount.setText(String.valueOf(v.getResources().getStorage()));
         
-        
+        lstAttacks.setListData(new Vector(v.getIncomingAttacks()));
 
-        /*if (world.getPlayer().IsLoggedIn)
-            lblVillageNamePos.setText();
-        else
-            lblVillageNamePos.setText("Hráč není přihlášen!");
-
-        lblUpdateTime.setText(String.valueOf(world.getNexUpdateTime() / 1000.0f));
-
-        lblIncomingAttacksCount.setText(String.valueOf(world.getPlayer().getIncomingAttacks().size()));
-
-        jlIncomingAttacks.setListData(new Vector(world.getPlayer().getIncomingAttacks()));
-
-        if (world.getPlayer().IsAttacked())
-            jpAnnounce.setBackground(Color.red);
-        else
-            jpAnnounce.setBackground(new Color(240, 240, 240));*/
+        if (v.IsAttacked()) {
+            requestFocusInWindow();
+            Utils.tone(500, 500);
+        }
     }
 }

@@ -1,19 +1,9 @@
 package dkstatus;
 
-import dkstatus.cookies.ChromeDataProvider;
-import dkstatus.cookies.BrowserManager;
-import dkstatus.requests.BasicDataRequest;
-import dkstatus.requests.VillageListRequest;
-import dkstatus.ui.MainWindow;
+import dkstatus.ui.WindowManager;
 import dkstatus.world.World;
-import java.awt.EventQueue;
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.Timer;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 
 /**
@@ -22,48 +12,24 @@ import java.util.logging.Logger;
  */
 public class DKStatus {
     
-    private static volatile MainWindow window;
     private static World world = new World();
-    private static final Timer t = new Timer();;
+    private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
     
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                window = new MainWindow();
-                window.setVisible(true);
-            }
-        });
         
-        UpdateData();        
+        WindowManager.initialize();
+
+        updateData();
     }
 
-    public static void UpdateData() {
-        world.beforeUpdate();
-        try {
-            if (!world.getPlayer().isLoggedIn()) {
-                BrowserManager.refreshCookies();
-                new VillageListRequest().updateData(world);
-            }
-            
-            new BasicDataRequest().updateData(world);
-        } catch (UnknownHostException ex) {
-            // without internet connection
-            world.getPlayer().setName("Offline");
-        } catch (IOException ex) {
-            Logger.getLogger(DKStatus.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        world.afterUpdate();
-
-        while (window == null) ; // bussy wait till window is created
-
-        t.schedule(new UpdateTask(), world.getNexUpdateTime());
-        window.updateWindow(world);
+    private static void updateData() {
+        executor.execute(new UpdateTask(executor, world));
     }
 
-    public static void RefreshUpdate() {
+    public static void refreshUpdate() {
+        executor.shutdownNow();
+        executor = Executors.newScheduledThreadPool(2);
         world = new World();
-        UpdateData();
+        updateData();
     }
 }

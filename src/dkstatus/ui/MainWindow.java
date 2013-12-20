@@ -7,11 +7,8 @@ import dkstatus.cookies.FirefoxDataProvider;
 import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
-import java.awt.Component;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -51,6 +48,9 @@ public class MainWindow extends javax.swing.JFrame {
         lblAnnounce = new javax.swing.JLabel();
         lblMessage = new javax.swing.JLabel();
         lblForum = new javax.swing.JLabel();
+        lblIncomingAttackCount = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        lblNextUpdateIn = new javax.swing.JLabel();
         tbToolbar = new javax.swing.JToolBar();
         mbMenu = new javax.swing.JMenuBar();
         mSettings = new javax.swing.JMenu();
@@ -76,6 +76,21 @@ public class MainWindow extends javax.swing.JFrame {
         lblForum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/forum_active.png"))); // NOI18N
         lblForum.setText("Kmen");
 
+        lblIncomingAttackCount.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblIncomingAttackCount.setForeground(java.awt.Color.red);
+        lblIncomingAttackCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/attack.png"))); // NOI18N
+        lblIncomingAttackCount.setText("0");
+
+        btnUpdate.setText("Aktualizovat");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        lblNextUpdateIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/time.png"))); // NOI18N
+        lblNextUpdateIn.setText("0");
+
         javax.swing.GroupLayout pPlayerLayout = new javax.swing.GroupLayout(pPlayer);
         pPlayer.setLayout(pPlayerLayout);
         pPlayerLayout.setHorizontalGroup(
@@ -93,7 +108,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(lblMessage)
                 .addGap(18, 18, 18)
                 .addComponent(lblForum)
-                .addContainerGap(542, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblIncomingAttackCount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
+                .addComponent(lblNextUpdateIn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUpdate)
+                .addContainerGap())
         );
         pPlayerLayout.setVerticalGroup(
             pPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +126,10 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(lblPointCount)
                     .addComponent(lblAnnounce)
                     .addComponent(lblMessage)
-                    .addComponent(lblForum))
+                    .addComponent(lblForum)
+                    .addComponent(lblIncomingAttackCount)
+                    .addComponent(btnUpdate)
+                    .addComponent(lblNextUpdateIn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -160,20 +184,27 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void changeSourceBrowserToChrome(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSourceBrowserToChrome
         BrowserManager.setProvider(new ChromeDataProvider());
-        DKStatus.RefreshUpdate();
+        DKStatus.refreshUpdate();
         rbmiFirefox.setSelected(false);
     }//GEN-LAST:event_changeSourceBrowserToChrome
 
     private void changeSourceBrowserToFirefox(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSourceBrowserToFirefox
         BrowserManager.setProvider(new FirefoxDataProvider());
-        DKStatus.RefreshUpdate();
+        DKStatus.refreshUpdate();
         rbmiChrome.setSelected(false);
     }//GEN-LAST:event_changeSourceBrowserToFirefox
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        DKStatus.refreshUpdate();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblAnnounce;
     private javax.swing.JLabel lblForum;
+    private javax.swing.JLabel lblIncomingAttackCount;
     private javax.swing.JLabel lblMessage;
+    private javax.swing.JLabel lblNextUpdateIn;
     private javax.swing.JLabel lblPlayer;
     private javax.swing.JLabel lblPlayerName;
     private javax.swing.JLabel lblPointCount;
@@ -187,18 +218,29 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tpVillages;
     // End of variables declaration//GEN-END:variables
 
-    public void updateWindow(World world) {
+    public synchronized void updateWindow(World world) {
         Player plr = world.getPlayer();
-        
-        lblPlayerName.setText(plr.getName());
+ 
+        if (world.getPlayer().isLoggedIn())
+            lblPlayerName.setText(plr.getName());
+        else
+            lblPlayerName.setText("Není přihlášen");
+
         lblPointCount.setText(String.valueOf(plr.getPoints()));
         lblAnnounce.setVisible(plr.hasAnnounce());
         lblMessage.setVisible(plr.hasMessage());
         lblForum.setVisible(plr.hasForumMessage());
         
         pPlayer.setVisible(true);
+
+        lblNextUpdateIn.setText(String.valueOf(world.getNexUpdateTime() / 1000.0f));
+        
+        int incomingAttacks = plr.getIncomingAttackCount();
+        lblIncomingAttackCount.setText(String.valueOf(incomingAttacks));
+        lblIncomingAttackCount.setVisible(incomingAttacks > 0);
         
         updateVillages(plr.getVillages());
+        
     }
 
     private void updateVillages(List<Village> villages) {

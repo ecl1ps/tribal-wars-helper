@@ -11,6 +11,6 @@ public class Config {
     
     public static final float WORLD_MARCH_SPEED = 0.8f;
     
-    public static final int UPDATE_MS = 5000;
-    public static final int UPDATE_JITTER = 5000;
+    public static final int UPDATE_MS = 10000;
+    public static final int UPDATE_JITTER = 10000;
 }
