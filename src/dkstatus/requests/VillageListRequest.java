@@ -1,13 +1,9 @@
 package dkstatus.requests;
 
-import dkstatus.Config;
 import dkstatus.Utils;
-import dkstatus.world.IncomingAttack;
 import dkstatus.world.Village;
 import dkstatus.world.World;
-import java.awt.Point;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.client.methods.HttpGet;
@@ -45,12 +41,8 @@ public class VillageListRequest implements IUpdateRequest {
         
         Document doc = Jsoup.parse(resultHtml);
         
-        if (!Utils.isUserLogged(doc)) {
-            world.getPlayer().setIsLoggedIn(false);
+        if (!Utils.checkUserLogged(doc, world))
             return;
-        } else {
-            world.getPlayer().setIsLoggedIn(true);
-        }
         
         world.getPlayer().getVillages().clear();
         

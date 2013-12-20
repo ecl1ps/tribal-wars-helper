@@ -22,12 +22,20 @@ public class World {
         return player;
     }
 
-    public void ProcessUpdate() {
+    public void afterUpdate() {
+        for (Village v : player.getVillages())
+            v.cleanup();
+             
         nextUpdateIn = Config.UPDATE_MS + rand.nextInt(Config.UPDATE_JITTER);
     }
 
     public long getNexUpdateTime() {
         return nextUpdateIn;
+    }
+
+    public void beforeUpdate() {
+        for (Village v : player.getVillages())
+            v.invalidate();
     }
     
 }

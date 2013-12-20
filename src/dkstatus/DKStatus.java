@@ -39,6 +39,7 @@ public class DKStatus {
     }
 
     public static void UpdateData() {
+        world.beforeUpdate();
         try {
             if (!world.getPlayer().isLoggedIn()) {
                 BrowserManager.refreshCookies();
@@ -53,7 +54,7 @@ public class DKStatus {
             Logger.getLogger(DKStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        world.ProcessUpdate();
+        world.afterUpdate();
 
         while (window == null) ; // bussy wait till window is created
 

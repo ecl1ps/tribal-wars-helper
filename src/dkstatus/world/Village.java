@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Johny
  */
-public class Village {
+public class Village implements IValidable {
     
     private int id;
     private Player owner = new Player();
@@ -122,6 +122,35 @@ public class Village {
         }
         final Village other = (Village) obj;
         return this.id == other.id;
+    }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
+
+    @Override
+    public void validate() {
+    }
+
+    @Override
+    public void invalidate() {
+        for (IncomingAttack att : incomingAttacks)
+            att.invalidate();
+    }
+
+    public IncomingAttack getCommandId(int id) {
+        for (IncomingAttack att : incomingAttacks)
+            if (att.getCommandId() == id)
+                return att;
+        
+        return null;
+    }
+
+    void cleanup() {
+        for (IncomingAttack att : incomingAttacks)
+            if (!att.isValid())        
+                incomingAttacks.remove(att);
     }
     
     

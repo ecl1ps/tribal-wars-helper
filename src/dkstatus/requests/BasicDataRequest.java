@@ -16,6 +16,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  *
@@ -31,7 +32,6 @@ public class BasicDataRequest implements IUpdateRequest {
 
             Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
             
-            // vyhazuje HttpResponseException pri chybe requestu
             return httpclient.execute(request, new BasicResponseHandler());
         }
     }
@@ -49,12 +49,8 @@ public class BasicDataRequest implements IUpdateRequest {
             Document doc = Jsoup.parse(resultHtml);
 
             if (firstReq) { // only once - common data
-                if (!Utils.isUserLogged(doc)) {
-                    world.getPlayer().setIsLoggedIn(false);
+                if (!Utils.checkUserLogged(doc, world))
                     return;
-                } else {
-                    world.getPlayer().setIsLoggedIn(true);
-                }
 
                 Element menu = doc.select("#menu_row").first();
 
@@ -85,17 +81,23 @@ public class BasicDataRequest implements IUpdateRequest {
             v.setPosition(new Point(Integer.parseInt(pos.substring(1, 4)), Integer.parseInt(pos.substring(5, 8))));
             v.setContinent(pos.substring(10, 13));
 
-            int currentAttacks = Integer.parseInt(headerInfo.select("#incomings_amount").first().text());
+            //int currentAttacks = Integer.parseInt(headerInfo.select("#incomings_amount").first().text());
             
-            Element incoming = doc.select("#show_incoming_units").first();
-            
-            List<IncomingAttack> recordedAttacks = v.getIncomingAttacks();
-            if (currentAttacks != recordedAttacks.size()) {
-                if (currentAttacks > recordedAttacks.size())
-                    for (int i = recordedAttacks.size(); i <= currentAttacks; ++i)
-                        recordedAttacks.add(new IncomingAttack("Name", 123, 456, new Date())); //TODO
+            Elements incoming = doc.select("#show_incoming_units tr");
+            for (Element el : incoming) {
+                Element a = el.select("a").first();
+                if (a == null)
+                    continue;
+                
+                String link = a.attr("href"); ///game.php?village=9845&amp;id=3124812&amp;type=other&amp;screen=info_command
+                String[] atoms = link.split(".*id=(\\d+).*");
+                int id = Integer.parseInt(atoms[0]);
+                
+                IncomingAttack att = v.getCommandId(id);
+                if (att != null)
+                    att.validate();
                 else
-                    recordedAttacks.subList(0, currentAttacks + 1); // TODO
+                    new CommandInfoRequest(id, v.getId()).updateData(world);
             }
 
             /*String supports = headerInfo.select("#supports_amount").first().text();

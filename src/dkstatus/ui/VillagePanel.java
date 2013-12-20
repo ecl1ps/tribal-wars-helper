@@ -16,6 +16,8 @@ public class VillagePanel extends javax.swing.JPanel {
      * @param id
      */
     public VillagePanel(Integer id) {
+        this.id = id;
+        
         initComponents();
         
         UIUtils.transformToHyperlink(lblWoodCount, "village=" + id + "&screen=wood");
@@ -75,9 +77,9 @@ public class VillagePanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblIronCount))
                     .addComponent(lblVillageName))
-                .addGap(40, 40, 40)
+                .addGap(35, 35, 35)
                 .addComponent(lblStorageCount)
-                .addContainerGap(647, Short.MAX_VALUE))
+                .addContainerGap(618, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

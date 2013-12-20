@@ -74,5 +74,13 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public Village getVillage(int villageId) {
+        for (Village v : villages)
+            if (v.getId() == villageId)
+                return v;
+        
+        return null;
+    }
     
 }

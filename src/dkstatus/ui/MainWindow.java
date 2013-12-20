@@ -225,7 +225,7 @@ public class MainWindow extends javax.swing.JFrame {
             } else {
                 for (int i = 0; i < tpVillages.getTabCount(); i++)
                 {
-                    VillagePanel tmp = (VillagePanel)tpVillages.getTabComponentAt(i);
+                    VillagePanel tmp = (VillagePanel)tpVillages.getComponentAt(i);
                     if (tmp.getId() == v.getId()) {
                         vp = tmp;
                         break;
