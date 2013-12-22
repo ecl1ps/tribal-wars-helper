@@ -34,26 +34,30 @@ public class UpdateTask extends TimerTask {
     }
     
     private void updateData() {
-        world.beforeUpdate();
         try {
-            if (!world.getPlayer().isLoggedIn()) {
-                BrowserManager.refreshCookies();
-                new VillageListRequest().updateData(world);
+            world.beforeUpdate();
+            try {
+                if (!world.getPlayer().isLoggedIn()) {
+                    BrowserManager.refreshCookies();
+                    new VillageListRequest().updateData(world);
+                }
+
+                new BasicDataRequest().updateData(world);
+            } catch (UnknownHostException ex) {
+                // without internet connection
+                world.getPlayer().setName("Offline");
+            } catch (IOException ex) {
+                Logger.getLogger(DKStatus.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            new BasicDataRequest().updateData(world);
-        } catch (UnknownHostException ex) {
-            // without internet connection
-            world.getPlayer().setName("Offline");
-        } catch (IOException ex) {
+
+            world.afterUpdate();
+
+            while (!WindowManager.isInitialized()) ; // bussy wait till window is created
+
+            executor.schedule(new UpdateTask(executor, world), world.getNexUpdateTime(), TimeUnit.MILLISECONDS);
+            WindowManager.getWindow().updateWindow(world);
+        } catch (Exception ex) { // prevent silent thread termination
             Logger.getLogger(DKStatus.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        world.afterUpdate();
-
-        while (!WindowManager.isInitialized()) ; // bussy wait till window is created
-
-        executor.schedule(new UpdateTask(executor, world), world.getNexUpdateTime(), TimeUnit.MILLISECONDS);
-        WindowManager.getWindow().updateWindow(world);
+        }        
     }    
 }

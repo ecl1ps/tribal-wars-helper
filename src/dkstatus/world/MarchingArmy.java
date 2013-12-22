@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
  *
  * @author Johny
  */
-public class MarchingArmy implements IValidable {
+public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
     
     private boolean valid;
     
@@ -105,7 +105,11 @@ public class MarchingArmy implements IValidable {
             case RETRIEVING_SUPPORT:
                 return String.format("%s: Stažení podpory od %s (%s)", 
                     armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
-                    to.toString()); 
+                    to.toString(), toPlayer.getName()); 
+            case SENT_BACK_SUPPORT:
+                return String.format("%s: Podpora zaslána zpět od %s (%s)", 
+                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                    to.toString(), toPlayer.getName());                 
             case RETURNING_ATTACK:
                 return String.format("%s: Návrat z útoku na %s", 
                     armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
@@ -113,9 +117,13 @@ public class MarchingArmy implements IValidable {
             case CANCELLED:
                 return String.format("%s: Zrušený pochod na %s", 
                     armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
-                    to.toString());             
+                    to.toString()); 
+            case UNKNOWN_I:
+            case UNKNOWN_O:
+                return String.format("%s: Neznámý příkaz", 
+                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"));                  
         }
-        return null;
+        return "Unk";
     }
 
     @Override
@@ -131,6 +139,11 @@ public class MarchingArmy implements IValidable {
     @Override
     public void invalidate() {
         valid = false;
+    }
+
+    @Override
+    public int compareTo(MarchingArmy o) {
+        return armyArrives.compareTo(o.armyArrives);
     }
     
 }

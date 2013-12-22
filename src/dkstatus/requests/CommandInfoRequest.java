@@ -93,7 +93,7 @@ public class CommandInfoRequest implements IUpdateRequest {
         } catch (IllegalArgumentException e) {
             try {
                 // there can be extra line when catapult target is specified
-                arrivalTime = commandRows.get(7).select("td").get(1).text();
+                arrivalTime = commandRows.get(incoming ? 6 : 7).select("td").get(1).text();
                 arrival = format.parseDateTime(arrivalTime);
             } catch (IllegalArgumentException e2) {
                 arrival = new DateTime();
@@ -112,6 +112,6 @@ public class CommandInfoRequest implements IUpdateRequest {
         for (CommandType t : CommandType.values())
             if (t.isIncoming() == incoming && commandHeader.startsWith(t.getParseString()))
                 return t;
-        return null;
+        return CommandType.UNKNOWN_O;
     }
 }

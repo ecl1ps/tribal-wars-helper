@@ -64,7 +64,7 @@ public class BasicDataRequest implements IUpdateRequest {
                 world.getPlayer().hasAnnounce(!menu.select("#new_report").first().hasAttr("style"));
                 world.getPlayer().hasMessage(!menu.select("#new_mail").first().hasAttr("style"));
                 Element forumMessage = menu.select("#tribe_forum_indicator").first(); // players without tribe don't have this element
-                world.getPlayer().hasForumMessage(forumMessage != null && !forumMessage.hasAttr("style"));
+                world.getPlayer().hasForumMessage(forumMessage != null && !forumMessage.hasClass("no_new_post"));
             }
 
             Element headerInfo = doc.select("#header_info tr").first();

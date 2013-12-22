@@ -9,6 +9,7 @@ import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.util.ArrayList;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -51,7 +52,6 @@ public class MainWindow extends javax.swing.JFrame {
         lblIncomingAttackCount = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         lblNextUpdateIn = new javax.swing.JLabel();
-        tbToolbar = new javax.swing.JToolBar();
         mbMenu = new javax.swing.JMenuBar();
         mSettings = new javax.swing.JMenu();
         mBrowser = new javax.swing.JMenu();
@@ -60,7 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DK Status");
-        setPreferredSize(new java.awt.Dimension(800, 609));
+        setPreferredSize(new java.awt.Dimension(750, 609));
 
         lblPlayer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPlayer.setText("Hráč:");
@@ -111,7 +111,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(lblForum)
                 .addGap(18, 18, 18)
                 .addComponent(lblIncomingAttackCount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(lblNextUpdateIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnUpdate)
@@ -133,8 +133,6 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(lblNextUpdateIn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
-
-        tbToolbar.setRollover(true);
 
         mSettings.setText("Settings");
         mbMenu.add(mSettings);
@@ -168,16 +166,13 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(tpVillages)
-            .addComponent(tbToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tpVillages, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tbToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tpVillages, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -215,7 +210,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel pPlayer;
     private javax.swing.JRadioButtonMenuItem rbmiChrome;
     private javax.swing.JRadioButtonMenuItem rbmiFirefox;
-    private javax.swing.JToolBar tbToolbar;
     private javax.swing.JTabbedPane tpVillages;
     // End of variables declaration//GEN-END:variables
 
@@ -234,7 +228,9 @@ public class MainWindow extends javax.swing.JFrame {
         
         pPlayer.setVisible(true);
 
-        lblNextUpdateIn.setText(String.valueOf(world.getNexUpdateTime() / 1000.0f));
+        DateTime next = new DateTime();
+        next.plusMillis((int)world.getNexUpdateTime());
+        lblNextUpdateIn.setText(next.toString("HH:mm:ss"));
         
         int incomingAttacks = plr.getIncomingAttackCount();
         lblIncomingAttackCount.setText(String.valueOf(incomingAttacks));

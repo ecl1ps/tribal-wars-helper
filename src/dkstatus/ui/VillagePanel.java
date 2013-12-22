@@ -8,6 +8,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
@@ -221,6 +222,8 @@ public class VillagePanel extends javax.swing.JPanel {
         lblStorageCount.setText(String.valueOf(v.getResources().getStorage()));
         lblPopulation.setText(v.getPopulation().toString());
         
+        Collections.sort(v.getIncomingArmies());
+        Collections.sort(v.getOutgoingArmies());
         lstIncoming.setListData(v.getIncomingArmies().toArray());
         lstOutgoing.setListData(v.getOutgoingArmies().toArray());
 

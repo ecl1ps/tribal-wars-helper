@@ -149,13 +149,17 @@ public class Village implements IValidable {
     }
 
     void cleanup() {
-        for (MarchingArmy att : incomingArmies)
-            if (!att.isValid())        
-                incomingArmies.remove(att);
+        for (int i = 0; i < incomingArmies.size(); ++i) {
+            MarchingArmy ma = incomingArmies.get(i);
+            if (!ma.isValid())        
+                incomingArmies.remove(i);        
+        }
         
-        for (MarchingArmy att : outgoingArmies)
-            if (!att.isValid())        
-                incomingArmies.remove(att);        
+        for (int i = 0; i < outgoingArmies.size(); ++i) {
+            MarchingArmy ma = outgoingArmies.get(i);
+            if (!ma.isValid())        
+                outgoingArmies.remove(i);        
+        }
     }
     
     
