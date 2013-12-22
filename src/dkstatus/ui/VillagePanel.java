@@ -229,7 +229,7 @@ public class VillagePanel extends javax.swing.JPanel {
 
         if (v.IsAttacked()) {
             requestFocusInWindow();
-            Utils.tone(2000,300);
+            Utils.tone(2000,1000);
         }
     }
 }

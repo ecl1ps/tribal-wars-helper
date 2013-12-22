@@ -6,6 +6,7 @@ import dkstatus.requests.BasicDataRequest;
 import dkstatus.requests.VillageListRequest;
 import dkstatus.ui.WindowManager;
 import dkstatus.world.World;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.TimerTask;
@@ -43,6 +44,8 @@ public class UpdateTask extends TimerTask {
                 }
 
                 new BasicDataRequest().updateData(world);
+            } catch (EOFException ex) {
+                // request error (timeout?)              
             } catch (UnknownHostException ex) {
                 // without internet connection
                 world.getPlayer().setName("Offline");

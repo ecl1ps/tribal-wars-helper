@@ -1,5 +1,6 @@
 package dkstatus.ui;
 
+import dkstatus.Config;
 import dkstatus.DKStatus;
 import dkstatus.cookies.BrowserManager;
 import dkstatus.cookies.ChromeDataProvider;
@@ -230,7 +231,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         DateTime next = new DateTime();
         next.plusMillis((int)world.getNexUpdateTime());
-        lblNextUpdateIn.setText(next.toString("HH:mm:ss"));
+        lblNextUpdateIn.setText(String.format("%s (%d s)", next.toString("HH:mm:ss"), (int)(world.getNexUpdateTime() / 1000)));
         
         int incomingAttacks = plr.getIncomingAttackCount();
         lblIncomingAttackCount.setText(String.valueOf(incomingAttacks));

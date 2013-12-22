@@ -16,7 +16,7 @@ public enum ArmyType {
     SWORDSMAN("šermíři", 22),
     PIKE_AXE("kopiníci/sekerníci/lučištníci", 18),
     HEAVY_CAVALLERY("těžká kavalérie", 11),
-    LIGHT_CAVALLERY("lehká kavalérie", 10),
+    LIGHT_CAVALLERY("lehká kavalérie/lučištník na koni/paladin", 10),
     SCOUT("zvědi", 9),
     INVALID("neznámé", 1);
     
