@@ -1,16 +1,16 @@
 package dkstatus;
 
 import dkstatus.world.ArmyType;
+import dkstatus.world.MapPosition;
 import dkstatus.world.World;
-import java.awt.Point;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 import org.jsoup.nodes.Document;
 
 /**
@@ -40,11 +40,16 @@ public class Utils {
         return true;
     }
     
-    public static ArmyType calculateAttackType(Point from, Point to, DateTime start, DateTime end) {
+    public static ArmyType calculateAttackType(MapPosition from, MapPosition to, DateTime start, DateTime end) {
         for (ArmyType  a : ArmyType.values()) {
-           if (start.plus(a.getTimeToTravell(from, to)).minus(Config.UPDATE_MS + Config.UPDATE_JITTER).isBefore(end))
+            Period p = a.getTimeToTravell(from, to);
+            Logger.getLogger(Utils.class.getName()).log(Level.INFO, "{0}: {1}", new Object[]{a, p});
+            DateTime temp = start.plus(p);
+            temp = temp.minus(Config.UPDATE_MS + Config.UPDATE_JITTER);
+            if (temp.isBefore(end))
                return a;
         }
+        
         return ArmyType.INVALID;
     }    
     

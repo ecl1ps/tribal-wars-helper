@@ -1,7 +1,8 @@
 package dkstatus.requests;
 
 import dkstatus.Utils;
-import dkstatus.world.IncomingAttack;
+import dkstatus.world.MarchingArmy;
+import dkstatus.world.MapPosition;
 import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.awt.Point;
@@ -73,39 +74,38 @@ public class BasicDataRequest implements IUpdateRequest {
             v.getResources().setIron(Integer.parseInt(headerInfo.select("#iron").first().text()));
             v.getResources().setStorage(Integer.parseInt(headerInfo.select("#storage").first().text()));
 
-            v.getPopulation().Current = Integer.parseInt(headerInfo.select("#pop_current_label").first().text());
-            v.getPopulation().Max = Integer.parseInt(headerInfo.select("#pop_max_label").first().text());
+            v.getPopulation().setCurrent(Integer.parseInt(headerInfo.select("#pop_current_label").first().text()));
+            v.getPopulation().setMax(Integer.parseInt(headerInfo.select("#pop_max_label").first().text()));
 
             v.setName(headerInfo.select("#menu_row2_village a").first().text());
             String pos = headerInfo.select("#menu_row2 td b").first().text();
-            v.setPosition(new Point(Integer.parseInt(pos.substring(1, 4)), Integer.parseInt(pos.substring(5, 8))));
-            v.setContinent(pos.substring(10, 13));
+            v.setPosition(new MapPosition(Integer.parseInt(pos.substring(1, 4)), Integer.parseInt(pos.substring(5, 8)), pos.substring(10, 13)));
 
-            //int currentAttacks = Integer.parseInt(headerInfo.select("#incomings_amount").first().text());
+            parseCommands(doc.select("#show_incoming_units tr"), v, world, true);
             
-            Elements incoming = doc.select("#show_incoming_units tr");
-            for (Element el : incoming) {
-                Element a = el.select("a").first();
-                if (a == null)
-                    continue;
-                
-                String link = a.attr("href"); ///game.php?village=9845&amp;id=3124812&amp;type=other&amp;screen=info_command
-                Pattern p = Pattern.compile(".*id=(\\d+).*");
-                Matcher m = p.matcher(link); 
-                if (!m.find())
-                    continue;
-                
-                int id = Integer.parseInt(m.group(1));
-                
-                IncomingAttack att = v.getCommandId(id);
-                if (att != null)
-                    att.validate();
-                else
-                    new CommandInfoRequest(id, v.getId()).updateData(world);
-            }
+            parseCommands(doc.select("#show_outgoing_units tr"), v, world, false);
+        }
+    }
 
-            /*String supports = headerInfo.select("#supports_amount").first().text();
-            v.getIncomingSupports() = supports.isEmpty() ? 0 : Integer.parseInt(supports);*/
+    private void parseCommands(Elements rows, Village v, World world, boolean incoming) throws IOException, NumberFormatException {
+        for (Element el : rows) {
+            Element a = el.select("a").first();
+            if (a == null)
+                continue;
+            
+            String link = a.attr("href"); ///game.php?village=9845&amp;id=3124812&amp;type=other&amp;screen=info_command
+            Pattern p = Pattern.compile(".*id=(\\d+).*");
+            Matcher m = p.matcher(link);
+            if (!m.find())
+                continue;
+            
+            int id = Integer.parseInt(m.group(1));
+            
+            MarchingArmy att = v.getCommandId(id);
+            if (att != null)
+                att.validate();
+            else
+                new CommandInfoRequest(id, v.getId(), incoming).updateData(world);
         }
     }
 }

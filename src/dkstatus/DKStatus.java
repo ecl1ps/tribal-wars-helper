@@ -13,10 +13,10 @@ import java.util.concurrent.ScheduledExecutorService;
 public class DKStatus {
     
     private static World world = new World();
-    private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+    private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(10);
     
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws InterruptedException {
+
         WindowManager.initialize();
 
         updateData();

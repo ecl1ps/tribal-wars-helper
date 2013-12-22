@@ -2,8 +2,16 @@
 package dkstatus.ui;
 
 import dkstatus.Utils;
+import dkstatus.world.MarchingArmy;
 import dkstatus.world.Village;
-import java.util.Vector;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -11,7 +19,7 @@ import java.util.Vector;
  */
 public class VillagePanel extends javax.swing.JPanel {
 
-    private Integer id;
+    private final Integer id;
     
     /**
      * Creates new form VillagePanel
@@ -22,10 +30,37 @@ public class VillagePanel extends javax.swing.JPanel {
         
         initComponents();
         
+        final int villageId = id;
+        lstIncoming.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                MarchingArmy att = (MarchingArmy)lstIncoming.getSelectedValue();
+                try {
+                    Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=other&screen=info_command")));
+                } catch (URISyntaxException | IOException ex) {
+                    //It looks like there's a problem
+                    Logger.getLogger(UIUtils.class.getName()).log(Level.INFO, null, ex);
+                }
+            }
+        }); 
+        lstOutgoing.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                MarchingArmy att = (MarchingArmy)lstOutgoing.getSelectedValue();
+                try {
+                    Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=own&screen=info_command")));
+                } catch (URISyntaxException | IOException ex) {
+                    //It looks like there's a problem
+                    Logger.getLogger(UIUtils.class.getName()).log(Level.INFO, null, ex);
+                }
+            }
+        });         
+        
         UIUtils.transformToHyperlink(lblWoodCount, "village=" + id + "&screen=wood");
         UIUtils.transformToHyperlink(lblStoneCount, "village=" + id + "&screen=stone");
         UIUtils.transformToHyperlink(lblIronCount, "village=" + id + "&screen=iron");
         UIUtils.transformToHyperlink(lblStorageCount, "village=" + id + "&screen=storage");
+        UIUtils.transformToHyperlink(lblPopulation, "village=" + id + "&screen=farm");
         
         UIUtils.transformToHyperlink(lblVillageName, "village=" + id + "&screen=overview");
     }
@@ -49,9 +84,13 @@ public class VillagePanel extends javax.swing.JPanel {
         lblStoneCount = new javax.swing.JLabel();
         lblIronCount = new javax.swing.JLabel();
         lblStorageCount = new javax.swing.JLabel();
-        pAttacks = new javax.swing.JPanel();
-        spAttacks = new javax.swing.JScrollPane();
-        lstAttacks = new javax.swing.JList();
+        lblPopulation = new javax.swing.JLabel();
+        pOutgoing = new javax.swing.JPanel();
+        spOutgoing = new javax.swing.JScrollPane();
+        lstOutgoing = new javax.swing.JList();
+        pIncoming = new javax.swing.JPanel();
+        spIncoming = new javax.swing.JScrollPane();
+        lstIncoming = new javax.swing.JList();
 
         lblVillageName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/village.png"))); // NOI18N
         lblVillageName.setText("Uber Vesnice (111|222) K01");
@@ -68,6 +107,9 @@ public class VillagePanel extends javax.swing.JPanel {
         lblStorageCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/storage.png"))); // NOI18N
         lblStorageCount.setText("0");
 
+        lblPopulation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/worker.png"))); // NOI18N
+        lblPopulation.setText("0/0");
+
         javax.swing.GroupLayout pResourcesLayout = new javax.swing.GroupLayout(pResources);
         pResources.setLayout(pResourcesLayout);
         pResourcesLayout.setHorizontalGroup(
@@ -83,8 +125,10 @@ public class VillagePanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(lblIronCount)
                         .addGap(18, 18, 18)
-                        .addComponent(lblStorageCount)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblStorageCount)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblPopulation)))
+                .addContainerGap(483, Short.MAX_VALUE))
         );
         pResourcesLayout.setVerticalGroup(
             pResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,21 +140,39 @@ public class VillagePanel extends javax.swing.JPanel {
                     .addComponent(lblWoodCount)
                     .addComponent(lblStoneCount)
                     .addComponent(lblIronCount)
-                    .addComponent(lblStorageCount))
+                    .addComponent(lblStorageCount)
+                    .addComponent(lblPopulation))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        spAttacks.setViewportView(lstAttacks);
+        spOutgoing.setViewportView(lstOutgoing);
 
-        javax.swing.GroupLayout pAttacksLayout = new javax.swing.GroupLayout(pAttacks);
-        pAttacks.setLayout(pAttacksLayout);
-        pAttacksLayout.setHorizontalGroup(
-            pAttacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spAttacks, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+        javax.swing.GroupLayout pOutgoingLayout = new javax.swing.GroupLayout(pOutgoing);
+        pOutgoing.setLayout(pOutgoingLayout);
+        pOutgoingLayout.setHorizontalGroup(
+            pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 715, Short.MAX_VALUE)
+            .addGroup(pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(spOutgoing, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
         );
-        pAttacksLayout.setVerticalGroup(
-            pAttacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spAttacks, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+        pOutgoingLayout.setVerticalGroup(
+            pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 182, Short.MAX_VALUE)
+            .addGroup(pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(spOutgoing, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+        );
+
+        spIncoming.setViewportView(lstIncoming);
+
+        javax.swing.GroupLayout pIncomingLayout = new javax.swing.GroupLayout(pIncoming);
+        pIncoming.setLayout(pIncomingLayout);
+        pIncomingLayout.setHorizontalGroup(
+            pIncomingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(spIncoming)
+        );
+        pIncomingLayout.setVerticalGroup(
+            pIncomingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(spIncoming, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -118,31 +180,36 @@ public class VillagePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pResources, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pAttacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 364, Short.MAX_VALUE))
+            .addComponent(pIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pOutgoing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pAttacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 242, Short.MAX_VALUE))
+                .addComponent(pIncoming, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pOutgoing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 108, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblIronCount;
+    private javax.swing.JLabel lblPopulation;
     private javax.swing.JLabel lblStoneCount;
     private javax.swing.JLabel lblStorageCount;
     private javax.swing.JLabel lblVillageName;
     private javax.swing.JLabel lblWoodCount;
-    private javax.swing.JList lstAttacks;
-    private javax.swing.JPanel pAttacks;
+    private javax.swing.JList lstIncoming;
+    private javax.swing.JList lstOutgoing;
+    private javax.swing.JPanel pIncoming;
+    private javax.swing.JPanel pOutgoing;
     private javax.swing.JPanel pResources;
-    private javax.swing.JScrollPane spAttacks;
+    private javax.swing.JScrollPane spIncoming;
+    private javax.swing.JScrollPane spOutgoing;
     // End of variables declaration//GEN-END:variables
 
     void updateVillage(Village v) {
@@ -152,12 +219,14 @@ public class VillagePanel extends javax.swing.JPanel {
         lblStoneCount.setText(String.valueOf(v.getResources().getStone()));
         lblIronCount.setText(String.valueOf(v.getResources().getIron()));
         lblStorageCount.setText(String.valueOf(v.getResources().getStorage()));
+        lblPopulation.setText(v.getPopulation().toString());
         
-        lstAttacks.setListData(new Vector(v.getIncomingAttacks()));
+        lstIncoming.setListData(v.getIncomingArmies().toArray());
+        lstOutgoing.setListData(v.getOutgoingArmies().toArray());
 
         if (v.IsAttacked()) {
             requestFocusInWindow();
-            Utils.tone(500, 500);
+            Utils.tone(2000,300);
         }
     }
 }

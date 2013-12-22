@@ -1,10 +1,12 @@
 package dkstatus.requests;
 
 import dkstatus.Utils;
-import dkstatus.world.IncomingAttack;
+import dkstatus.world.CommandType;
+import dkstatus.world.MarchingArmy;
+import dkstatus.world.MapPosition;
+import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
-import java.awt.Point;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,19 +26,22 @@ import org.jsoup.select.Elements;
  * @author Johny
  */
 public class CommandInfoRequest implements IUpdateRequest {
-    private int commandId;
-    private int villageId;
+    private final int commandId;
+    private final int villageId;
+    private final boolean incoming;
 
-    public CommandInfoRequest(int commandId, int villageId) {
+    public CommandInfoRequest(int commandId, int villageId, boolean incoming) {
         this.commandId = commandId;
         this.villageId = villageId;
+        this.incoming = incoming;
     }
     
     private String getResult() throws IOException {
         
         try (CloseableHttpClient httpclient = NetUtils.createClient()) {
             
-            HttpGet request = NetUtils.prepareGetRequest("id=" + commandId + "&type=other&screen=info_command");
+            HttpGet request = NetUtils.prepareGetRequest(
+                    "village=" + villageId + "&id=" + commandId + "&type=" + (incoming ? "other" : "own") + "&screen=info_command");
 
             Logger.getLogger(CommandInfoRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
             
@@ -55,30 +60,58 @@ public class CommandInfoRequest implements IUpdateRequest {
         if (!Utils.checkUserLogged(doc, world))
             return;
         
-        Elements commandRows = doc.select("#content_value tr");
+        String commandHeader = doc.select("#content_value h2").first().text();
+        CommandType type = parseCommandType(commandHeader);
         
-        String attackerName = commandRows.get(1).select("a").first().text();
+        Elements commandRows = doc.select("#content_value table").first().select("tr");
         
-        Element attackingVillage = commandRows.get(2).select("span").first();
-        int attackerId = Integer.parseInt(attackingVillage.attr("data-player"));
-        int attackingVillageId = Integer.parseInt(attackingVillage.attr("data-id"));
+        Player otherPlayer = new Player();
+        Village otherVillage = new Village();
+        otherPlayer.addVillage(otherVillage);
         
-        String attacker = attackingVillage.text();
-        int len = attacker.length();
-        String attackerVillageName = attacker.substring(0, len - 14);
-        Point attackerPos = new Point(
-                Integer.parseInt(attacker.substring(len - 12, len - 9)), 
-                Integer.parseInt(attacker.substring(len - 8, len - 5)));
-        String attackerContinent = attacker.substring(len - 3, len);
+        otherPlayer.setName(commandRows.get(incoming ? 1 : 3).select("td").get(2).text());
         
-        String arrivalTime = commandRows.get(5).select("td").get(1).text();
+        Element otherVillageElem = commandRows.get(incoming ? 2 : 4).select("span").first();
+        otherPlayer.setId(Integer.parseInt(otherVillageElem.attr("data-player")));
+        otherVillage.setId(Integer.parseInt(otherVillageElem.attr("data-id")));
         
-        DateTimeFormatter format = DateTimeFormat.forPattern("dd-MM-yy HH:mm:ss:SSS"); //19.12.13 13:34:29:397
-        DateTime arrival = format.parseDateTime(arrivalTime);
+        String otherVillageText = otherVillageElem.text();
+        int len = otherVillageText.length();
+        otherVillage.setName(otherVillageText.substring(0, len - 14));
+        otherVillage.setPosition(new MapPosition(
+                Integer.parseInt(otherVillageText.substring(len - 12, len - 9)), 
+                Integer.parseInt(otherVillageText.substring(len - 8, len - 5)),
+                otherVillageText.substring(len - 3, len)));
+        
+        DateTimeFormatter format = DateTimeFormat.forPattern("dd.MM.yy HH:mm:ss:SSS"); //19.12.13 13:34:29:397
+        
+        String arrivalTime = commandRows.get(incoming ? 5 : 6).select("td").get(1).text();
+        
+        DateTime arrival;
+        try {
+            arrival = format.parseDateTime(arrivalTime);
+        } catch (IllegalArgumentException e) {
+            try {
+                // there can be extra line when catapult target is specified
+                arrivalTime = commandRows.get(7).select("td").get(1).text();
+                arrival = format.parseDateTime(arrivalTime);
+            } catch (IllegalArgumentException e2) {
+                arrival = new DateTime();
+                Logger.getLogger(CommandInfoRequest.class.getName()).log(Level.WARNING, "Couldn't parse datetime of command", e2);
+            }
+        }
 
         Village v = world.getPlayer().getVillage(villageId);
-        v.getIncomingAttacks().add(
-                new IncomingAttack(commandId, v, attackerId, attackerName, attackingVillageId, 
-                        attackerVillageName, attackerPos, attackerContinent, arrival));
+        if (incoming)
+            v.getIncomingArmies().add(new MarchingArmy(commandId, type, otherPlayer, otherVillage, world.getPlayer(), v, arrival));
+        else
+            v.getOutgoingArmies().add(new MarchingArmy(commandId, type, world.getPlayer(), v, otherPlayer, otherVillage, arrival));
+    }
+
+    private CommandType parseCommandType(String commandHeader) {
+        for (CommandType t : CommandType.values())
+            if (t.isIncoming() == incoming && commandHeader.startsWith(t.getParseString()))
+                return t;
+        return null;
     }
 }

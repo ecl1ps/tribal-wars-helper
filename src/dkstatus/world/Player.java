@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Player {
     
+    private int id = 0;
     private String name = "";
     private int points = 0;
     private boolean isLoggedIn = false;
@@ -23,8 +24,20 @@ public class Player {
         return villages;
     }
 
+    public Village getFirstVillage() {
+        return villages.size() > 0 ? villages.get(0) : null;
+    }
+        
     public void addVillage(Village village) {
         villages.add(village);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -86,7 +99,9 @@ public class Player {
     public int getIncomingAttackCount() {
         int incomingAttacks = 0;
         for (Village v : villages) {
-            incomingAttacks += v.getIncomingAttacks().size();
+            for (MarchingArmy a : v.getIncomingArmies())
+                if (a.getCommandType() == CommandType.INCOMING_ATTACK)
+                    incomingAttacks++;
         }
         return incomingAttacks;
     }

@@ -1,7 +1,6 @@
 
 package dkstatus.world;
 
-import java.awt.Point;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,21 +11,20 @@ import java.util.List;
 public class Village implements IValidable {
     
     private int id;
-    private Player owner = new Player();
     private String name = "";
-    private String continent = "K01";
-    private Point position = new Point();
+    private Player owner = new Player();
+    private MapPosition position = new MapPosition();
     
     private final Resources resources = new Resources();
     private final Population population = new Population();
     
-    private final List<IncomingAttack> incomingAttacks = new LinkedList<>();
-    private final List<IncomingAttack> IncomingSupports = new LinkedList<>();
+    private final List<MarchingArmy> incomingArmies = new LinkedList<>();
+    private final List<MarchingArmy> outgoingArmies = new LinkedList<>();
     
     public Village() {
     }
     
-    public Village(int id, String name, Player owner, Point pos) {
+    public Village(int id, String name, Player owner, MapPosition pos) {
         this.name = name;
         this.owner = owner;
         this.position = pos;
@@ -49,15 +47,19 @@ public class Village implements IValidable {
     }    
     
     public boolean IsAttacked() {
-        return !incomingAttacks.isEmpty();
+        for (MarchingArmy att : incomingArmies)
+            if (att.getCommandType() == CommandType.INCOMING_ATTACK)
+                return true;
+        
+        return false;
     }    
 
-    public List<IncomingAttack> getIncomingAttacks() {
-        return incomingAttacks;
+    public List<MarchingArmy> getIncomingArmies() {
+        return incomingArmies;
     }  
 
-    public List<IncomingAttack> getIncomingSupports() {
-        return IncomingSupports;
+    public List<MarchingArmy> getOutgoingArmies() {
+        return outgoingArmies;
     }
 
     public Player getOwner() {
@@ -68,7 +70,7 @@ public class Village implements IValidable {
         return name;
     }
 
-    public Point getPosition() {
+    public MapPosition getPosition() {
         return position;
     }
 
@@ -80,19 +82,11 @@ public class Village implements IValidable {
         this.name = name;
     }
 
-    public void setPosition(Point position) {
+    public void setPosition(MapPosition position) {
         this.position = position;
     }
-
-    public String getContinent() {
-        return continent;
-    }
-
-    public void setContinent(String continent) {
-        this.continent = continent;
-    }
     
-    public double getDistance(Point p) {
+    public double getDistance(MapPosition p) {
         return position.distance(p);
     }
     
@@ -102,7 +96,7 @@ public class Village implements IValidable {
 
     @Override
     public String toString() {
-        return String.format("%s (%d|%d) %s", name, position.x, position.y, continent);
+        return String.format("%s %s", name, position.toString());
     }
 
     @Override
@@ -135,22 +129,33 @@ public class Village implements IValidable {
 
     @Override
     public void invalidate() {
-        for (IncomingAttack att : incomingAttacks)
+        for (MarchingArmy att : incomingArmies)
             att.invalidate();
+        
+        for (MarchingArmy att : outgoingArmies)
+            att.invalidate();        
     }
 
-    public IncomingAttack getCommandId(int id) {
-        for (IncomingAttack att : incomingAttacks)
+    public MarchingArmy getCommandId(int id) {
+        for (MarchingArmy att : incomingArmies)
             if (att.getCommandId() == id)
                 return att;
         
+        for (MarchingArmy att : outgoingArmies)
+            if (att.getCommandId() == id)
+                return att;
+                
         return null;
     }
 
     void cleanup() {
-        for (IncomingAttack att : incomingAttacks)
+        for (MarchingArmy att : incomingArmies)
             if (!att.isValid())        
-                incomingAttacks.remove(att);
+                incomingArmies.remove(att);
+        
+        for (MarchingArmy att : outgoingArmies)
+            if (!att.isValid())        
+                incomingArmies.remove(att);        
     }
     
     

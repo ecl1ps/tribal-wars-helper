@@ -60,6 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DK Status");
+        setPreferredSize(new java.awt.Dimension(800, 609));
 
         lblPlayer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPlayer.setText("Hráč:");
@@ -78,7 +79,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         lblIncomingAttackCount.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblIncomingAttackCount.setForeground(java.awt.Color.red);
-        lblIncomingAttackCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/attack.png"))); // NOI18N
+        lblIncomingAttackCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/attacked.png"))); // NOI18N
         lblIncomingAttackCount.setText("0");
 
         btnUpdate.setText("Aktualizovat");
@@ -110,7 +111,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(lblForum)
                 .addGap(18, 18, 18)
                 .addComponent(lblIncomingAttackCount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(lblNextUpdateIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnUpdate)
@@ -175,8 +176,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(pPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tpVillages, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tbToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tbToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -240,7 +241,6 @@ public class MainWindow extends javax.swing.JFrame {
         lblIncomingAttackCount.setVisible(incomingAttacks > 0);
         
         updateVillages(plr.getVillages());
-        
     }
 
     private void updateVillages(List<Village> villages) {
