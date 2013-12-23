@@ -9,8 +9,12 @@ import java.awt.EventQueue;
  */
 public class WindowManager {
     private static volatile MainWindow window;
+    private static boolean initializationStarted = false;
     
     public static void initialize() {
+        
+        initializationStarted = true;
+        
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -21,6 +25,11 @@ public class WindowManager {
     }
 
     public static MainWindow getWindow() {
+        if (!initializationStarted)
+            initialize();
+        
+        while (window == null) ; // bussy wait till window is created
+        
         return window;
     }
 

@@ -1,19 +1,17 @@
 
 package dkstatus.world;
 
-import dkstatus.Config;
-import java.util.Random;
+import org.joda.time.DateTime;
 
 /**
  *
  * @author Johny
  */
 public class World {
-    private final Random rand = new Random(System.currentTimeMillis());
     
     private final Player player = new Player();
     
-    private long nextUpdateIn = 0;
+    private DateTime nextUpdateIn = new DateTime();
 
     /**
      * @return the player
@@ -22,20 +20,11 @@ public class World {
         return player;
     }
 
-    public void afterUpdate() {
-        for (Village v : player.getVillages())
-            v.cleanup();
-             
-        nextUpdateIn = Config.UPDATE_MS + rand.nextInt(Config.UPDATE_JITTER);
-    }
-
-    public long getNexUpdateTime() {
+    public DateTime getNexUpdateTime() {
         return nextUpdateIn;
     }
 
-    public void beforeUpdate() {
-        for (Village v : player.getVillages())
-            v.invalidate();
+    public void setNextUpdateIn(DateTime nextUpdateIn) {
+        this.nextUpdateIn = nextUpdateIn;
     }
-    
 }

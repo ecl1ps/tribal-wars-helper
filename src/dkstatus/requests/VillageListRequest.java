@@ -1,14 +1,12 @@
 package dkstatus.requests;
 
 import dkstatus.Utils;
+import dkstatus.WebRequestService;
 import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,24 +16,11 @@ import org.jsoup.select.Elements;
  *
  * @author Johny
  */
-public class VillageListRequest implements IUpdateRequest {
+public class VillageListRequest extends AbstractUpdateRequest {
     
-    private String getResult() throws IOException {
-        
-        try (CloseableHttpClient httpclient = NetUtils.createClient()) {
-            
-            HttpGet request = NetUtils.prepareGetRequest("screen=overview_villages");
-
-            Logger.getLogger(VillageListRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
-            
-            // vyhazuje HttpResponseException pri chybe requestu
-            return httpclient.execute(request, new BasicResponseHandler());
-        }
-    }
-
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = getResult();
+        String resultHtml = getResult("screen=overview_villages");
         
         Logger.getLogger(VillageListRequest.class.getName()).log(Level.FINER, resultHtml);
         
@@ -58,6 +43,7 @@ public class VillageListRequest implements IUpdateRequest {
 
             world.getPlayer().addVillage(v);
         }
-
+        
+        WebRequestService.scheduleTask(new BasicDataRequest(), 0);
     }
 }

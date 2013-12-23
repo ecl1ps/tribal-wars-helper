@@ -1,6 +1,5 @@
 package dkstatus.ui;
 
-import dkstatus.Config;
 import dkstatus.DKStatus;
 import dkstatus.cookies.BrowserManager;
 import dkstatus.cookies.ChromeDataProvider;
@@ -10,6 +9,7 @@ import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.SwingUtilities;
 import org.joda.time.DateTime;
 
 /**
@@ -214,66 +214,87 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tpVillages;
     // End of variables declaration//GEN-END:variables
 
-    public synchronized void updateWindow(World world) {
-        Player plr = world.getPlayer();
- 
-        if (world.getPlayer().isLoggedIn())
-            lblPlayerName.setText(plr.getName());
-        else
-            lblPlayerName.setText("Není přihlášen");
+    public void updateWindow(final World world) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Player plr = world.getPlayer();
 
-        lblPointCount.setText(String.valueOf(plr.getPoints()));
-        lblAnnounce.setVisible(plr.hasAnnounce());
-        lblMessage.setVisible(plr.hasMessage());
-        lblForum.setVisible(plr.hasForumMessage());
-        
-        pPlayer.setVisible(true);
+                if (world.getPlayer().isLoggedIn()) {
+                    lblPlayerName.setText(plr.getName());
+                } else {
+                    lblPlayerName.setText("Není přihlášen");
+                }
 
-        DateTime next = new DateTime();
-        next.plusMillis((int)world.getNexUpdateTime());
-        lblNextUpdateIn.setText(String.format("%s (%d s)", next.toString("HH:mm:ss"), (int)(world.getNexUpdateTime() / 1000)));
-        
-        int incomingAttacks = plr.getIncomingAttackCount();
-        lblIncomingAttackCount.setText(String.valueOf(incomingAttacks));
-        lblIncomingAttackCount.setVisible(incomingAttacks > 0);
-        
-        updateVillages(plr.getVillages());
+                lblPointCount.setText(String.valueOf(plr.getPoints()));
+                lblAnnounce.setVisible(plr.hasAnnounce());
+                lblMessage.setVisible(plr.hasMessage());
+                lblForum.setVisible(plr.hasForumMessage());
+
+                pPlayer.setVisible(true);
+
+                lblNextUpdateIn.setText(String.format("%s (%ds)", world.getNexUpdateTime().toString("HH:mm:ss"),
+                        world.getNexUpdateTime().minus(new DateTime().getMillis()).getSecondOfMinute()));
+
+                int incomingAttacks = plr.getIncomingAttackCount();
+                lblIncomingAttackCount.setText(String.valueOf(incomingAttacks));
+                lblIncomingAttackCount.setVisible(incomingAttacks > 0);
+
+                updateVillages(plr.getVillages());
+            }
+        });
     }
 
     private void updateVillages(List<Village> villages) {
         List<Integer> newIds = new ArrayList<>();
         for (Village v : villages) // get ids of all current villages
             newIds.add(v.getId());
-        
-        for (int i = 0; i < tpVillages.getTabCount(); i++)
-        {
-           VillagePanel vp = (VillagePanel)tpVillages.getComponentAt(i);
-           if (!newIds.contains(vp.getId())) { // remove tabs with non-existing villages
-               tpVillages.remove(vp);
-               i--;
-           } else {
-               newIds.remove(vp.getId()); // otherwise set id as not new
-           }
+
+        for (int i = 0; i < tpVillages.getTabCount(); i++) {
+            VillagePanel vp = (VillagePanel) tpVillages.getComponentAt(i);
+            if (!newIds.contains(vp.getId())) { // remove tabs with non-existing villages
+                tpVillages.remove(vp);
+                i--;
+            } else {
+                newIds.remove(vp.getId()); // otherwise set id as not new
+            }
         }
-        
+
         for (Village v : villages) {
             VillagePanel vp = null;
             if (newIds.contains(v.getId())) {
                 vp = new VillagePanel(v.getId());
                 tpVillages.add(v.toString(), vp);
             } else {
-                for (int i = 0; i < tpVillages.getTabCount(); i++)
-                {
-                    VillagePanel tmp = (VillagePanel)tpVillages.getComponentAt(i);
+                for (int i = 0; i < tpVillages.getTabCount(); i++) {
+                    VillagePanel tmp = (VillagePanel) tpVillages.getComponentAt(i);
                     if (tmp.getId() == v.getId()) {
                         vp = tmp;
+                        tpVillages.setTitleAt(i, v.toString());
                         break;
                     }
                 }
             }
-            
-            if (vp != null)
+
+            if (vp != null) {
                 vp.updateVillage(v);
+            }
         }
+    }
+
+    public void updateVillagePanel(final Village v) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {        
+                for (int i = 0; i < tpVillages.getTabCount(); i++) {
+                    VillagePanel vp = (VillagePanel) tpVillages.getComponentAt(i);
+                    if (vp.getId() != v.getId())
+                        continue;
+
+                    vp.updateVillage(v);
+                    break;
+                }
+            }
+        });
     }
 }

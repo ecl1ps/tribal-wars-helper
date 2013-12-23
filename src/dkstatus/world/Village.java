@@ -148,7 +148,7 @@ public class Village implements IValidable {
         return null;
     }
 
-    void cleanup() {
+    public void cleanup() {
         for (int i = 0; i < incomingArmies.size(); ++i) {
             MarchingArmy ma = incomingArmies.get(i);
             if (!ma.isValid())        

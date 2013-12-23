@@ -1,6 +1,8 @@
 package dkstatus.requests;
 
 import dkstatus.Utils;
+import dkstatus.WebRequestService;
+import dkstatus.ui.WindowManager;
 import dkstatus.world.CommandType;
 import dkstatus.world.MarchingArmy;
 import dkstatus.world.MapPosition;
@@ -10,9 +12,6 @@ import dkstatus.world.World;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -25,7 +24,7 @@ import org.jsoup.select.Elements;
  *
  * @author Johny
  */
-public class CommandInfoRequest implements IUpdateRequest {
+public class CommandInfoRequest extends AbstractUpdateRequest {
     private final int commandId;
     private final int villageId;
     private final boolean incoming;
@@ -35,23 +34,10 @@ public class CommandInfoRequest implements IUpdateRequest {
         this.villageId = villageId;
         this.incoming = incoming;
     }
-    
-    private String getResult() throws IOException {
-        
-        try (CloseableHttpClient httpclient = NetUtils.createClient()) {
-            
-            HttpGet request = NetUtils.prepareGetRequest(
-                    "village=" + villageId + "&id=" + commandId + "&type=" + (incoming ? "other" : "own") + "&screen=info_command");
-
-            Logger.getLogger(CommandInfoRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
-            
-            return httpclient.execute(request, new BasicResponseHandler());
-        }
-    }
 
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = getResult();
+        String resultHtml = getResult("village=" + villageId + "&id=" + commandId + "&type=" + (incoming ? "other" : "own") + "&screen=info_command");
         
         Logger.getLogger(CommandInfoRequest.class.getName()).log(Level.FINER, resultHtml);
         
@@ -60,7 +46,13 @@ public class CommandInfoRequest implements IUpdateRequest {
         if (!Utils.checkUserLogged(doc, world))
             return;
         
-        String commandHeader = doc.select("#content_value h2").first().text();
+        Element commandHeaderEl = doc.select("#content_value h2").first();
+        if (commandHeaderEl == null)
+            return; // command doesn't exist anymore
+                
+        String commandHeader = commandHeaderEl.text();
+
+        
         CommandType type = parseCommandType(commandHeader);
         
         Elements commandRows = doc.select("#content_value table").first().select("tr");
@@ -106,6 +98,8 @@ public class CommandInfoRequest implements IUpdateRequest {
             v.getIncomingArmies().add(new MarchingArmy(commandId, type, otherPlayer, otherVillage, world.getPlayer(), v, arrival));
         else
             v.getOutgoingArmies().add(new MarchingArmy(commandId, type, world.getPlayer(), v, otherPlayer, otherVillage, arrival));
+        
+        WindowManager.getWindow().updateVillagePanel(v);
     }
 
     private CommandType parseCommandType(String commandHeader) {
@@ -114,4 +108,8 @@ public class CommandInfoRequest implements IUpdateRequest {
                 return t;
         return CommandType.UNKNOWN_O;
     }
+    
+    public static int calculateDelay() {
+        return 1000 + WebRequestService.getRandomGenerator().nextInt(3000); // 1 - 4 sec
+    }     
 }

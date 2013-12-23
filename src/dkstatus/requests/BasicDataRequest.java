@@ -1,111 +1,39 @@
 package dkstatus.requests;
 
-import dkstatus.Utils;
-import dkstatus.world.MarchingArmy;
-import dkstatus.world.MapPosition;
+import dkstatus.Config;
+import dkstatus.WebRequestService;
+import dkstatus.cookies.BrowserManager;
 import dkstatus.world.Village;
 import dkstatus.world.World;
-import java.awt.Point;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.joda.time.DateTime;
 
 /**
  *
  * @author Johny
  */
-public class BasicDataRequest implements IUpdateRequest {
+public class BasicDataRequest implements IUpdateRequest{
     
-    private String getResult(int villageId) throws IOException {
-        
-        try (CloseableHttpClient httpclient = NetUtils.createClient()) {
-            
-            HttpGet request = NetUtils.prepareGetRequest("village=" + villageId + "&screen=overview");
-
-            Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
-            
-            return httpclient.execute(request, new BasicResponseHandler());
-        }
-    }
-
     @Override
     public void updateData(World world) throws IOException {
-        boolean firstReq = true;
         
-        for (Village v : world.getPlayer().getVillages()) {
-            
-            String resultHtml = getResult(v.getId());
-
-            Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINER, resultHtml);
-
-            Document doc = Jsoup.parse(resultHtml);
-
-            if (firstReq) { // only once - common data
-                if (!Utils.checkUserLogged(doc, world))
-                    return;
-
-                Element menu = doc.select("#menu_row").first();
-
-                world.getPlayer().setName(menu.children().get(10).select("tr").first().child(0).text());
-
-                String points = menu.select("#rank_points").first().text();
-                points = points.replaceAll("\\.", "");
-                world.getPlayer().setPoints(Integer.parseInt(points));
-
-                world.getPlayer().hasAnnounce(!menu.select("#new_report").first().hasAttr("style"));
-                world.getPlayer().hasMessage(!menu.select("#new_mail").first().hasAttr("style"));
-                Element forumMessage = menu.select("#tribe_forum_indicator").first(); // players without tribe don't have this element
-                world.getPlayer().hasForumMessage(forumMessage != null && !forumMessage.hasClass("no_new_post"));
+        if (!world.getPlayer().isLoggedIn()) {
+            BrowserManager.refreshCookies();
+            WebRequestService.scheduleTask(new VillageListRequest(), 0);
+        } else {
+            int delay = 0;
+            for (Village v : world.getPlayer().getVillages()) {
+                delay += VillageDataRequest.calculateDelay();
+                WebRequestService.scheduleTask(new VillageDataRequest(v), delay);
             }
 
-            Element headerInfo = doc.select("#header_info tr").first();
-
-            v.getResources().setWood(Integer.parseInt(headerInfo.select("#wood").first().text()));
-            v.getResources().setStone(Integer.parseInt(headerInfo.select("#stone").first().text()));
-            v.getResources().setIron(Integer.parseInt(headerInfo.select("#iron").first().text()));
-            v.getResources().setStorage(Integer.parseInt(headerInfo.select("#storage").first().text()));
-
-            v.getPopulation().setCurrent(Integer.parseInt(headerInfo.select("#pop_current_label").first().text()));
-            v.getPopulation().setMax(Integer.parseInt(headerInfo.select("#pop_max_label").first().text()));
-
-            v.setName(headerInfo.select("#menu_row2_village a").first().text());
-            String pos = headerInfo.select("#menu_row2 td b").first().text();
-            v.setPosition(new MapPosition(Integer.parseInt(pos.substring(1, 4)), Integer.parseInt(pos.substring(5, 8)), pos.substring(10, 13)));
-
-            parseCommands(doc.select("#show_incoming_units tr"), v, world, true);
-            
-            parseCommands(doc.select("#show_outgoing_units tr"), v, world, false);
+            delay = calculateDelay();
+            world.setNextUpdateIn(new DateTime().plusMillis(delay));
+            WebRequestService.scheduleTask(new BasicDataRequest(), delay);
         }
     }
-
-    private void parseCommands(Elements rows, Village v, World world, boolean incoming) throws IOException, NumberFormatException {
-        for (Element el : rows) {
-            Element a = el.select("a").first();
-            if (a == null)
-                continue;
-            
-            String link = a.attr("href"); ///game.php?village=9845&amp;id=3124812&amp;type=other&amp;screen=info_command
-            Pattern p = Pattern.compile(".*id=(\\d+).*");
-            Matcher m = p.matcher(link);
-            if (!m.find())
-                continue;
-            
-            int id = Integer.parseInt(m.group(1));
-            
-            MarchingArmy att = v.getCommandId(id);
-            if (att != null)
-                att.validate();
-            else
-                new CommandInfoRequest(id, v.getId(), incoming).updateData(world);
-        }
-    }
+    
+    public static int calculateDelay() {
+        return Config.UPDATE_MS + WebRequestService.getRandomGenerator().nextInt(Config.UPDATE_JITTER);
+    }       
 }
