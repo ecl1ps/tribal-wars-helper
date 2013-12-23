@@ -2,6 +2,7 @@
 package dkstatus.cookies;
 
 import dkstatus.Config;
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -32,11 +33,13 @@ public class FirefoxDataProvider implements IBrowserDataProvider {
         byte[] encoded = null;
         
         try {
-            FileStore fs = Files.getFileStore(Paths.get(repositoryPath));
-                
+            File profilesDir = new File(repositoryPath);
+            String[] files = profilesDir.list();
+            if (files.length <= 0)
+                return cookieStore;
             
-            repositoryPath += "2f9swmun.default\\sessionstore.js";
-        
+            repositoryPath += files[0];
+            repositoryPath += "\\sessionstore.js";
 
             encoded = Files.readAllBytes(Paths.get(repositoryPath));
         } catch (IOException ex) {
