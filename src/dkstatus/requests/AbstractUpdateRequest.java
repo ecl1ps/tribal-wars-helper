@@ -20,7 +20,7 @@ public abstract class AbstractUpdateRequest implements IUpdateRequest {
             
             HttpGet request = NetUtils.prepareGetRequest(requestData);
 
-            Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Executing request: {0}", request.getURI());
             
             return httpclient.execute(request, new BasicResponseHandler());
         }

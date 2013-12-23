@@ -11,25 +11,31 @@ import org.joda.time.PeriodType;
  */
 public enum ArmyType {
     
-    NOBLE("šlechtic", 35),
-    RAM_CATAPULT("beranidla/katapulty", 30),
-    SWORDSMAN("šermíři", 22),
-    PIKE_AXE("kopiníci/sekerníci/lučištníci", 18),
-    HEAVY_CAVALLERY("těžká kavalérie", 11),
-    LIGHT_CAVALLERY("lehká kavalérie/lučištník na koni/paladin", 10),
-    SCOUT("zvědi", 9),
-    INVALID("neznámé", 1);
+    NOBLE("šlechtic", "slecht", 35),
+    RAM_CATAPULT("beranidla/katapulty", "berani", 30),
+    SWORDSMAN("šermíři", "serm", 22),
+    PIKE_AXE("kopiníci/sekerníci/lučištníci", "sekery", 18),
+    HEAVY_CAVALLERY("těžká kavalérie", "TK", 11),
+    LIGHT_CAVALLERY("lehká kavalérie/lučištník na koni/paladin", "LK", 10),
+    SCOUT("zvědi", "zvedi", 9),
+    INVALID("neznámé", "unk", 1);
     
     private final String name;
+    private final String shortName;
     private final int speed; //  minutes per length unit
     
-    private ArmyType(String name, int speed) {
+    private ArmyType(String name, String shortName, int speed) {
         this.name = name;
+        this.shortName = shortName;
         this.speed = speed;
     }
     
     public String getName() {
         return name;
+    }
+
+    public String getShortName() {
+        return shortName;
     }
     
     public Period getTimeToTravell(MapPosition from, MapPosition to) {

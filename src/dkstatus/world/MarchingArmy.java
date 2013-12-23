@@ -145,5 +145,34 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
     public int compareTo(MarchingArmy o) {
         return armyArrives.compareTo(o.armyArrives);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + this.commandId;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MarchingArmy other = (MarchingArmy) obj;
+        return this.commandId == other.commandId;
+    }
+
+    public String toShortString() {
+        if (commandType != CommandType.INCOMING_ATTACK)
+            return "Unsupported type";
+        
+        return String.format("%s utoci na %s s: %s v %s", 
+            from.getName(), to.getName(), armyType.getShortName(),
+            armyArrives.toString("HH:mm:ss"));
+    }
+    
     
 }

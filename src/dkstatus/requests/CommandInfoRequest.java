@@ -1,7 +1,9 @@
 package dkstatus.requests;
 
+import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
+import dkstatus.sms.SmsSender;
 import dkstatus.ui.WindowManager;
 import dkstatus.world.CommandType;
 import dkstatus.world.MarchingArmy;
@@ -94,10 +96,22 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
         }
 
         Village v = world.getPlayer().getVillage(villageId);
-        if (incoming)
-            v.getIncomingArmies().add(new MarchingArmy(commandId, type, otherPlayer, otherVillage, world.getPlayer(), v, arrival));
-        else
-            v.getOutgoingArmies().add(new MarchingArmy(commandId, type, world.getPlayer(), v, otherPlayer, otherVillage, arrival));
+        MarchingArmy army;
+        if (incoming) {
+            army = new MarchingArmy(commandId, type, otherPlayer, otherVillage, world.getPlayer(), v, arrival);
+            if (v.getIncomingArmies().contains(army))
+                v.getIncomingArmies().remove(army);
+            else if (army.getCommandType() == CommandType.INCOMING_ATTACK)
+                SmsSender.sendSms(Config.USER_PHONE_NUMBER, army.toShortString());
+            
+            v.getIncomingArmies().add(army);
+        } else {
+            army = new MarchingArmy(commandId, type, world.getPlayer(), v, otherPlayer, otherVillage, arrival);
+            if (v.getIncomingArmies().contains(army))
+                v.getIncomingArmies().remove(army);
+            
+            v.getOutgoingArmies().add(army);
+        }
         
         WindowManager.getWindow().updateVillagePanel(v);
     }

@@ -12,6 +12,8 @@ public class Config {
     public static final double WORLD_SPEED = 1.6;
     public static final double WORLD_MARCH_SPEED = 0.8;
     
+    public static final String USER_PHONE_NUMBER = "721935719";
+    
     public static final int UPDATE_MS = 10000;
     public static final int UPDATE_JITTER = 10000;
 }
