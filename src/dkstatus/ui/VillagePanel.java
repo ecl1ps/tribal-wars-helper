@@ -35,7 +35,13 @@ public class VillagePanel extends javax.swing.JPanel {
         lstIncoming.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting())
+                    return;
+                
                 MarchingArmy att = (MarchingArmy)lstIncoming.getSelectedValue();
+                if (att == null)
+                    return;
+                
                 try {
                     Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=other&screen=info_command")));
                 } catch (URISyntaxException | IOException ex) {
@@ -47,7 +53,13 @@ public class VillagePanel extends javax.swing.JPanel {
         lstOutgoing.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting())
+                    return;
+                
                 MarchingArmy att = (MarchingArmy)lstOutgoing.getSelectedValue();
+                if (att == null)
+                    return;
+                
                 try {
                     Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=own&screen=info_command")));
                 } catch (URISyntaxException | IOException ex) {
