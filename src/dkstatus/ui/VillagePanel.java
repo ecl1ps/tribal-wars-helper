@@ -45,7 +45,6 @@ public class VillagePanel extends javax.swing.JPanel {
                 try {
                     Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=other&screen=info_command")));
                 } catch (URISyntaxException | IOException ex) {
-                    //It looks like there's a problem
                     Logger.getLogger(UIUtils.class.getName()).log(Level.INFO, null, ex);
                 }
             }
@@ -63,7 +62,6 @@ public class VillagePanel extends javax.swing.JPanel {
                 try {
                     Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=own&screen=info_command")));
                 } catch (URISyntaxException | IOException ex) {
-                    //It looks like there's a problem
                     Logger.getLogger(UIUtils.class.getName()).log(Level.INFO, null, ex);
                 }
             }

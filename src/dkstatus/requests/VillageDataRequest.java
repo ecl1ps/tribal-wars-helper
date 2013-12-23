@@ -89,7 +89,7 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             int id = Integer.parseInt(m.group(1));
             
             MarchingArmy att = v.getCommandId(id);
-            if (att != null)
+            if (att != null && att.getArmyArrives().isAfterNow())
                 att.validate();
             else {
                 delay += incoming ? 100 : CommandInfoRequest.calculateDelay();
