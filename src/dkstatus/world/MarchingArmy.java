@@ -81,47 +81,47 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
         switch (commandType) {
             case INCOMING_ATTACK:
                 return String.format("%s: %s (%s) útočí na %s s: %s v %s", 
-                    marchStarted.toString("dd.MM.yyyy HH:mm:ss"), 
+                    marchStarted.toString("dd.MM.yy HH:mm:ss"), 
                     from.toString(), fromPlayer.getName(), to.getName(), armyType.getName(),
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"));
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"));
             case INCOMING_SUPPORT:
                 return String.format("%s: %s (%s) posílá podporu pro %s s: %s v %s", 
-                    marchStarted.toString("dd.MM.yyyy HH:mm:ss"), 
+                    marchStarted.toString("dd.MM.yy HH:mm:ss"), 
                     from.toString(), fromPlayer.getName(), to.getName(), armyType.getName(),
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss")); 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss")); 
             case OUTGOING_ATTACK:
                 if (toPlayer.getName().equalsIgnoreCase("---"))
                     return String.format("%s: Útok na %s", 
-                        armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                        armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                         to.toString());
                 else
                     return String.format("%s: Útok na %s (%s)", 
-                        armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                        armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                         to.toString(), toPlayer.getName()); 
             case OUTGOING_SUPPORT:
                 return String.format("%s: Podpora pro %s (%s)", 
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     to.toString(), toPlayer.getName());
             case RETRIEVING_SUPPORT:
-                return String.format("%s: Stažení podpory od %s (%s)", 
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                return String.format("%s: Stažení podpory z %s (%s)", 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     to.toString(), toPlayer.getName()); 
             case SENT_BACK_SUPPORT:
-                return String.format("%s: Podpora zaslána zpět od %s (%s)", 
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                return String.format("%s: Podpora zaslána zpět z %s (%s)", 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     to.toString(), toPlayer.getName());                 
             case RETURNING_ATTACK:
                 return String.format("%s: Návrat z útoku na %s", 
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     to.toString());
             case CANCELLED:
                 return String.format("%s: Zrušený pochod na %s", 
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"), 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     to.toString()); 
             case UNKNOWN_I:
             case UNKNOWN_O:
                 return String.format("%s: Neznámý příkaz", 
-                    armyArrives.toString("dd.MM.yyyy HH:mm:ss"));                  
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"));                  
         }
         return "Unk";
     }
