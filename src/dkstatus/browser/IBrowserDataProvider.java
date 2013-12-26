@@ -1,6 +1,7 @@
 
-package dkstatus.cookies;
+package dkstatus.browser;
 
+import org.apache.http.HttpRequest;
 import org.apache.http.client.CookieStore;
 
 /**
@@ -15,5 +16,5 @@ public interface IBrowserDataProvider {
      */
     public CookieStore getBrowserCookies();
     
-    public String getUserAgent();
+    public void setHeaders(HttpRequest request);
 }

@@ -2,7 +2,7 @@
 package dkstatus.requests;
 
 import dkstatus.Utils;
-import dkstatus.cookies.BrowserManager;
+import dkstatus.browser.BrowserManager;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
@@ -24,7 +24,7 @@ public class NetUtils {
     
     public static HttpGet prepareGetRequest(String requestParams) {
         HttpGet request = new HttpGet(Utils.getLink(requestParams));
-        request.setHeader("User-Agent", BrowserManager.getUserAgent());
+        BrowserManager.setHeaders(request);
         return request;
     }    
 }

@@ -1,6 +1,7 @@
 
-package dkstatus.cookies;
+package dkstatus.browser;
 
+import org.apache.http.HttpRequest;
 import org.apache.http.client.CookieStore;
 
 /**
@@ -26,8 +27,8 @@ public class BrowserManager {
     public static void refreshCookies() {
         cookieStore = browserProvider.getBrowserCookies();
     }    
-    
-    public static String getUserAgent() {
-        return browserProvider.getUserAgent();
+
+    public static void setHeaders(HttpRequest request) {
+        browserProvider.setHeaders(request);
     }
 }

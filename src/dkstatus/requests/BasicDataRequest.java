@@ -2,7 +2,7 @@ package dkstatus.requests;
 
 import dkstatus.Config;
 import dkstatus.WebRequestService;
-import dkstatus.cookies.BrowserManager;
+import dkstatus.browser.BrowserManager;
 import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.io.IOException;

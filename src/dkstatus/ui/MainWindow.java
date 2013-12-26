@@ -1,9 +1,9 @@
 package dkstatus.ui;
 
 import dkstatus.DKStatus;
-import dkstatus.cookies.BrowserManager;
-import dkstatus.cookies.ChromeDataProvider;
-import dkstatus.cookies.FirefoxDataProvider;
+import dkstatus.browser.BrowserManager;
+import dkstatus.browser.ChromeDataProvider;
+import dkstatus.browser.FirefoxDataProvider;
 import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;

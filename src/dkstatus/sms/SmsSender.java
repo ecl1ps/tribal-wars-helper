@@ -1,7 +1,7 @@
 
 package dkstatus.sms;
 
-import dkstatus.cookies.BrowserManager;
+import dkstatus.browser.BrowserManager;
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class SmsSender {
             formparams.add(new BasicNameValuePair("submit", "Odeslat"));
             
             HttpPost httppost = new HttpPost("http://www.sms-o2.cz/");
-            httppost.setHeader("User-Agent", BrowserManager.getUserAgent());
+            BrowserManager.setHeaders(httppost);
             httppost.setEntity(new UrlEncodedFormEntity(formparams, Consts.UTF_8));
             
             Logger.getLogger(SmsSender.class.getName()).log(Level.FINE, "Sending sms: {0}", text);

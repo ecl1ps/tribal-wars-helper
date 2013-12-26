@@ -1,5 +1,5 @@
 
-package dkstatus.cookies;
+package dkstatus.browser;
 
 import dkstatus.Config;
 import java.io.IOException;
@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.HttpRequest;
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.cookie.BasicClientCookie;
@@ -68,8 +70,14 @@ public class ChromeDataProvider implements IBrowserDataProvider {
     }
 
     @Override
-    public String getUserAgent() {
-        return "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36";
+    public void setHeaders(HttpRequest request) {
+        request.setHeader(HTTP.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36");
+        request.addHeader(HTTP.CONN_DIRECTIVE, "keep-alive");
+        request.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+        request.addHeader("Accept-Language", "cs-CZ,cs;q=0.8,en-US,en;q=0.2");
+        request.addHeader("Accept-Encoding", "gzip, deflate");
+        request.addHeader("Referer", String.format("http://www.%s/", Config.ROOT_DOMAIN));
+        request.addHeader("Cache-Control", "max-age=0");
     }
     
 }
