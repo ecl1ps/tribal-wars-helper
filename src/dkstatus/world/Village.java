@@ -161,6 +161,18 @@ public class Village implements IValidable {
                 outgoingArmies.remove(i);        
         }
     }
+
+    public boolean hasActiveAnnounce() {
+        for (MarchingArmy att : incomingArmies)
+            if (att.hasActiveAnnounce())
+                return true;
+        
+        return false;
+    }
     
+    public void resetActiveAnnounces() {
+        for (MarchingArmy att : incomingArmies)
+            att.setActiveAnnounce(false);
+    }    
     
 }

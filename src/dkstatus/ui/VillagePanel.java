@@ -237,8 +237,8 @@ public class VillagePanel extends javax.swing.JPanel {
         lstIncoming.setListData(v.getIncomingArmies().toArray());
         lstOutgoing.setListData(v.getOutgoingArmies().toArray());
 
-        if (v.IsAttacked()) {
-            requestFocusInWindow();
+        if (v.IsAttacked() && v.hasActiveAnnounce()) {
+            requestFocus();
             Utils.tone(2000,1000);
         }
     }

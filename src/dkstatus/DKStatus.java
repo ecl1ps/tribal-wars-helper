@@ -25,4 +25,8 @@ public class DKStatus {
         WebRequestService.restartService();
         updateData();
     }
+
+    public static void resetAlert() {
+        WebRequestService.getWorld().resetAlert();
+    }
 }

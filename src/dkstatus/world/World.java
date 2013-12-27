@@ -27,4 +27,9 @@ public class World {
     public void setNextUpdateIn(DateTime nextUpdateIn) {
         this.nextUpdateIn = nextUpdateIn;
     }
+
+    public void resetAlert() {
+        for (Village v : player.getVillages())
+            v.resetActiveAnnounces();
+    }
 }

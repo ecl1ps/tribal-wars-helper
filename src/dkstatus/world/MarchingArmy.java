@@ -11,6 +11,7 @@ import org.joda.time.DateTime;
 public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
     
     private boolean valid;
+    private boolean activeAnnounce;
     
     private final int commandId;
     private final CommandType commandType;
@@ -25,6 +26,7 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
     public MarchingArmy(int commandId, CommandType commandType, Player fromPlayer, Village from, Player toPlayer, Village to, DateTime armyArrives) {
         
         valid = true;
+        activeAnnounce = false;
         this.marchStarted = new DateTime();
         this.armyArrives = armyArrives;
         this.commandId = commandId;
@@ -173,6 +175,12 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
             from.getName(), to.getName(), armyType.getShortName(),
             armyArrives.toString("HH:mm:ss"));
     }
-    
-    
+
+    public boolean hasActiveAnnounce() {
+        return activeAnnounce;
+    }
+
+    public void setActiveAnnounce(boolean activeAnnounce) {
+        this.activeAnnounce = activeAnnounce;
+    }
 }

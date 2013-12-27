@@ -53,6 +53,7 @@ public class MainWindow extends javax.swing.JFrame {
         lblIncomingAttackCount = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         lblNextUpdateIn = new javax.swing.JLabel();
+        btnResetAnnounces = new javax.swing.JButton();
         mbMenu = new javax.swing.JMenuBar();
         mSettings = new javax.swing.JMenu();
         mBrowser = new javax.swing.JMenu();
@@ -93,18 +94,25 @@ public class MainWindow extends javax.swing.JFrame {
         lblNextUpdateIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/time.png"))); // NOI18N
         lblNextUpdateIn.setText("0");
 
+        btnResetAnnounces.setText("Ukončit poplach");
+        btnResetAnnounces.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetAnnouncesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pPlayerLayout = new javax.swing.GroupLayout(pPlayer);
         pPlayer.setLayout(pPlayerLayout);
         pPlayerLayout.setHorizontalGroup(
             pPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pPlayerLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPlayerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblPlayer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblPlayerName)
-                .addGap(128, 128, 128)
+                .addGap(64, 64, 64)
                 .addComponent(lblPointCount)
-                .addGap(58, 58, 58)
+                .addGap(18, 18, 18)
                 .addComponent(lblAnnounce)
                 .addGap(18, 18, 18)
                 .addComponent(lblMessage)
@@ -112,10 +120,12 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(lblForum)
                 .addGap(18, 18, 18)
                 .addComponent(lblIncomingAttackCount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                 .addComponent(lblNextUpdateIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnUpdate)
+                .addGroup(pPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnResetAnnounces, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pPlayerLayout.setVerticalGroup(
@@ -132,7 +142,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(lblIncomingAttackCount)
                     .addComponent(btnUpdate)
                     .addComponent(lblNextUpdateIn))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(btnResetAnnounces))
         );
 
         mSettings.setText("Settings");
@@ -172,8 +183,9 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tpVillages, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tpVillages, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -195,7 +207,12 @@ public class MainWindow extends javax.swing.JFrame {
         DKStatus.refreshUpdate();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void btnResetAnnouncesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetAnnouncesActionPerformed
+        DKStatus.resetAlert();
+    }//GEN-LAST:event_btnResetAnnouncesActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnResetAnnounces;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblAnnounce;
     private javax.swing.JLabel lblForum;

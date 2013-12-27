@@ -101,8 +101,10 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
             army = new MarchingArmy(commandId, type, otherPlayer, otherVillage, world.getPlayer(), v, arrival);
             if (v.getIncomingArmies().contains(army))
                 v.getIncomingArmies().remove(army);
-            else if (army.getCommandType() == CommandType.INCOMING_ATTACK)
-                SmsSender.sendSms(Config.USER_PHONE_NUMBER, army.toShortString());
+            else if (army.getCommandType() == CommandType.INCOMING_ATTACK) {
+                army.setActiveAnnounce(true);
+                SmsSender.sendSms(Config.getStringProperty(Config.ConfigKey.USER_PHONE_NUMBER), army.toShortString());
+            }
             
             v.getIncomingArmies().add(army);
         } else {
