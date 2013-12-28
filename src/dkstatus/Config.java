@@ -48,6 +48,7 @@ public class Config {
             properties.load(new FileInputStream(CONFIG_FILE));
         } catch (IOException e) {
             Logger.getLogger(Config.class.getName()).log(Level.INFO, "Couldn't load config file - using defaults");
+            save();
         }
     }
     
@@ -69,10 +70,14 @@ public class Config {
     
     public static void setProperty(ConfigKey key, String val) {
         properties.setProperty(key.name(), val);
+        save();
+    }   
+    
+    private static void save() {
         try {
             properties.store(new FileOutputStream(CONFIG_FILE), "");
         } catch (IOException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }     
+    }
 }

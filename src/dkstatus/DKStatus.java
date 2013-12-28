@@ -11,7 +11,9 @@ import dkstatus.ui.WindowManager;
 public class DKStatus {
     
     public static void main(String[] args) throws InterruptedException {
-
+        
+        Config.init();
+        
         WindowManager.initialize();
 
         updateData();
