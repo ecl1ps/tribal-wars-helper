@@ -1,11 +1,13 @@
 
 package dkstatus.requests;
 
+import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
 import dkstatus.ui.WindowManager;
 import dkstatus.world.MapPosition;
 import dkstatus.world.MarchingArmy;
+import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.io.IOException;
@@ -42,17 +44,7 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             if (!Utils.checkUserLogged(doc, world))
                 return;
             
-            // <editor-fold defaultstate="collapsed" desc="common data">
-            Element menu = doc.select("#menu_row").first();
-            world.getPlayer().setName(menu.children().get(10).select("tr").first().child(0).text());
-            String points = menu.select("#rank_points").first().text();
-            points = points.replaceAll("\\.", "");
-            world.getPlayer().setPoints(Integer.parseInt(points));
-            world.getPlayer().hasAnnounce(!menu.select("#new_report").first().hasAttr("style"));
-            world.getPlayer().hasMessage(!menu.select("#new_mail").first().hasAttr("style"));
-            Element forumMessage = menu.select("#tribe_forum_indicator").first(); // players without tribe don't have this element
-            world.getPlayer().hasForumMessage(forumMessage != null && !forumMessage.hasClass("no_new_post"));
-            // </editor-fold>
+            parseCommonData(world, doc);
             
             Element headerInfo = doc.select("#header_info tr").first();
             v.getResources().setWood(Integer.parseInt(headerInfo.select("#wood").first().text()));
@@ -69,6 +61,9 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             parseCommands(doc.select("#show_outgoing_units tr"), v, false);
             
             v.cleanup();
+            
+            if (v.IsAttacked() && v.hasActiveAnnounce())
+                Utils.tone(2000,1000);
             
             WindowManager.getWindow().updateWindow(world); 
     }
@@ -101,4 +96,37 @@ public class VillageDataRequest extends AbstractUpdateRequest {
     public static int calculateDelay() {
         return 1000 + WebRequestService.getRandomGenerator().nextInt(2000); // 1 - 3 sec
     }     
+
+    private synchronized void parseCommonData(World world, Document doc) {
+        if (world.hasCommonDataUpdated())
+            return;
+        
+        world.setCommonDataUpdated(true);
+        Player player = world.getPlayer();
+        
+        Element menu = doc.select("#menu_row").first();
+        player.setName(menu.children().get(10).select("tr").first().child(0).text());
+        String points = menu.select("#rank_points").first().text();
+        points = points.replaceAll("\\.", "");
+        player.setPoints(Integer.parseInt(points));
+        player.hasAnnounce(!menu.select("#new_report").first().hasAttr("style"));
+        Element forumMessage = menu.select("#tribe_forum_indicator").first(); // players without tribe don't have this element
+        player.hasForumMessage(forumMessage != null && !forumMessage.hasClass("no_new_post"));
+        
+        boolean hasNewMessage = !menu.select("#new_mail").first().hasAttr("style");
+        if (hasNewMessage && Config.getBoolProperty(Config.ConfigKey.HAS_MESSAGE_ALERT)) { 
+            if (Config.getBoolProperty(Config.ConfigKey.HAS_MESSAGE_ALERT_CONTINUOUS)) {
+                if (!player.hasMessageAlertDeactivated())
+                    Utils.tone(500,500);
+                else if (!player.hasMessage()) {
+                    player.setHasMessageAlertDeactivated(false);
+                    Utils.tone(500,500);
+                }
+            } else if (!player.hasMessage()) {
+                Utils.tone(500,500);
+            }
+        }
+                            
+        player.hasMessage(hasNewMessage);
+    }
 }

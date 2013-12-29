@@ -236,10 +236,8 @@ public class VillagePanel extends javax.swing.JPanel {
         Collections.sort(v.getOutgoingArmies());
         lstIncoming.setListData(v.getIncomingArmies().toArray());
         lstOutgoing.setListData(v.getOutgoingArmies().toArray());
-
-        if (v.IsAttacked() && v.hasActiveAnnounce()) {
-            requestFocus();
-            Utils.tone(2000,1000);
-        }
+        
+        if (v.IsAttacked()) // TODO: not working
+            requestFocusInWindow();
     }
 }

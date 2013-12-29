@@ -20,7 +20,7 @@ public class VillageListRequest extends AbstractUpdateRequest {
     
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = getResult("screen=overview_villages");
+        String resultHtml = getResult("screen=overview_villages&mode=prod");
         
         Logger.getLogger(VillageListRequest.class.getName()).log(Level.FINER, resultHtml);
         
@@ -31,7 +31,7 @@ public class VillageListRequest extends AbstractUpdateRequest {
         
         world.getPlayer().getVillages().clear();
         
-        Elements villageRows= doc.select("#production_table tr");
+        Elements villageRows = doc.select(".overview_table tr");
         
         for (Element row : villageRows) {
             if (!row.hasAttr("class"))

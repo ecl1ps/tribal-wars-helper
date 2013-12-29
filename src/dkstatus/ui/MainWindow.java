@@ -246,6 +246,7 @@ public class MainWindow extends javax.swing.JFrame {
                 lblPointCount.setText(String.valueOf(plr.getPoints()));
                 lblAnnounce.setVisible(plr.hasAnnounce());
                 lblMessage.setVisible(plr.hasMessage());
+                
                 lblForum.setVisible(plr.hasForumMessage());
 
                 pPlayer.setVisible(true);

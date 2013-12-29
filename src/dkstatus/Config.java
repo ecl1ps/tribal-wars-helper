@@ -30,7 +30,10 @@ public class Config {
         
         PROXY_ENABLED,
         PROXY_IP,
-        PROXY_PORT
+        PROXY_PORT, 
+        
+        HAS_MESSAGE_ALERT,
+        HAS_MESSAGE_ALERT_CONTINUOUS
     }
     
     public static void init() {
@@ -40,6 +43,8 @@ public class Config {
         properties.setProperty(ConfigKey.PROXY_ENABLED.name(), "false");
         properties.setProperty(ConfigKey.PROXY_IP.name(), "");
         properties.setProperty(ConfigKey.PROXY_PORT.name(), "8080");
+        properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT.name(), "false");
+        properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT_CONTINUOUS.name(), "false");        
         
         //init with defaults
         properties = new Properties(properties);

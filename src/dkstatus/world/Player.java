@@ -16,6 +16,7 @@ public class Player {
     private boolean isLoggedIn = false;
     private boolean hasAnnounce = false;
     private boolean hasMessage = false;
+    private boolean hasMessageAlert = false;
     private boolean hasForumMessage = false;
     
     private final List<Village> villages = new LinkedList<>();
@@ -72,6 +73,14 @@ public class Player {
         this.hasMessage = hasMessage;
     }
 
+    public boolean hasMessageAlertDeactivated() {
+        return hasMessageAlert;
+    }
+
+    public void setHasMessageAlertDeactivated(boolean hasMessageAlert) {
+        this.hasMessageAlert = hasMessageAlert;
+    }
+    
     public boolean hasForumMessage() {
         return hasForumMessage;
     }

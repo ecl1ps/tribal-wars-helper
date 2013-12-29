@@ -22,6 +22,7 @@ public class BasicDataRequest implements IUpdateRequest{
             WebRequestService.scheduleTask(new VillageListRequest(), 0);
         } else {
             int delay = 0;
+            world.setCommonDataUpdated(false);
             for (Village v : world.getPlayer().getVillages()) {
                 delay += VillageDataRequest.calculateDelay();
                 WebRequestService.scheduleTask(new VillageDataRequest(v), delay);

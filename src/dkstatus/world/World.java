@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 public class World {
     
     private final Player player = new Player();
+    private volatile boolean commonDataUpdated;
     
     private DateTime nextUpdateIn = new DateTime();
 
@@ -29,7 +30,16 @@ public class World {
     }
 
     public void resetAlert() {
+        player.setHasMessageAlertDeactivated(false);
         for (Village v : player.getVillages())
             v.resetActiveAnnounces();
+    }
+
+    public void setCommonDataUpdated(boolean updated) {
+        commonDataUpdated = updated;
+    }
+
+    public boolean hasCommonDataUpdated() {
+        return commonDataUpdated;
     }
 }
