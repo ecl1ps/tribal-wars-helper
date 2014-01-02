@@ -6,24 +6,34 @@ package dkstatus.world;
  * @author Johny
  */
 public enum UnitType {
-    SPEARMAN("Kopiníci", "unit_spear.png"),
-    SWORDSMAN("Šermíři", "unit_sword.png"),
-    AXEMAN("Sekerníci", "unit_axe.png"),
-    ARCHER("Lučištníci", "unit_archer.png"),
-    SPY("Zvědi", "unit_spy.png"),
-    LIGHT_CAVALRY("Lehká kavalerie", "unit_light.png"),
-    HEAVY_CAVALRY("Težká kavalerie", "unit_heavy.png"),
-    MOUNTED_ARCHER("Lučištníci na koni", "unit_marcher.png"),
-    RAM("Beranidla", "unit_ram.png"),
-    CATAPULT("Katapulty", "unit_catapult.png"),
-    PALADIN("Paladin", "unit_knight.png"),
-    NOBLE("Šlechticové", "unit_snob.png");
+    SPEARMAN(1, "Kopiníci", "spear", "unit_spear.png"),
+    SWORDSMAN(2, "Šermíři", "sword", "unit_sword.png"),
+    AXEMAN(3, "Sekerníci", "axe", "unit_axe.png"),
+    ARCHER(4, "Lučištníci", "archer", "unit_archer.png"),
+    SPY(5, "Zvědi", "spy", "unit_spy.png"),
+    LIGHT_CAVALRY(6, "Lehká kavalérie", "light", "unit_light.png"),
+    MOUNTED_ARCHER(7, "Lučištníci na koni", "marcher", "unit_marcher.png"),
+    HEAVY_CAVALRY(8, "Težká kavalérie", "heavy", "unit_heavy.png"),
+    RAM(9, "Beranidla", "ram", "unit_ram.png"),
+    CATAPULT(10, "Katapulty", "catapult", "unit_catapult.png"),
+    PALADIN(11, "Paladin", "knight", "unit_knight.png"),
+    NOBLE(12, "Šlechticové", "snob", "unit_snob.png"),
+    INVALID(13, "Invalid", "", "unit_snob.png");
     
-    private String name;
-    private String image;
-    private UnitType(String name, String image) {
+    private final int id;
+    private final String name;
+    private final String shortcut;
+    private final String image;
+    
+    private UnitType(int id, String name, String shortcut, String image) {
+        this.id = id;
         this.name = name;
+        this.shortcut = shortcut;
         this.image = image;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -32,5 +42,13 @@ public enum UnitType {
 
     public String getImage() {
         return image;
+    }
+
+    public static UnitType calculateUnitType(String unitShortcut) {
+        for (UnitType  t : UnitType.values()) {
+            if (unitShortcut.equals(t.shortcut))
+                return t;
+        }
+        return INVALID;
     }
 }

@@ -15,8 +15,8 @@ public enum ArmyType {
     RAM_CATAPULT("beranidla/katapulty", "berani", 30),
     SWORDSMAN("šermíři", "serm", 22),
     PIKE_AXE("kopiníci/sekerníci/lučištníci", "sekery", 18),
-    HEAVY_CAVALLERY("těžká kavalérie", "TK", 11),
-    LIGHT_CAVALLERY("lehká kavalérie/lučištník na koni/paladin", "LK", 10),
+    HEAVY_CAVALLERY("TK", "TK", 11),
+    LIGHT_CAVALLERY("LK/LnK/paladin", "LK", 10),
     SCOUT("zvědi", "zvedi", 9),
     INVALID("neznámé", "unk", 1);
     

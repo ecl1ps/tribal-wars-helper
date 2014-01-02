@@ -306,12 +306,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
 
             if (vp != null) {
-                vp.updateVillage(v);
+                vp.updateVillage(v, UpdateType.VILLAGE_COMMON);
             }
         }
     }
 
-    public void updateVillagePanel(final Village v) {
+    public void updateVillagePanel(final Village v, final UpdateType type) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {        
@@ -320,7 +320,7 @@ public class MainWindow extends javax.swing.JFrame {
                     if (vp.getId() != v.getId())
                         continue;
 
-                    vp.updateVillage(v);
+                    vp.updateVillage(v, type);
                     break;
                 }
             }

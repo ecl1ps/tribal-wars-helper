@@ -4,10 +4,13 @@ package dkstatus.requests;
 import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
+import dkstatus.ui.UpdateType;
 import dkstatus.ui.WindowManager;
 import dkstatus.world.MapPosition;
 import dkstatus.world.MarchingArmy;
 import dkstatus.world.Player;
+import dkstatus.world.Unit;
+import dkstatus.world.UnitType;
 import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.io.IOException;
@@ -57,6 +60,8 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             String pos = headerInfo.select("#menu_row2 td b").first().text();
             v.setPosition(new MapPosition(Integer.parseInt(pos.substring(1, 4)), Integer.parseInt(pos.substring(5, 8)), pos.substring(10, 13)));
             
+            parseUnits(doc.select("#show_units td"), v);
+            
             parseCommands(doc.select("#show_incoming_units tr"), v, true);
             parseCommands(doc.select("#show_outgoing_units tr"), v, false);
             
@@ -66,6 +71,7 @@ public class VillageDataRequest extends AbstractUpdateRequest {
                 Utils.tone(2000,1000);
             
             WindowManager.getWindow().updateWindow(world); 
+            WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_UNITS); 
     }
 
     private void parseCommands(Elements rows, Village v, boolean incoming) throws IOException, NumberFormatException {
@@ -128,5 +134,25 @@ public class VillageDataRequest extends AbstractUpdateRequest {
         }
                             
         player.hasMessage(hasNewMessage);
+    }
+
+    private void parseUnits(Elements tds, Village v) {
+        v.clearUnits();
+        
+        for (Element td : tds) {
+            Element a = td.select("a").first();
+            if (a == null || !a.hasAttr("onclick"))
+                continue;
+            
+            String onClick = a.attr("onclick");
+            String unitShortcut = onClick.substring(30, onClick.length() - 2); // return UnitPopup.open(event, 'spear')
+            Unit u = new Unit(UnitType.calculateUnitType(unitShortcut));
+            if (u.getType() == UnitType.PALADIN)
+                u.setInVillage(1);
+            else
+                u.setInVillage(Integer.parseInt(td.select("strong").first().text()));
+
+            v.addUnit(u);
+        }
     }
 }

@@ -4,6 +4,7 @@ import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
 import dkstatus.sms.SmsSender;
+import dkstatus.ui.UpdateType;
 import dkstatus.ui.WindowManager;
 import dkstatus.world.CommandType;
 import dkstatus.world.MarchingArmy;
@@ -115,7 +116,7 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
             v.getOutgoingArmies().add(army);
         }
         
-        WindowManager.getWindow().updateVillagePanel(v);
+        WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_COMMON);
     }
 
     private CommandType parseCommandType(String commandHeader) {

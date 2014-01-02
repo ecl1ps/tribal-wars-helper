@@ -3,6 +3,8 @@ package dkstatus.world;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -17,6 +19,8 @@ public class Village implements IValidable {
     
     private final Resources resources = new Resources();
     private final Population population = new Population();
+    
+    private final Set<Unit> units = new TreeSet<>();
     
     private final List<MarchingArmy> incomingArmies = new LinkedList<>();
     private final List<MarchingArmy> outgoingArmies = new LinkedList<>();
@@ -174,5 +178,17 @@ public class Village implements IValidable {
         for (MarchingArmy att : incomingArmies)
             att.setActiveAnnounce(false);
     }    
+
+    public Set<Unit> getUnits() {
+        return units;
+    }
+
+    public void clearUnits() {
+        units.clear();
+    }
+
+    public void addUnit(Unit u) {
+        units.add(u);
+    }
     
 }
