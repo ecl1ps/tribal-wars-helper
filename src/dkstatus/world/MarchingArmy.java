@@ -90,7 +90,12 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
                 return String.format("%s: %s (%s) posílá podporu pro %s s: %s v %s", 
                     marchStarted.toString("dd.MM.yy HH:mm:ss"), 
                     from.toString(), fromPlayer.getName(), to.getName(), armyType.getName(),
-                    armyArrives.toString("dd.MM.yy HH:mm:ss")); 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"));
+            case PALADIN_RELOCATION_IN:
+                return String.format("%s: přesun paladina z %s, příchod v %s", 
+                    marchStarted.toString("dd.MM.yy HH:mm:ss"), 
+                    from.toString(),
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"));                
             case OUTGOING_ATTACK:
                 if (toPlayer.getName().equalsIgnoreCase("---"))
                     return String.format("%s: Útok na %s", 
@@ -120,6 +125,11 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
                 return String.format("%s: Zrušený pochod na %s", 
                     armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     to.toString()); 
+            case PALADIN_RELOCATION_OUT:
+                return String.format("%s: přesun paladina do %s, příchod v %s", 
+                    marchStarted.toString("dd.MM.yy HH:mm:ss"), 
+                    to.toString(),
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"));                 
             case UNKNOWN_I:
             case UNKNOWN_O:
                 return String.format("%s: Neznámý příkaz", 
