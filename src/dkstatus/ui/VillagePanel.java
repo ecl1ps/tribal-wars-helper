@@ -33,20 +33,7 @@ public class VillagePanel extends javax.swing.JPanel {
         this.id = id;
         
         initComponents();
-        
-        lblArcher.setVisible(false);
-        lblAxe.setVisible(false);
-        lblCatapult.setVisible(false);
-        lblHeavy.setVisible(false);
-        lblIronCount.setVisible(false);
-        lblLight.setVisible(false);
-        lblMarcher.setVisible(false);
-        lblNoble.setVisible(false);
-        lblPaladin.setVisible(false);
-        lblPopulation.setVisible(false);
-        lblRam.setVisible(false);
-        lblSpear.setVisible(false);
-        lblSpy.setVisible(false);        
+        hideUnits();        
         
         final int villageId = id;
         lstIncoming.addListSelectionListener(new ListSelectionListener() {
@@ -91,6 +78,22 @@ public class VillagePanel extends javax.swing.JPanel {
         UIUtils.transformToHyperlink(lblPopulation, "village=" + id + "&screen=farm");
         
         UIUtils.transformToHyperlink(lblVillageName, "village=" + id + "&screen=overview");
+    }
+
+    private void hideUnits() {
+        lblArcher.setVisible(false);
+        lblAxe.setVisible(false);
+        lblCatapult.setVisible(false);
+        lblHeavy.setVisible(false);
+        lblIronCount.setVisible(false);
+        lblLight.setVisible(false);
+        lblMarcher.setVisible(false);
+        lblNoble.setVisible(false);
+        lblPaladin.setVisible(false);
+        lblPopulation.setVisible(false);
+        lblRam.setVisible(false);
+        lblSpear.setVisible(false);
+        lblSpy.setVisible(false);
     }
 
     public Integer getId() {
@@ -397,6 +400,8 @@ public class VillagePanel extends javax.swing.JPanel {
     }
 
     private void updateUnits(Village v) {
+        hideUnits();
+        
         for (Unit u : v.getUnits()) {
             JLabel unitLabel = getUnitLabel(u.getType());
             if (u.getTotal() > 0) {
