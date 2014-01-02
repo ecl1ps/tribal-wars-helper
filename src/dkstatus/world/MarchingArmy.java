@@ -23,11 +23,12 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
     private final DateTime armyArrives;
     private final ArmyType armyType;
 
-    public MarchingArmy(int commandId, CommandType commandType, Player fromPlayer, Village from, Player toPlayer, Village to, DateTime armyArrives) {
+    public MarchingArmy(int commandId, CommandType commandType, Player fromPlayer, Village from, 
+            Player toPlayer, Village to, DateTime marchStarted, DateTime armyArrives) {
         
         valid = true;
         activeAnnounce = false;
-        this.marchStarted = new DateTime();
+        this.marchStarted = marchStarted;
         this.armyArrives = armyArrives;
         this.commandId = commandId;
         this.fromPlayer = fromPlayer;

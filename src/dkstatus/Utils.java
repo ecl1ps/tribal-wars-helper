@@ -45,7 +45,6 @@ public class Utils {
             Period p = a.getTimeToTravell(from, to);
             Logger.getLogger(Utils.class.getName()).log(Level.INFO, "{0}: {1}", new Object[]{a, p});
             DateTime temp = start.plus(p);
-            temp = temp.minus(Config.UPDATE_MS + Config.UPDATE_JITTER);
             if (temp.isBefore(end))
                return a;
         }

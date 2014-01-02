@@ -99,7 +99,7 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
         Village v = world.getPlayer().getVillage(villageId);
         MarchingArmy army;
         if (incoming) {
-            army = new MarchingArmy(commandId, type, otherPlayer, otherVillage, world.getPlayer(), v, arrival);
+            army = new MarchingArmy(commandId, type, otherPlayer, otherVillage, world.getPlayer(), v, v.getLastUpdateIn(), arrival);
             if (v.getIncomingArmies().contains(army))
                 v.getIncomingArmies().remove(army);
             else if (army.getCommandType() == CommandType.INCOMING_ATTACK) {
@@ -109,13 +109,14 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
             
             v.getIncomingArmies().add(army);
         } else {
-            army = new MarchingArmy(commandId, type, world.getPlayer(), v, otherPlayer, otherVillage, arrival);
+            army = new MarchingArmy(commandId, type, world.getPlayer(), v, otherPlayer, otherVillage, v.getLastUpdateIn(), arrival);
             if (v.getIncomingArmies().contains(army))
                 v.getIncomingArmies().remove(army);
             
             v.getOutgoingArmies().add(army);
         }
         
+        v.setLastUpdateIn(new DateTime());
         WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_COMMON);
     }
 

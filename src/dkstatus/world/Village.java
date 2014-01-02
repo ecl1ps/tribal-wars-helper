@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -24,6 +25,8 @@ public class Village implements IValidable {
     
     private final List<MarchingArmy> incomingArmies = new LinkedList<>();
     private final List<MarchingArmy> outgoingArmies = new LinkedList<>();
+    
+    private DateTime lastUpdateIn = new DateTime();
     
     public Village() {
     }
@@ -98,6 +101,14 @@ public class Village implements IValidable {
         return position.distance(v.getPosition());
     }    
 
+    public DateTime getLastUpdateIn() {
+        return lastUpdateIn;
+    }
+
+    public void setLastUpdateIn(DateTime lastUpdateIn) {
+        this.lastUpdateIn = lastUpdateIn;
+    }
+    
     @Override
     public String toString() {
         return String.format("%s %s", name, position.toString());
