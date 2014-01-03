@@ -6,12 +6,12 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mSettings">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Settings"/>
+            <Property name="text" type="java.lang.String" value="Nastaven&#xed;"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mBrowser">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Browser"/>
+            <Property name="text" type="java.lang.String" value="Prohl&#xed;&#x17e;e&#x10d;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="rbmiChrome">

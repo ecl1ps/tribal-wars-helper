@@ -11,7 +11,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-93,0,0,3,65"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-93,0,0,2,-87"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -34,11 +34,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblVillageName" min="-2" max="-2" attributes="0"/>
-                          <Component id="pResources" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblVillageName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="pResources" min="-2" pref="370" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -72,6 +73,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
                 <Property name="alignment" type="int" value="0"/>
+                <Property name="horizontalGap" type="int" value="10"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblWoodCount">
@@ -191,7 +193,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_spear.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="40000 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="40000 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblSword">
@@ -199,7 +201,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_sword.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="0 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="0 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblAxe">
@@ -207,7 +209,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_axe.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3000 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3000 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblArcher">
@@ -215,7 +217,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_archer.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="0 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="0 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblRam">
@@ -223,7 +225,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_ram.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblCatapult">
@@ -231,7 +233,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_catapult.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -284,7 +286,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_spy.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblLight">
@@ -292,7 +294,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_light.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblMarcher">
@@ -300,7 +302,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_marcher.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblHeavy">
@@ -308,7 +310,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_heavy.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +1 (03:45:11)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPaladin">
@@ -324,7 +326,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_snob.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3 +1 (3:15:16 v 16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3 +1 (16:45:11)"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -372,7 +374,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="spIncoming" pref="833" max="32767" attributes="0"/>
+                  <Component id="spIncoming" pref="681" max="32767" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -405,9 +407,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="833" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="681" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Component id="spOutgoing" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="spOutgoing" alignment="0" pref="681" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -71,7 +71,6 @@ public class VillageDataRequest extends AbstractUpdateRequest {
                 Utils.tone(2000,1000);
             
             WindowManager.getWindow().updateWindow(world); 
-            WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_UNITS); 
     }
 
     private void parseCommands(Elements rows, Village v, boolean incoming) throws IOException, NumberFormatException {
@@ -137,7 +136,8 @@ public class VillageDataRequest extends AbstractUpdateRequest {
     }
 
     private void parseUnits(Elements tds, Village v) {
-        v.clearUnits();
+        for (Unit u : v.getUnits())
+            u.setInVillage(0);
         
         for (Element td : tds) {
             Element a = td.select("a").first();
@@ -146,13 +146,19 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             
             String onClick = a.attr("onclick");
             String unitShortcut = onClick.substring(30, onClick.length() - 2); // return UnitPopup.open(event, 'spear')
-            Unit u = new Unit(UnitType.calculateUnitType(unitShortcut));
+            
+            UnitType type = UnitType.calculateUnitType(unitShortcut);
+            
+            Unit u = v.getUnitByType(type);
+            if (u == null) {
+                u = new Unit(type);
+                v.addUnit(u);
+            }
+            
             if (u.getType() == UnitType.PALADIN)
                 u.setInVillage(1);
             else
                 u.setInVillage(Integer.parseInt(td.select("strong").first().text()));
-
-            v.addUnit(u);
         }
     }
 }

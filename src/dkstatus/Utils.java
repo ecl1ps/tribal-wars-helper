@@ -33,6 +33,7 @@ public class Utils {
     public static boolean checkUserLogged(Document doc, World world) {
         if (!Utils.isUserLogged(doc)) {
             world.getPlayer().setIsLoggedIn(false);
+            world.getPlayer().setName("nepřipojen");
             return false;
         }
 

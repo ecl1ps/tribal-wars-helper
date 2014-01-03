@@ -10,9 +10,9 @@ import org.joda.time.DateTime;
  */
 public class Unit implements Comparable<Unit> {
     private final UnitType type;
-    private int inVillage;
+    private volatile int inVillage;
     private int recruiting;
-    private DateTime recruitmentFinshed;
+    private DateTime recruitmentFinishes;
 
     public Unit(UnitType type) {
         this.type = type;
@@ -36,16 +36,16 @@ public class Unit implements Comparable<Unit> {
         this.recruiting = recruiting;
     }
 
-    public DateTime getRecruitmentFinshed() {
-        return recruitmentFinshed;
+    public DateTime getRecruitmentFinishes() {
+        return recruitmentFinishes;
     }
     
     public int getTotal() {
         return recruiting + inVillage;
     }    
 
-    public void setRecruitmentFinshed(DateTime recruitmentFinshed) {
-        this.recruitmentFinshed = recruitmentFinshed;
+    public void setRecruitmentFinishes(DateTime recruitmentFinshed) {
+        this.recruitmentFinishes = recruitmentFinshed;
     }
 
     public UnitType getType() {
@@ -74,6 +74,11 @@ public class Unit implements Comparable<Unit> {
     @Override
     public int compareTo(Unit o) {
         return type.getId() - o.type.getId();
+    }
+
+    public void reset() {
+        recruiting = 0;
+        recruitmentFinishes = new DateTime();
     }
     
 }

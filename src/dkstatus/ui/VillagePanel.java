@@ -92,6 +92,7 @@ public class VillagePanel extends javax.swing.JPanel {
         lblRam.setVisible(false);
         lblSpear.setVisible(false);
         lblSpy.setVisible(false);
+        lblSword.setVisible(false);
     }
 
     public Integer getId() {
@@ -151,7 +152,7 @@ public class VillagePanel extends javax.swing.JPanel {
         lblVillageName.setText("Uber Vesnice (111|222) K01");
 
         pResources.setPreferredSize(new java.awt.Dimension(301, 76));
-        pResources.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pResources.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         lblWoodCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/wood.png"))); // NOI18N
         lblWoodCount.setText("0");
@@ -179,10 +180,11 @@ public class VillagePanel extends javax.swing.JPanel {
             pVillageInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pVillageInfoLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(pVillageInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblVillageName)
-                    .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblVillageName)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pVillageInfoLayout.createSequentialGroup()
+                .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         pVillageInfoLayout.setVerticalGroup(
             pVillageInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,22 +200,22 @@ public class VillagePanel extends javax.swing.JPanel {
         pHeader.add(filler2);
 
         lblSpear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spear.png"))); // NOI18N
-        lblSpear.setText("40000 +100 (3:15:16 v 16:45:11)");
+        lblSpear.setText("40000 +100 (16:45:11)");
 
         lblSword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_sword.png"))); // NOI18N
-        lblSword.setText("0 +100 (3:15:16 v 16:45:11)");
+        lblSword.setText("0 +100 (16:45:11)");
 
         lblAxe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_axe.png"))); // NOI18N
-        lblAxe.setText("3000 +100 (3:15:16 v 16:45:11)");
+        lblAxe.setText("3000 +100 (16:45:11)");
 
         lblArcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_archer.png"))); // NOI18N
-        lblArcher.setText("0 +100 (3:15:16 v 16:45:11)");
+        lblArcher.setText("0 +100 (16:45:11)");
 
         lblRam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_ram.png"))); // NOI18N
-        lblRam.setText("3333 +100 (3:15:16 v 16:45:11)");
+        lblRam.setText("3333 +100 (16:45:11)");
 
         lblCatapult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_catapult.png"))); // NOI18N
-        lblCatapult.setText("3333 +100 (3:15:16 v 16:45:11)");
+        lblCatapult.setText("3333 +100 (16:45:11)");
 
         javax.swing.GroupLayout pUnits1Layout = new javax.swing.GroupLayout(pUnits1);
         pUnits1.setLayout(pUnits1Layout);
@@ -247,22 +249,22 @@ public class VillagePanel extends javax.swing.JPanel {
         );
 
         lblSpy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spy.png"))); // NOI18N
-        lblSpy.setText("3333 +100 (3:15:16 v 16:45:11)");
+        lblSpy.setText("3333 +100 (16:45:11)");
 
         lblLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_light.png"))); // NOI18N
-        lblLight.setText("3333 +100 (3:15:16 v 16:45:11)");
+        lblLight.setText("3333 +100 (16:45:11)");
 
         lblMarcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_marcher.png"))); // NOI18N
-        lblMarcher.setText("3333 +100 (3:15:16 v 16:45:11)");
+        lblMarcher.setText("3333");
 
         lblHeavy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_heavy.png"))); // NOI18N
-        lblHeavy.setText("3333 +100 (3:15:16 v 16:45:11)");
+        lblHeavy.setText("3333 +1 (03:45:11)");
 
         lblPaladin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_knight.png"))); // NOI18N
         lblPaladin.setText("1");
 
         lblNoble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_snob.png"))); // NOI18N
-        lblNoble.setText("3 +1 (3:15:16 v 16:45:11)");
+        lblNoble.setText("3 +1 (16:45:11)");
 
         javax.swing.GroupLayout pUnits2Layout = new javax.swing.GroupLayout(pUnits2);
         pUnits2.setLayout(pUnits2Layout);
@@ -327,7 +329,7 @@ public class VillagePanel extends javax.swing.JPanel {
             pIncomingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pIncomingLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(spIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
+                .addComponent(spIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         pIncomingLayout.setVerticalGroup(
@@ -345,9 +347,9 @@ public class VillagePanel extends javax.swing.JPanel {
         pOutgoing.setLayout(pOutgoingLayout);
         pOutgoingLayout.setHorizontalGroup(
             pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 833, Short.MAX_VALUE)
+            .addGap(0, 681, Short.MAX_VALUE)
             .addGroup(pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spOutgoing, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(spOutgoing, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
         );
         pOutgoingLayout.setVerticalGroup(
             pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,15 +440,11 @@ public class VillagePanel extends javax.swing.JPanel {
                 if (u.getRecruiting() <= 0)
                     unitLabel.setText(String.valueOf(u.getInVillage()));
                 else
-                    unitLabel.setText(String.format("%d +%d ()", u.getInVillage(), u.getRecruiting()));
+                    unitLabel.setText(String.format("%d +%d (%s)", u.getInVillage(), u.getRecruiting(),
+                            u.getRecruitmentFinishes().toString("HH:mm:ss")));
+                
             }                
         }
-        
-        
-        //pUnits.setPreferredSize(pUnits.getPreferredSize());
-        //pUnits.validate();
-        //pUnits.setPreferredSize(new Dimension(200, pUnits.getHeight()));
-        //
     }
 
     private JLabel getUnitLabel(UnitType type) {

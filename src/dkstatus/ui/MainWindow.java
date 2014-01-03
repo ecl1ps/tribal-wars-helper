@@ -73,7 +73,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DK Status");
-        setPreferredSize(new java.awt.Dimension(750, 609));
 
         lblPlayer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPlayer.setText("Hráč:");
@@ -157,10 +156,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(btnResetAnnounces))
         );
 
-        mSettings.setText("Settings");
+        mSettings.setText("Nastavení");
         mbMenu.add(mSettings);
 
-        mBrowser.setText("Browser");
+        mBrowser.setText("Prohlížeč");
 
         rbmiChrome.setText("Chrome");
         rbmiChrome.addActionListener(new java.awt.event.ActionListener() {

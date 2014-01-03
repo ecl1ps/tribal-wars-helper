@@ -44,6 +44,10 @@ public enum UnitType {
         return image;
     }
 
+    public String getShortcut() {
+        return shortcut;
+    }
+
     public static UnitType calculateUnitType(String unitShortcut) {
         for (UnitType  t : UnitType.values()) {
             if (unitShortcut.equals(t.shortcut))

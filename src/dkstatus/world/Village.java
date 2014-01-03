@@ -194,12 +194,16 @@ public class Village implements IValidable {
         return units;
     }
 
-    public void clearUnits() {
-        units.clear();
-    }
-
     public void addUnit(Unit u) {
         units.add(u);
+    }
+
+    public Unit getUnitByType(UnitType type) {
+        for (Unit u : units) {
+            if (u.getType() == type)
+                return u;
+        }        
+        return null;
     }
     
 }
