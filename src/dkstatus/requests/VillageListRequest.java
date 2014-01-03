@@ -35,6 +35,7 @@ public class VillageListRequest extends AbstractUpdateRequest {
         Elements villageRows = doc.select(".overview_table tr");
         
         int delay = 0;
+        int mapDelay = 5000;
         for (Element row : villageRows) {
             if (!row.hasAttr("class"))
                 continue;
@@ -53,6 +54,9 @@ public class VillageListRequest extends AbstractUpdateRequest {
             v.setOwner(world.getPlayer());
 
             world.getPlayer().addVillage(v);
+            
+            WebRequestService.scheduleTask(new MapRequest(v), mapDelay);
+            mapDelay += 120000;
             
             delay += 5000;
             WebRequestService.scheduleTask(new RecruitmentRequest(v), delay);

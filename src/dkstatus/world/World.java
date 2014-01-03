@@ -1,6 +1,8 @@
 
 package dkstatus.world;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.joda.time.DateTime;
 
 /**
@@ -8,6 +10,8 @@ import org.joda.time.DateTime;
  * @author Johny
  */
 public class World {
+    
+    private final Set<Village> villages = new HashSet<>(400);
     
     private final Player player = new Player();
     private volatile boolean commonDataUpdated;
@@ -41,5 +45,13 @@ public class World {
 
     public boolean hasCommonDataUpdated() {
         return commonDataUpdated;
+    }
+
+    public Set<Village> getVillages() {
+        return villages;
+    }
+    
+    public synchronized void addVillage(Village v) {
+        villages.add(v);
     }
 }
