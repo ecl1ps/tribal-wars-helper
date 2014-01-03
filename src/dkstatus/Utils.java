@@ -83,5 +83,9 @@ public class Utils {
         } catch (LineUnavailableException ex) {
             Logger.getLogger(Utils.class.getName()).log(Level.WARNING, null, ex);
         }
-    }    
+    }   
+    
+    public static String clearNumber(String number) {
+        return number.replaceAll("\\.", "");
+    }
 }

@@ -2,6 +2,7 @@ package dkstatus.requests;
 
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
+import dkstatus.world.MapPosition;
 import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.io.IOException;
@@ -39,8 +40,17 @@ public class VillageListRequest extends AbstractUpdateRequest {
                 continue;
             
             Village v = new Village();
+            
+            String fullName = row.select("a span").first().text(); //some name (433|577) K54
+            
+            v.setName(fullName.substring(0, fullName.length() - 14));
+            String pos = fullName.substring(fullName.length() - 13);
+            v.setPosition(new MapPosition(Integer.parseInt(pos.substring(1, 4)), Integer.parseInt(pos.substring(5, 8)), pos.substring(10, 13)));
+            
             String idLabel = row.select("span").first().attr("id"); //label_id
             v.setId(Integer.parseInt(idLabel.substring(6)));
+            
+            v.setOwner(world.getPlayer());
 
             world.getPlayer().addVillage(v);
             

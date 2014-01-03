@@ -56,9 +56,6 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             v.getResources().setStorage(Integer.parseInt(headerInfo.select("#storage").first().text()));
             v.getPopulation().setCurrent(Integer.parseInt(headerInfo.select("#pop_current_label").first().text()));
             v.getPopulation().setMax(Integer.parseInt(headerInfo.select("#pop_max_label").first().text()));
-            v.setName(headerInfo.select("#menu_row2_village a").first().text());
-            String pos = headerInfo.select("#menu_row2 td b").first().text();
-            v.setPosition(new MapPosition(Integer.parseInt(pos.substring(1, 4)), Integer.parseInt(pos.substring(5, 8)), pos.substring(10, 13)));
             
             parseUnits(doc.select("#show_units td"), v);
             
@@ -111,9 +108,7 @@ public class VillageDataRequest extends AbstractUpdateRequest {
         
         Element menu = doc.select("#menu_row").first();
         player.setName(menu.children().get(10).select("tr").first().child(0).text());
-        String points = menu.select("#rank_points").first().text();
-        points = points.replaceAll("\\.", "");
-        player.setPoints(Integer.parseInt(points));
+        player.setPoints(Integer.parseInt(Utils.clearNumber(menu.select("#rank_points").first().text())));
         player.hasAnnounce(!menu.select("#new_report").first().hasAttr("style"));
         Element forumMessage = menu.select("#tribe_forum_indicator").first(); // players without tribe don't have this element
         player.hasForumMessage(forumMessage != null && !forumMessage.hasClass("no_new_post"));
