@@ -1,5 +1,6 @@
 package dkstatus;
 
+import dkstatus.ui.WindowManager;
 import dkstatus.world.ArmyType;
 import dkstatus.world.MapPosition;
 import dkstatus.world.World;
@@ -34,6 +35,7 @@ public class Utils {
         if (!Utils.isUserLogged(doc)) {
             world.getPlayer().setIsLoggedIn(false);
             world.getPlayer().setName("nepřipojen");
+            WindowManager.getWindow().updateWindow(world);
             return false;
         }
 

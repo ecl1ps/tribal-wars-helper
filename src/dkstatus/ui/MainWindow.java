@@ -83,7 +83,7 @@ public class MainWindow extends javax.swing.JFrame {
         rbmiFirefox = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("DK Status");
+        setTitle("DK Pomocník");
 
         lblPlayer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPlayer.setText("Hráč:");
