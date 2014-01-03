@@ -8,10 +8,12 @@ import dkstatus.browser.FirefoxDataProvider;
 import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -32,6 +34,8 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        setIconImage(new ImageIcon(getClass().getResource("/resources/images/favicon.png")).getImage());
         
         initComponents();
         
