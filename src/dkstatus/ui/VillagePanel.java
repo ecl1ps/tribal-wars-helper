@@ -184,7 +184,7 @@ public class VillagePanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pVillageInfoLayout.createSequentialGroup()
                 .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pVillageInfoLayout.setVerticalGroup(
             pVillageInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,112 +193,63 @@ public class VillagePanel extends javax.swing.JPanel {
                 .addComponent(lblVillageName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 55, Short.MAX_VALUE))
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         pHeader.add(pVillageInfo);
         pHeader.add(filler2);
 
+        pUnits1.setLayout(new javax.swing.BoxLayout(pUnits1, javax.swing.BoxLayout.Y_AXIS));
+
         lblSpear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spear.png"))); // NOI18N
         lblSpear.setText("40000 +100 (16:45:11)");
+        pUnits1.add(lblSpear);
 
         lblSword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_sword.png"))); // NOI18N
         lblSword.setText("0 +100 (16:45:11)");
+        pUnits1.add(lblSword);
 
         lblAxe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_axe.png"))); // NOI18N
         lblAxe.setText("3000 +100 (16:45:11)");
+        pUnits1.add(lblAxe);
 
         lblArcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_archer.png"))); // NOI18N
         lblArcher.setText("0 +100 (16:45:11)");
+        pUnits1.add(lblArcher);
 
         lblRam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_ram.png"))); // NOI18N
         lblRam.setText("3333 +100 (16:45:11)");
+        pUnits1.add(lblRam);
 
         lblCatapult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_catapult.png"))); // NOI18N
         lblCatapult.setText("3333 +100 (16:45:11)");
+        pUnits1.add(lblCatapult);
 
-        javax.swing.GroupLayout pUnits1Layout = new javax.swing.GroupLayout(pUnits1);
-        pUnits1.setLayout(pUnits1Layout);
-        pUnits1Layout.setHorizontalGroup(
-            pUnits1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pUnits1Layout.createSequentialGroup()
-                .addGroup(pUnits1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSpear)
-                    .addComponent(lblSword)
-                    .addComponent(lblAxe)
-                    .addComponent(lblArcher)
-                    .addComponent(lblRam)
-                    .addComponent(lblCatapult))
-                .addGap(0, 0, 0))
-        );
-        pUnits1Layout.setVerticalGroup(
-            pUnits1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pUnits1Layout.createSequentialGroup()
-                .addComponent(lblSpear)
-                .addGap(0, 0, 0)
-                .addComponent(lblSword)
-                .addGap(0, 0, 0)
-                .addComponent(lblAxe)
-                .addGap(0, 0, 0)
-                .addComponent(lblArcher)
-                .addGap(0, 0, 0)
-                .addComponent(lblRam)
-                .addGap(0, 0, 0)
-                .addComponent(lblCatapult)
-                .addGap(0, 0, 0))
-        );
+        pUnits2.setLayout(new javax.swing.BoxLayout(pUnits2, javax.swing.BoxLayout.Y_AXIS));
 
         lblSpy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spy.png"))); // NOI18N
         lblSpy.setText("3333 +100 (16:45:11)");
+        pUnits2.add(lblSpy);
 
         lblLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_light.png"))); // NOI18N
         lblLight.setText("3333 +100 (16:45:11)");
+        pUnits2.add(lblLight);
 
         lblMarcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_marcher.png"))); // NOI18N
         lblMarcher.setText("3333");
+        pUnits2.add(lblMarcher);
 
         lblHeavy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_heavy.png"))); // NOI18N
         lblHeavy.setText("3333 +1 (03:45:11)");
+        pUnits2.add(lblHeavy);
 
         lblPaladin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_knight.png"))); // NOI18N
         lblPaladin.setText("1");
+        pUnits2.add(lblPaladin);
 
         lblNoble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_snob.png"))); // NOI18N
         lblNoble.setText("3 +1 (16:45:11)");
-
-        javax.swing.GroupLayout pUnits2Layout = new javax.swing.GroupLayout(pUnits2);
-        pUnits2.setLayout(pUnits2Layout);
-        pUnits2Layout.setHorizontalGroup(
-            pUnits2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pUnits2Layout.createSequentialGroup()
-                .addGroup(pUnits2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSpy)
-                    .addComponent(lblLight)
-                    .addComponent(lblMarcher)
-                    .addComponent(lblNoble)
-                    .addGroup(pUnits2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pUnits2Layout.createSequentialGroup()
-                            .addComponent(lblPaladin)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addComponent(lblHeavy)))
-                .addGap(0, 0, 0))
-        );
-        pUnits2Layout.setVerticalGroup(
-            pUnits2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pUnits2Layout.createSequentialGroup()
-                .addComponent(lblSpy)
-                .addGap(0, 0, 0)
-                .addComponent(lblLight)
-                .addGap(0, 0, 0)
-                .addComponent(lblMarcher)
-                .addGap(0, 0, 0)
-                .addComponent(lblHeavy)
-                .addGap(12, 12, 12)
-                .addComponent(lblPaladin)
-                .addGap(0, 0, 0)
-                .addComponent(lblNoble)
-                .addGap(0, 0, 0))
-        );
+        pUnits2.add(lblNoble);
 
         javax.swing.GroupLayout pUnitsLayout = new javax.swing.GroupLayout(pUnits);
         pUnits.setLayout(pUnitsLayout);
@@ -329,13 +280,13 @@ public class VillagePanel extends javax.swing.JPanel {
             pIncomingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pIncomingLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(spIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                .addComponent(spIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         pIncomingLayout.setVerticalGroup(
             pIncomingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pIncomingLayout.createSequentialGroup()
-                .addComponent(spIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                .addComponent(spIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -347,13 +298,13 @@ public class VillagePanel extends javax.swing.JPanel {
         pOutgoing.setLayout(pOutgoingLayout);
         pOutgoingLayout.setHorizontalGroup(
             pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 666, Short.MAX_VALUE)
             .addGroup(pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spOutgoing, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addComponent(spOutgoing, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
         );
         pOutgoingLayout.setVerticalGroup(
             pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 175, Short.MAX_VALUE)
+            .addGap(0, 179, Short.MAX_VALUE)
             .addGroup(pOutgoingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(spOutgoing, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
