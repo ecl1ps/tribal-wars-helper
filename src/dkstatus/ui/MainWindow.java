@@ -1,6 +1,7 @@
 package dkstatus.ui;
 
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
+import dkstatus.Config;
 import dkstatus.DKStatus;
 import dkstatus.browser.BrowserManager;
 import dkstatus.browser.ChromeDataProvider;
@@ -38,6 +39,12 @@ public class MainWindow extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("/resources/images/favicon.png")).getImage());
         
         initComponents();
+        
+        String browser = Config.getStringProperty(Config.ConfigKey.BROWSER_CLASS);
+        if (browser.equals(ChromeDataProvider.class.getName())) {
+            rbmiChrome.setSelected(true);
+            rbmiFirefox.setSelected(false);
+        }
         
         UIUtils.transformToHyperlink(lblAnnounce, "screen=report");
         UIUtils.transformToHyperlink(lblMessage, "screen=mail");
@@ -206,12 +213,14 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void changeSourceBrowserToChrome(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSourceBrowserToChrome
+        Config.setProperty(Config.ConfigKey.BROWSER_CLASS, ChromeDataProvider.class.getName());
         BrowserManager.setProvider(new ChromeDataProvider());
         DKStatus.refreshUpdate();
         rbmiFirefox.setSelected(false);
     }//GEN-LAST:event_changeSourceBrowserToChrome
 
     private void changeSourceBrowserToFirefox(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSourceBrowserToFirefox
+        Config.setProperty(Config.ConfigKey.BROWSER_CLASS, FirefoxDataProvider.class.getName());
         BrowserManager.setProvider(new FirefoxDataProvider());
         DKStatus.refreshUpdate();
         rbmiChrome.setSelected(false);

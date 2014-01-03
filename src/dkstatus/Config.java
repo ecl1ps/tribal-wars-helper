@@ -1,5 +1,6 @@
 package dkstatus;
 
+import dkstatus.browser.FirefoxDataProvider;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,6 +33,8 @@ public class Config {
         PROXY_IP,
         PROXY_PORT, 
         
+        BROWSER_CLASS,
+        
         HAS_MESSAGE_ALERT,
         HAS_MESSAGE_ALERT_CONTINUOUS
     }
@@ -43,8 +46,9 @@ public class Config {
         properties.setProperty(ConfigKey.PROXY_ENABLED.name(), "false");
         properties.setProperty(ConfigKey.PROXY_IP.name(), "");
         properties.setProperty(ConfigKey.PROXY_PORT.name(), "8080");
+        properties.setProperty(ConfigKey.BROWSER_CLASS.name(), FirefoxDataProvider.class.getName());
         properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT.name(), "false");
-        properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT_CONTINUOUS.name(), "false");        
+        properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT_CONTINUOUS.name(), "false");   
         
         //init with defaults
         properties = new Properties(properties);
