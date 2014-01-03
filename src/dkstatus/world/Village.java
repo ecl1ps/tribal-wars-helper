@@ -14,6 +14,7 @@ import org.joda.time.DateTime;
 public class Village implements IValidable {
     
     private int id;
+    private int points;
     private String name = "";
     private Player owner = new Player();
     private MapPosition position = new MapPosition();
@@ -32,6 +33,7 @@ public class Village implements IValidable {
     }
     
     public Village(int id, String name, Player owner, MapPosition pos) {
+        this.id = id;
         this.name = name;
         this.owner = owner;
         this.position = pos;
@@ -107,6 +109,14 @@ public class Village implements IValidable {
 
     public void setLastUpdateIn(DateTime lastUpdateIn) {
         this.lastUpdateIn = lastUpdateIn;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
     
     @Override
