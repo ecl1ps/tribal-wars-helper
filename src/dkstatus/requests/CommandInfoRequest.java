@@ -128,8 +128,4 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
                 return t;
         return CommandType.UNKNOWN_O;
     }
-    
-    public static int calculateDelay() {
-        return 1000 + WebRequestService.getRandomGenerator().nextInt(3000); // 1 - 4 sec
-    }     
 }

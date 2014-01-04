@@ -94,13 +94,9 @@ public class RecruitmentRequest extends AbstractUpdateRequest {
             }
         }
 
-        WebRequestService.scheduleTask(new RecruitmentRequest(v), calculateDelay());
+        WebRequestService.scheduleTask(new RecruitmentRequest(v), Utils.randSec(60, 180));
         WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_UNITS);
     }
-
-    public static int calculateDelay() {
-        return 60000 + WebRequestService.getRandomGenerator().nextInt(120000); // 1 - 3 min
-    }     
 
     private Unit getUnitByClass(Set<String> classes) {
         for (String clazz : classes) {

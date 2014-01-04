@@ -89,4 +89,19 @@ public class Utils {
     public static String clearNumber(String number) {
         return number.replaceAll("\\.", "");
     }
+    
+    public static int rand(int min, int max) {
+        return min + WebRequestService.getRandomGenerator().nextInt(max - min);
+    }
+    
+    /**
+     * returns value between min and max multiplied by 1000<br>
+     * eg. randSec(10, 20) might be 14568 (miliseconds)
+     * @param minSec
+     * @param maxSec
+     * @return 
+     */
+    public static int randSec(int minSec, int maxSec) {
+        return minSec * 1000 + WebRequestService.getRandomGenerator().nextInt((maxSec - minSec) * 1000);
+    }    
 }

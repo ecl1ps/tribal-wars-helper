@@ -153,17 +153,11 @@ public class MapRequest extends AbstractUpdateRequest {
                     else
                         v.setPoints(Integer.parseInt(points));
                     world.addVillage(v);
-                    
-                    //System.out.println(v.toString());
                 }                
             }
         }
         
         WindowManager.getWindow().updateRaidHelpers(world);
-        WebRequestService.scheduleTask(new MapRequest(v), calculateDelay());
+        WebRequestService.scheduleTask(new MapRequest(v), Utils.randSec(60 * 60 * 2, 60 * 60 * 3)); // 2 - 3 hours
     }
-
-    public static int calculateDelay() {
-        return 1000 * 60 * 60 * 2 + WebRequestService.getRandomGenerator().nextInt(1000 * 60 * 60); // 2 - 3 hours
-    }   
 }

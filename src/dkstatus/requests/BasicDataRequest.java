@@ -1,6 +1,6 @@
 package dkstatus.requests;
 
-import dkstatus.Config;
+import dkstatus.Utils;
 import dkstatus.WebRequestService;
 import dkstatus.browser.BrowserManager;
 import dkstatus.world.Village;
@@ -24,17 +24,13 @@ public class BasicDataRequest implements IUpdateRequest{
             int delay = 0;
             world.setCommonDataUpdated(false);
             for (Village v : world.getPlayer().getVillages()) {
-                delay += VillageDataRequest.calculateDelay();
                 WebRequestService.scheduleTask(new VillageDataRequest(v), delay);
+                delay += Utils.randSec(1, 3);
             }
 
-            delay = calculateDelay();
+            delay = Utils.randSec(30, 60);
             world.setNextUpdateIn(new DateTime().plusMillis(delay));
             WebRequestService.scheduleTask(new BasicDataRequest(), delay);
         }
     }
-    
-    public static int calculateDelay() {
-        return Config.UPDATE_MS + WebRequestService.getRandomGenerator().nextInt(Config.UPDATE_JITTER);
-    }       
 }

@@ -4,9 +4,7 @@ package dkstatus.requests;
 import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
-import dkstatus.ui.UpdateType;
 import dkstatus.ui.WindowManager;
-import dkstatus.world.MapPosition;
 import dkstatus.world.MarchingArmy;
 import dkstatus.world.Player;
 import dkstatus.world.Unit;
@@ -66,7 +64,7 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             v.cleanup();
             
             if (v.IsAttacked() && v.hasActiveAnnounce())
-                Utils.tone(2000,1000);
+                Utils.tone(2000, 1000);
             
             WindowManager.getWindow().updateWindow(world); 
     }
@@ -90,7 +88,7 @@ public class VillageDataRequest extends AbstractUpdateRequest {
             if (att != null && att.getArmyArrives().isAfterNow())
                 att.validate();
             else {
-                delay += incoming ? 100 : CommandInfoRequest.calculateDelay();
+                delay += incoming ? 100 : Utils.randSec(1, 4);
                 WebRequestService.scheduleTask(new CommandInfoRequest(id, v.getId(), incoming, v.getLastUpdateIn()), delay);
             }
         }
@@ -98,10 +96,6 @@ public class VillageDataRequest extends AbstractUpdateRequest {
         v.setLastUpdateIn(new DateTime());
         Logger.getLogger(VillageDataRequest.class.getName()).log(Level.FINEST, "after creating - setting last updated to now: {0}", v.getLastUpdateIn());
     }   
-    
-    public static int calculateDelay() {
-        return 1000 + WebRequestService.getRandomGenerator().nextInt(2000); // 1 - 3 sec
-    }     
 
     private synchronized void parseCommonData(World world, Document doc) {
         if (world.hasCommonDataUpdated())
