@@ -15,7 +15,7 @@ public class World {
     
     private final Set<Village> villages = new HashSet<>(400);
     
-    private final Player player = new Player();
+    private Player player = new Player();
     private volatile boolean commonDataUpdated;
     
     private DateTime nextUpdateIn = new DateTime();
@@ -27,6 +27,10 @@ public class World {
         return player;
     }
 
+    public void reset() {
+        player = new Player();
+    }
+    
     public DateTime getNexUpdateTime() {
         return nextUpdateIn;
     }

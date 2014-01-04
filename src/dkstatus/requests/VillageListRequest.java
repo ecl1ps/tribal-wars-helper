@@ -2,12 +2,14 @@ package dkstatus.requests;
 
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
+import dkstatus.ui.WindowManager;
 import dkstatus.world.MapPosition;
 import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,8 +29,13 @@ public class VillageListRequest extends AbstractUpdateRequest {
         
         Document doc = Jsoup.parse(resultHtml);
         
-        if (!Utils.checkUserLogged(doc, world))
+        if (!Utils.checkUserLogged(doc, world)) {
+            int delay = Utils.randSec(30, 60);
+            world.setNextUpdateIn(new DateTime().plusMillis(delay));
+            WebRequestService.scheduleTask(new BasicDataRequest(), delay);
+            WindowManager.getWindow().updateWindow(world);
             return;
+        }
         
         world.getPlayer().getVillages().clear();
         

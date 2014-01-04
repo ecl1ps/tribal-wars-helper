@@ -265,7 +265,7 @@ public class MainWindow extends javax.swing.JFrame {
                     lblPlayerName.setForeground(Color.black);
                 } else {
                     lblPlayerName.setText("Není přihlášen");
-                    lblPlayerName.setForeground(Color.black);
+                    lblPlayerName.setForeground(Color.red);
                 }
 
                 lblPointCount.setText(String.valueOf(plr.getPoints()));
