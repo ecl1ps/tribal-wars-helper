@@ -35,6 +35,7 @@ public class Utils {
         if (!Utils.isUserLogged(doc)) {
             world.getPlayer().setIsLoggedIn(false);
             world.getPlayer().setName("nepřipojen");
+            world.getPlayer().getVillages().clear();
             WindowManager.getWindow().updateWindow(world);
             return false;
         }

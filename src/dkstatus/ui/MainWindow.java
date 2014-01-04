@@ -9,7 +9,7 @@ import dkstatus.browser.FirefoxDataProvider;
 import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
-import java.awt.Image;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -262,8 +262,10 @@ public class MainWindow extends javax.swing.JFrame {
 
                 if (world.getPlayer().isLoggedIn()) {
                     lblPlayerName.setText(plr.getName());
+                    lblPlayerName.setForeground(Color.red);
                 } else {
                     lblPlayerName.setText("Není přihlášen");
+                    lblPlayerName.setForeground(Color.black);
                 }
 
                 lblPointCount.setText(String.valueOf(plr.getPoints()));
