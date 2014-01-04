@@ -46,8 +46,9 @@ public class Utils {
     public static ArmyType calculateAttackType(MapPosition from, MapPosition to, DateTime start, DateTime end) {
         for (ArmyType  a : ArmyType.values()) {
             Period p = a.getTimeToTravell(from, to);
-            Logger.getLogger(Utils.class.getName()).log(Level.INFO, "{0}: {1}", new Object[]{a, p});
+            Logger.getLogger(Utils.class.getName()).log(Level.INFO, "army: {0} period: {1}", new Object[]{a, p});
             DateTime temp = start.plus(p);
+            Logger.getLogger(Utils.class.getName()).log(Level.INFO, "start: {0} plus period: {1} end: {2}", new Object[]{start, temp, end});
             if (temp.isBefore(end))
                return a;
         }

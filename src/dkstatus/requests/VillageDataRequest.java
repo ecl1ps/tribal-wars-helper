@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -90,9 +91,12 @@ public class VillageDataRequest extends AbstractUpdateRequest {
                 att.validate();
             else {
                 delay += incoming ? 100 : CommandInfoRequest.calculateDelay();
-                WebRequestService.scheduleTask(new CommandInfoRequest(id, v.getId(), incoming), delay);
+                WebRequestService.scheduleTask(new CommandInfoRequest(id, v.getId(), incoming, v.getLastUpdateIn()), delay);
             }
         }
+        
+        v.setLastUpdateIn(new DateTime());
+        Logger.getLogger(VillageDataRequest.class.getName()).log(Level.FINEST, "after creating - setting last updated to now: {0}", v.getLastUpdateIn());
     }   
     
     public static int calculateDelay() {
