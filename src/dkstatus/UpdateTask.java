@@ -4,6 +4,7 @@ package dkstatus;
 import dkstatus.requests.IUpdateRequest;
 import dkstatus.world.World;
 import java.io.EOFException;
+import java.net.NoRouteToHostException;
 import java.net.UnknownHostException;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -30,7 +31,7 @@ public class UpdateTask extends TimerTask {
             request.updateData(world);
         } catch (EOFException ex) {
             // request error (timeout?)              
-        } catch (UnknownHostException | HttpHostConnectException ex) {
+        } catch (UnknownHostException | HttpHostConnectException | NoRouteToHostException ex) {
             // without internet connection
             world.getPlayer().setName("Offline");
         } catch (Exception ex) { // prevents silent thread termination
