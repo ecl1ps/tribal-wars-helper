@@ -262,7 +262,7 @@ public class MainWindow extends javax.swing.JFrame {
 
                 if (world.getPlayer().isLoggedIn()) {
                     lblPlayerName.setText(plr.getName());
-                    lblPlayerName.setForeground(Color.red);
+                    lblPlayerName.setForeground(Color.black);
                 } else {
                     lblPlayerName.setText("Není přihlášen");
                     lblPlayerName.setForeground(Color.black);
@@ -294,7 +294,7 @@ public class MainWindow extends javax.swing.JFrame {
             newIds.add(v.getId());
 
         for (int i = 0; i < tpVillages.getTabCount(); i++) {
-            VillagePanel vp = (VillagePanel) tpVillages.getComponentAt(i);
+            VillageTabsPanel vp = (VillageTabsPanel) tpVillages.getComponentAt(i);
             if (!newIds.contains(vp.getId())) { // remove tabs with non-existing villages
                 tpVillages.remove(vp);
                 i--;
@@ -304,13 +304,13 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         for (Village v : villages) {
-            VillagePanel vp = null;
+            VillageTabsPanel vp = null;
             if (newIds.contains(v.getId())) {
-                vp = new VillagePanel(v.getId());
+                vp = new VillageTabsPanel(v);
                 tpVillages.add(v.toString(), vp);
             } else {
                 for (int i = 0; i < tpVillages.getTabCount(); i++) {
-                    VillagePanel tmp = (VillagePanel) tpVillages.getComponentAt(i);
+                    VillageTabsPanel tmp = (VillageTabsPanel) tpVillages.getComponentAt(i);
                     if (tmp.getId() == v.getId()) {
                         vp = tmp;
                         tpVillages.setTitleAt(i, v.toString());
@@ -320,7 +320,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
 
             if (vp != null) {
-                vp.updateVillage(v, UpdateType.VILLAGE_COMMON);
+                vp.getVillagePanel().updateVillage(v, UpdateType.VILLAGE_COMMON);
             }
         }
     }
@@ -330,14 +330,26 @@ public class MainWindow extends javax.swing.JFrame {
             @Override
             public void run() {        
                 for (int i = 0; i < tpVillages.getTabCount(); i++) {
-                    VillagePanel vp = (VillagePanel) tpVillages.getComponentAt(i);
+                    VillageTabsPanel vp = (VillageTabsPanel) tpVillages.getComponentAt(i);
                     if (vp.getId() != v.getId())
                         continue;
 
-                    vp.updateVillage(v, type);
+                    vp.getVillagePanel().updateVillage(v, type);
                     break;
                 }
             }
         });
     }
+    
+    public void updateRaidHelpers(final World world) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {        
+                for (int i = 0; i < tpVillages.getTabCount(); i++) {
+                    VillageTabsPanel vp = (VillageTabsPanel) tpVillages.getComponentAt(i);
+                    vp.getRaidpPanel().updateVillages(world.getVillages());
+                }
+            }
+        });
+    }    
 }

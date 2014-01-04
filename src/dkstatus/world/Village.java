@@ -123,7 +123,11 @@ public class Village implements IValidable {
     public String toString() {
         return String.format("%s %s", name, position.toString());
     }
-
+    
+    public String toStringSimple() {
+        return String.format("%s %s", name, position.toStringCoords());
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

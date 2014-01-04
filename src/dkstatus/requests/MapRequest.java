@@ -1,31 +1,22 @@
 
 package dkstatus.requests;
 
-import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
-import dkstatus.ui.UpdateType;
 import dkstatus.ui.WindowManager;
 import dkstatus.world.MapPosition;
-import dkstatus.world.MarchingArmy;
 import dkstatus.world.Player;
-import dkstatus.world.Unit;
-import dkstatus.world.UnitType;
 import dkstatus.world.Village;
 import dkstatus.world.World;
-import java.awt.Color;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  *
@@ -168,6 +159,7 @@ public class MapRequest extends AbstractUpdateRequest {
             }
         }
         
+        WindowManager.getWindow().updateRaidHelpers(world);
         WebRequestService.scheduleTask(new MapRequest(v), calculateDelay());
     }
 

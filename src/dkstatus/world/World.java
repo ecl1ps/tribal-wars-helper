@@ -1,7 +1,9 @@
 
 package dkstatus.world;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.joda.time.DateTime;
 
@@ -47,8 +49,8 @@ public class World {
         return commonDataUpdated;
     }
 
-    public Set<Village> getVillages() {
-        return villages;
+    public synchronized List<Village> getVillages() {
+        return new ArrayList<>(villages);
     }
     
     public synchronized void addVillage(Village v) {

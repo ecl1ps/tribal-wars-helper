@@ -21,7 +21,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Johny
  */
-public class VillagePanel extends javax.swing.JPanel {
+public class VillageMainPanel extends javax.swing.JPanel {
 
     private final Integer id;
     
@@ -29,7 +29,7 @@ public class VillagePanel extends javax.swing.JPanel {
      * Creates new form VillagePanel
      * @param id
      */
-    public VillagePanel(Integer id) {
+    public VillageMainPanel(Integer id) {
         this.id = id;
         
         initComponents();
@@ -95,9 +95,6 @@ public class VillagePanel extends javax.swing.JPanel {
         lblSword.setVisible(false);
     }
 
-    public Integer getId() {
-        return id;
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -353,6 +350,7 @@ public class VillagePanel extends javax.swing.JPanel {
         switch (type) {
             case VILLAGE_COMMON:
                 updateCommonData(v);
+                updateUnits(v);
                 break;
             case VILLAGE_UNITS:
                 updateUnits(v);

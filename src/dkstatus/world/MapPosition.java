@@ -57,6 +57,10 @@ public class MapPosition {
         return "(" + position.x + "|" + position.y + ") " + continent;
     }
     
+    public String toStringCoords() {
+        return "(" + position.x + "|" + position.y + ")";
+    }    
+    
     public double distance(MapPosition other) {
         return distance(other.getPosition());
     }
