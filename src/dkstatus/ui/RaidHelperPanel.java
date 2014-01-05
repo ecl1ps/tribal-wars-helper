@@ -85,11 +85,11 @@ public class RaidHelperPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable)e.getSource();
-                int modelRow = table.convertRowIndexToView(Integer.valueOf(e.getActionCommand()));
+                int modelRow = Integer.valueOf(e.getActionCommand());
                 Village v = (Village)((RaidTableModel)table.getModel()).getValueAt(modelRow, -1);
                 
                 if (prepareAndSendAttack(v))
-                    table.setValueAt(new ImageIcon(getClass().getResource("/resources/images/attack.png")), modelRow, 3);
+                    table.getModel().setValueAt(new ImageIcon(getClass().getResource("/resources/images/attack.png")), modelRow, 3);
             }
         });
         attackButton.setMnemonic(KeyEvent.VK_A);   
@@ -724,9 +724,8 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         AttackData attack = new AttackData(attacker, to);
         addUnits(attack);
         
-        for (Unit u : attack.getAttackingUnits())
-            if (u.getInVillage() <= 0)
-                return false; // empty attack
+        if (attack.getAttackingUnits().isEmpty())
+            return false; // empty attack
         
         for (Unit u : attack.getAttackingUnits())
             if (attacker.getAvailableUnitCount(u.getType()) < u.getInVillage())
