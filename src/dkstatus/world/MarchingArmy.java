@@ -83,20 +83,19 @@ public class MarchingArmy implements IValidable, Comparable<MarchingArmy> {
     public String toString() {
         switch (commandType) {
             case INCOMING_ATTACK:
-                return String.format("%s: %s (%s) útočí na %s s: %s v %s", 
-                    marchStarted.toString("dd.MM.yy HH:mm:ss"), 
+                return String.format("%s: %s (%s) útočí na %s s: %s (zjištěno po %s)", 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     from.toString(), fromPlayer.getName(), to.getName(), armyType.getName(),
-                    armyArrives.toString("dd.MM.yy HH:mm:ss"));
+                    marchStarted.toString("dd.MM.yy HH:mm:ss"));
             case INCOMING_SUPPORT:
-                return String.format("%s: %s (%s) posílá podporu pro %s s: %s v %s", 
-                    marchStarted.toString("dd.MM.yy HH:mm:ss"), 
+                return String.format("%s: %s (%s) posílá podporu pro %s s: %s (zjištěno po %s)", 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
                     from.toString(), fromPlayer.getName(), to.getName(), armyType.getName(),
-                    armyArrives.toString("dd.MM.yy HH:mm:ss"));
+                    marchStarted.toString("dd.MM.yy HH:mm:ss"));
             case PALADIN_RELOCATION_IN:
-                return String.format("%s: přesun paladina z %s, příchod v %s", 
-                    marchStarted.toString("dd.MM.yy HH:mm:ss"), 
-                    from.toString(),
-                    armyArrives.toString("dd.MM.yy HH:mm:ss"));                
+                return String.format("%s: přesun paladina z %s", 
+                    armyArrives.toString("dd.MM.yy HH:mm:ss"), 
+                    from.toString());                
             case OUTGOING_ATTACK:
                 if (toPlayer.getName().equalsIgnoreCase("---"))
                     return String.format("%s: Útok na %s", 
