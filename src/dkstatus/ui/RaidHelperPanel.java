@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.AbstractAction;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 /**
@@ -52,6 +53,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         //tblVillages.getColumn("Akce").setPreferredWidth(30);
         tblVillages.addMouseListener(attackButton);
         
+        
     }
 
     /**
@@ -63,8 +65,46 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        spVillages = new javax.swing.JScrollPane();
         tblVillages = new javax.swing.JTable();
+        pHeader = new javax.swing.JPanel();
+        pUnits = new javax.swing.JPanel();
+        lblSpear = new javax.swing.JLabel();
+        tfSpear = new javax.swing.JTextField();
+        lblSpearCount = new javax.swing.JLabel();
+        lblSword = new javax.swing.JLabel();
+        tfSword = new javax.swing.JTextField();
+        lblSwordCount = new javax.swing.JLabel();
+        lblAxe = new javax.swing.JLabel();
+        tfAxe = new javax.swing.JTextField();
+        lblAxeCount = new javax.swing.JLabel();
+        lblArcher = new javax.swing.JLabel();
+        tfArcher = new javax.swing.JTextField();
+        lblArcherCount = new javax.swing.JLabel();
+        lblSpy = new javax.swing.JLabel();
+        tfSpy = new javax.swing.JTextField();
+        lblSpyCount = new javax.swing.JLabel();
+        lblLight = new javax.swing.JLabel();
+        tfLight = new javax.swing.JTextField();
+        lblLightCount = new javax.swing.JLabel();
+        lblMarcher = new javax.swing.JLabel();
+        tfMarcher = new javax.swing.JTextField();
+        lblMarcherCount = new javax.swing.JLabel();
+        lblHeavy = new javax.swing.JLabel();
+        tfHeavy = new javax.swing.JTextField();
+        lblHeavyCount = new javax.swing.JLabel();
+        lblRam = new javax.swing.JLabel();
+        tfRam = new javax.swing.JTextField();
+        lblRamCount = new javax.swing.JLabel();
+        lblCatapult = new javax.swing.JLabel();
+        tfCatapult = new javax.swing.JTextField();
+        lblCatapultCount = new javax.swing.JLabel();
+        lblKnight = new javax.swing.JLabel();
+        tfKnight = new javax.swing.JTextField();
+        lblKnightCount = new javax.swing.JLabel();
+        lblSnob = new javax.swing.JLabel();
+        tfSnob = new javax.swing.JTextField();
+        lblSnobCount = new javax.swing.JLabel();
 
         tblVillages.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,26 +114,285 @@ public class RaidHelperPanel extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane1.setViewportView(tblVillages);
+        spVillages.setViewportView(tblVillages);
+
+        lblSpear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spear.png"))); // NOI18N
+
+        lblSpearCount.setText("(1000)");
+
+        lblSword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_sword.png"))); // NOI18N
+
+        lblSwordCount.setText("(1000)");
+
+        lblAxe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_axe.png"))); // NOI18N
+
+        lblAxeCount.setText("(1000)");
+
+        lblArcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_archer.png"))); // NOI18N
+
+        lblArcherCount.setText("(1000)");
+
+        lblSpy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spy.png"))); // NOI18N
+
+        lblSpyCount.setText("(1000)");
+
+        lblLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_light.png"))); // NOI18N
+
+        lblLightCount.setText("(1000)");
+
+        lblMarcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_marcher.png"))); // NOI18N
+
+        lblMarcherCount.setText("(1000)");
+
+        lblHeavy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_heavy.png"))); // NOI18N
+
+        lblHeavyCount.setText("(1000)");
+
+        lblRam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_ram.png"))); // NOI18N
+
+        lblRamCount.setText("(1000)");
+
+        lblCatapult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_catapult.png"))); // NOI18N
+
+        lblCatapultCount.setText("(1000)");
+
+        lblKnight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_knight.png"))); // NOI18N
+
+        lblKnightCount.setText("(1)");
+
+        lblSnob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_snob.png"))); // NOI18N
+
+        lblSnobCount.setText("(10)");
+
+        javax.swing.GroupLayout pUnitsLayout = new javax.swing.GroupLayout(pUnits);
+        pUnits.setLayout(pUnitsLayout);
+        pUnitsLayout.setHorizontalGroup(
+            pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pUnitsLayout.createSequentialGroup()
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblSpear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSpear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSpearCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblSword)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSwordCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblAxe)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfAxe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblAxeCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblArcher)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfArcher, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblArcherCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblSpy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSpy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSpyCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblLight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfLight, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLightCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblMarcher)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfMarcher, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMarcherCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblHeavy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfHeavy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblHeavyCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblRam)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfRam, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblRamCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblCatapult)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfCatapult, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCatapultCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblKnight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfKnight, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblKnightCount))
+                    .addGroup(pUnitsLayout.createSequentialGroup()
+                        .addComponent(lblSnob)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSnob, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSnobCount)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pUnitsLayout.setVerticalGroup(
+            pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pUnitsLayout.createSequentialGroup()
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSpear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSpear)
+                    .addComponent(lblSpearCount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblSword)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfSword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSwordCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAxe)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfAxe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAxeCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblArcher)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfArcher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblArcherCount))))
+            .addGroup(pUnitsLayout.createSequentialGroup()
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSpy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSpy)
+                    .addComponent(lblSpyCount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblLight)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfLight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblLightCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblMarcher)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfMarcher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMarcherCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblHeavy)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfHeavy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblHeavyCount))))
+            .addGroup(pUnitsLayout.createSequentialGroup()
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfRam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRam)
+                    .addComponent(lblRamCount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCatapult)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfCatapult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCatapultCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblKnight)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfKnight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblKnightCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblSnob)
+                    .addGroup(pUnitsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfSnob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSnobCount))))
+        );
+
+        javax.swing.GroupLayout pHeaderLayout = new javax.swing.GroupLayout(pHeader);
+        pHeader.setLayout(pHeaderLayout);
+        pHeaderLayout.setHorizontalGroup(
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pHeaderLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pHeaderLayout.setVerticalGroup(
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+            .addComponent(pHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(spVillages, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(pHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spVillages, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblArcher;
+    private javax.swing.JLabel lblArcherCount;
+    private javax.swing.JLabel lblAxe;
+    private javax.swing.JLabel lblAxeCount;
+    private javax.swing.JLabel lblCatapult;
+    private javax.swing.JLabel lblCatapultCount;
+    private javax.swing.JLabel lblHeavy;
+    private javax.swing.JLabel lblHeavyCount;
+    private javax.swing.JLabel lblKnight;
+    private javax.swing.JLabel lblKnightCount;
+    private javax.swing.JLabel lblLight;
+    private javax.swing.JLabel lblLightCount;
+    private javax.swing.JLabel lblMarcher;
+    private javax.swing.JLabel lblMarcherCount;
+    private javax.swing.JLabel lblRam;
+    private javax.swing.JLabel lblRamCount;
+    private javax.swing.JLabel lblSnob;
+    private javax.swing.JLabel lblSnobCount;
+    private javax.swing.JLabel lblSpear;
+    private javax.swing.JLabel lblSpearCount;
+    private javax.swing.JLabel lblSpy;
+    private javax.swing.JLabel lblSpyCount;
+    private javax.swing.JLabel lblSword;
+    private javax.swing.JLabel lblSwordCount;
+    private javax.swing.JPanel pHeader;
+    private javax.swing.JPanel pUnits;
+    private javax.swing.JScrollPane spVillages;
     private javax.swing.JTable tblVillages;
+    private javax.swing.JTextField tfArcher;
+    private javax.swing.JTextField tfAxe;
+    private javax.swing.JTextField tfCatapult;
+    private javax.swing.JTextField tfHeavy;
+    private javax.swing.JTextField tfKnight;
+    private javax.swing.JTextField tfLight;
+    private javax.swing.JTextField tfMarcher;
+    private javax.swing.JTextField tfRam;
+    private javax.swing.JTextField tfSnob;
+    private javax.swing.JTextField tfSpear;
+    private javax.swing.JTextField tfSpy;
+    private javax.swing.JTextField tfSword;
     // End of variables declaration//GEN-END:variables
 
     Comparator<Village> byDist = new Comparator<Village>() {
@@ -110,7 +409,37 @@ public class RaidHelperPanel extends javax.swing.JPanel {
 
     private void prepareAttack(Village to) {
         AttackData attack = new AttackData(attacker, to);
-        attack.addUnit(new Unit(UnitType.SPY, 5));
+        addUnits(attack);
         AttackManager.executeAttack(attack);
     }
+
+    private void addUnits(AttackData attack) {
+        addUnit(attack, lblArcherCount, UnitType.ARCHER);
+        addUnit(attack, lblAxeCount, UnitType.AXEMAN);
+        addUnit(attack, lblCatapultCount, UnitType.CATAPULT);
+        addUnit(attack, lblHeavyCount, UnitType.HEAVY_CAVALRY);
+        addUnit(attack, lblKnightCount, UnitType.PALADIN);
+        addUnit(attack, lblLightCount, UnitType.LIGHT_CAVALRY);
+        addUnit(attack, lblMarcherCount, UnitType.MOUNTED_ARCHER);
+        addUnit(attack, lblRamCount, UnitType.RAM);
+        addUnit(attack, lblSnobCount, UnitType.NOBLE);
+        addUnit(attack, lblSpearCount, UnitType.SPEARMAN);
+        addUnit(attack, lblSpyCount, UnitType.SPY);
+        addUnit(attack, lblSwordCount, UnitType.SWORDSMAN);
+    }
+
+    private void addUnit(AttackData attack, JLabel countLabel, UnitType unitType) {
+        if (countLabel.getText().equals(""))
+            return;
+        
+        int count;
+        try {
+            count = Integer.parseInt(countLabel.getText());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        
+        attack.addUnit(new Unit(unitType, count));
+    }
+
 }
