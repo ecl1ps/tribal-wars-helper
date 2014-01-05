@@ -31,7 +31,10 @@ public class Unit implements Comparable<Unit> {
     }
 
     public void setInVillage(int inVillage) {
-        this.inVillage = inVillage;
+        if (inVillage < 0)
+            this.inVillage = 0;
+        else
+            this.inVillage = inVillage;
     }
 
     public int getRecruiting() {

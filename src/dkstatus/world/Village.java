@@ -223,5 +223,19 @@ public class Village implements IValidable {
     public boolean hasOwnerPlayer() {
         return owner != null && owner.getId() != 0;
     }
+
+    public int getAvailableUnitCount(UnitType type) {
+        for (Unit u : units)
+            if (u.getType() == type)
+                return u.getInVillage();
+        
+        return 0;
+    }
+
+    public void reduceAvailableUnitCount(UnitType type, int count) {
+        for (Unit u : units)
+            if (u.getType() == type)
+                u.setInVillage(u.getInVillage() - count);
+    }
     
 }

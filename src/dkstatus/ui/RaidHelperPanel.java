@@ -8,6 +8,7 @@ import dkstatus.world.AttackManager;
 import dkstatus.world.Unit;
 import dkstatus.world.UnitType;
 import dkstatus.world.Village;
+import dkstatus.world.World;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -18,7 +19,6 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -49,6 +49,8 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         this.attacker = attacker;
         
         initComponents();
+        
+        updateAvailableUnits();
         
         RaidTableModel model = new RaidTableModel(new ArrayList<Village>(), attacker);
         tblVillages.setModel(model);
@@ -613,12 +615,21 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         addUnits(attack);
         
         for (Unit u : attack.getAttackingUnits())
-            if (u.getInVillage() > 0) {
-                AttackManager.executeAttack(attack);
-                return true;
-            }
+            if (u.getInVillage() <= 0)
+                return false; // empty attack
         
-        return false;
+        for (Unit u : attack.getAttackingUnits())
+            if (attacker.getAvailableUnitCount(u.getType()) < u.getInVillage())
+                return false; // not enough units for required attack
+        
+        AttackManager.executeAttack(attack);
+        
+        for (Unit u : attack.getAttackingUnits())
+            attacker.reduceAvailableUnitCount(u.getType(), u.getInVillage());
+        
+        updateAvailableUnits();
+                
+        return true;
     }
 
     private void addUnits(AttackData attack) {
@@ -671,5 +682,69 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         Collections.sort(transformed, byDist);
         ((RaidTableModel)tblVillages.getModel()).setVillages(transformed);
     }
-
+    
+    void updateWorld(World world) {
+        updateAvailableUnits();
+    }
+    
+    private void updateAvailableUnits() {
+        resetAvailableUnits();
+        
+        for (Unit u : attacker.getUnits()) {
+            switch (u.getType()) {
+                case ARCHER:
+                    lblArcherCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case AXEMAN:
+                    lblAxeCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case CATAPULT:
+                    lblCatapultCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case HEAVY_CAVALRY:
+                    lblHeavyCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case LIGHT_CAVALRY:
+                    lblLightCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case MOUNTED_ARCHER:
+                    lblMarcherCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case NOBLE:
+                    lblSnobCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case PALADIN:
+                    lblKnightCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case RAM:
+                    lblRamCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case SPEARMAN:
+                    lblSpearCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case SPY:
+                    lblSpyCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;
+                case SWORDSMAN:
+                    lblSwordCount.setText(String.format("(%d)", u.getInVillage()));
+                    break;                    
+            }
+        }
+        
+    }    
+    
+    private void resetAvailableUnits() {
+        lblArcherCount.setText("(0)");
+        lblAxeCount.setText("(0)");
+        lblCatapultCount.setText("(0)");
+        lblHeavyCount.setText("(0)");
+        lblKnightCount.setText("(0)");
+        lblLightCount.setText("(0)");
+        lblMarcherCount.setText("(0)");
+        lblRamCount.setText("(0)");
+        lblSnobCount.setText("(0)");
+        lblSpearCount.setText("(0)");
+        lblSpyCount.setText("(0)");
+        lblSwordCount.setText("(0)");        
+    }    
 }

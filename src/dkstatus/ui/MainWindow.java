@@ -282,12 +282,12 @@ public class MainWindow extends javax.swing.JFrame {
                 lblIncomingAttackCount.setText(String.valueOf(incomingAttacks));
                 lblIncomingAttackCount.setVisible(incomingAttacks > 0);
 
-                updateVillages(plr.getVillages());
+                updateVillages(plr.getVillages(), world);
             }
         });
     }
 
-    private void updateVillages(List<Village> villages) {
+    private void updateVillages(List<Village> villages, World world) {
         List<Integer> newIds = new ArrayList<>();
         for (Village v : villages) // get ids of all current villages
             newIds.add(v.getId());
@@ -320,6 +320,7 @@ public class MainWindow extends javax.swing.JFrame {
 
             if (vp != null) {
                 vp.getVillagePanel().updateVillage(v, UpdateType.VILLAGE_COMMON);
+                vp.getRaidpPanel().updateWorld(world);
             }
         }
     }
