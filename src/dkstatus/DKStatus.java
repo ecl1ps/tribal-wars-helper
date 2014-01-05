@@ -35,6 +35,7 @@ public class DKStatus {
 
     public static void refreshUpdate() {
         WebRequestService.restartService();
+        WindowManager.getWindow().updateWindow(WebRequestService.getWorld());
         updateData();
     }
 

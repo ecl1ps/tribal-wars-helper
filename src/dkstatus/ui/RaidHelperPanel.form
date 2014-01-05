@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="btngrpSelectedVillages">
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -17,7 +21,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="pHeader" max="32767" attributes="0"/>
-          <Component id="spVillages" pref="562" max="32767" attributes="0"/>
+          <Component id="spVillages" pref="599" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -25,8 +29,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="pHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="spVillages" min="-2" pref="423" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="spVillages" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,14 +57,19 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pFilter" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="pUnits" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pUnits" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Component id="pUnits" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="2" pref="11" max="32767" attributes="0"/>
+              </Group>
+              <Component id="pFilter" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -275,6 +283,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfSpear">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblSpearCount">
               <Properties>
@@ -289,6 +300,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfSword">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblSwordCount">
               <Properties>
@@ -303,6 +317,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfAxe">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAxeCount">
               <Properties>
@@ -317,6 +334,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfArcher">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblArcherCount">
               <Properties>
@@ -331,6 +351,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfSpy">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblSpyCount">
               <Properties>
@@ -345,6 +368,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfLight">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblLightCount">
               <Properties>
@@ -359,6 +385,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfMarcher">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblMarcherCount">
               <Properties>
@@ -373,6 +402,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfHeavy">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblHeavyCount">
               <Properties>
@@ -387,6 +419,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfRam">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblRamCount">
               <Properties>
@@ -401,6 +436,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfCatapult">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCatapultCount">
               <Properties>
@@ -415,6 +453,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfKnight">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblKnightCount">
               <Properties>
@@ -429,11 +470,123 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfSnob">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblSnobCount">
               <Properties>
                 <Property name="text" type="java.lang.String" value="(10)"/>
               </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pFilter">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Filtr"/>
+            <Property name="name" type="java.lang.String" value="Filtr" noResource="true"/>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="rbFree" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="rbOwned" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="rbAll" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="lblMaxDist" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="tfMaxDist" min="-2" pref="44" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnClearAttacked" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="rbFree" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbOwned" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbAll" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblMaxDist" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfMaxDist" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnClearAttacked" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblMaxDist">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Max. vzd&#xe1;lenost"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfMaxDist">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+                <Property name="text" type="java.lang.String" value="10"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfMaxDistActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="rbFree">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btngrpSelectedVillages"/>
+                </Property>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="barbarsk&#xe9;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="villageSelectionItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="rbOwned">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btngrpSelectedVillages"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="hr&#xe1;&#x10d;sk&#xe9;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="villageSelectionItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="rbAll">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btngrpSelectedVillages"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="v&#x161;echny"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="villageSelectionItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnClearAttacked">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vy&#x10d;istit &#xfa;toky"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearAttackedActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

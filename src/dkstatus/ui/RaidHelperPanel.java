@@ -9,13 +9,16 @@ import dkstatus.world.Unit;
 import dkstatus.world.UnitType;
 import dkstatus.world.Village;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 
 /**
@@ -24,7 +27,16 @@ import javax.swing.JTable;
  */
 public class RaidHelperPanel extends javax.swing.JPanel {
 
+    private enum VillageSelecton {
+        BARBARIC,
+        PLAYER,
+        ALL
+    }
+    
+    private List<Village> worldVillages;
     private final Village attacker;
+    private VillageSelecton villageSelectionMode = VillageSelecton.BARBARIC;
+    private float maxDist = 10;
     
     /**
      * Creates new form RaidHelperPanel
@@ -43,7 +55,9 @@ public class RaidHelperPanel extends javax.swing.JPanel {
                 JTable table = (JTable)e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
                 Village v = (Village)((RaidTableModel)table.getModel()).getValueAt(modelRow, -1);
-                prepareAttack(v);
+                //prepareAttack(v);
+                
+                table.setValueAt(new ImageIcon(getClass().getResource("/resources/images/attack.png")), modelRow, 3);
             }
         });
         attackButton.setMnemonic(KeyEvent.VK_A);   
@@ -65,6 +79,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngrpSelectedVillages = new javax.swing.ButtonGroup();
         spVillages = new javax.swing.JScrollPane();
         tblVillages = new javax.swing.JTable();
         pHeader = new javax.swing.JPanel();
@@ -105,6 +120,13 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         lblSnob = new javax.swing.JLabel();
         tfSnob = new javax.swing.JTextField();
         lblSnobCount = new javax.swing.JLabel();
+        pFilter = new javax.swing.JPanel();
+        lblMaxDist = new javax.swing.JLabel();
+        tfMaxDist = new javax.swing.JTextField();
+        rbFree = new javax.swing.JRadioButton();
+        rbOwned = new javax.swing.JRadioButton();
+        rbAll = new javax.swing.JRadioButton();
+        btnClearAttacked = new javax.swing.JButton();
 
         tblVillages.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,49 +140,73 @@ public class RaidHelperPanel extends javax.swing.JPanel {
 
         lblSpear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spear.png"))); // NOI18N
 
+        tfSpear.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+
         lblSpearCount.setText("(1000)");
 
         lblSword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_sword.png"))); // NOI18N
+
+        tfSword.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblSwordCount.setText("(1000)");
 
         lblAxe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_axe.png"))); // NOI18N
 
+        tfAxe.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+
         lblAxeCount.setText("(1000)");
 
         lblArcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_archer.png"))); // NOI18N
+
+        tfArcher.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblArcherCount.setText("(1000)");
 
         lblSpy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spy.png"))); // NOI18N
 
+        tfSpy.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+
         lblSpyCount.setText("(1000)");
 
         lblLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_light.png"))); // NOI18N
+
+        tfLight.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblLightCount.setText("(1000)");
 
         lblMarcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_marcher.png"))); // NOI18N
 
+        tfMarcher.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+
         lblMarcherCount.setText("(1000)");
 
         lblHeavy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_heavy.png"))); // NOI18N
+
+        tfHeavy.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblHeavyCount.setText("(1000)");
 
         lblRam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_ram.png"))); // NOI18N
 
+        tfRam.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+
         lblRamCount.setText("(1000)");
 
         lblCatapult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_catapult.png"))); // NOI18N
+
+        tfCatapult.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblCatapultCount.setText("(1000)");
 
         lblKnight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_knight.png"))); // NOI18N
 
+        tfKnight.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+
         lblKnightCount.setText("(1)");
 
         lblSnob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_snob.png"))); // NOI18N
+
+        tfSnob.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblSnobCount.setText("(10)");
 
@@ -321,17 +367,102 @@ public class RaidHelperPanel extends javax.swing.JPanel {
                         .addComponent(lblSnobCount))))
         );
 
+        pFilter.setToolTipText("Filtr");
+        pFilter.setName("Filtr"); // NOI18N
+
+        lblMaxDist.setText("Max. vzdálenost");
+
+        tfMaxDist.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        tfMaxDist.setText("10");
+        tfMaxDist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfMaxDistActionPerformed(evt);
+            }
+        });
+
+        btngrpSelectedVillages.add(rbFree);
+        rbFree.setSelected(true);
+        rbFree.setText("barbarské");
+        rbFree.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                villageSelectionItemStateChanged(evt);
+            }
+        });
+
+        btngrpSelectedVillages.add(rbOwned);
+        rbOwned.setText("hráčské");
+        rbOwned.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                villageSelectionItemStateChanged(evt);
+            }
+        });
+
+        btngrpSelectedVillages.add(rbAll);
+        rbAll.setText("všechny");
+        rbAll.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                villageSelectionItemStateChanged(evt);
+            }
+        });
+
+        btnClearAttacked.setText("Vyčistit útoky");
+        btnClearAttacked.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearAttackedActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pFilterLayout = new javax.swing.GroupLayout(pFilter);
+        pFilter.setLayout(pFilterLayout);
+        pFilterLayout.setHorizontalGroup(
+            pFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFilterLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pFilterLayout.createSequentialGroup()
+                        .addComponent(rbFree)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbOwned)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbAll))
+                    .addGroup(pFilterLayout.createSequentialGroup()
+                        .addComponent(lblMaxDist)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfMaxDist, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClearAttacked))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pFilterLayout.setVerticalGroup(
+            pFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFilterLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbFree)
+                    .addComponent(rbOwned)
+                    .addComponent(rbAll))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMaxDist)
+                    .addComponent(tfMaxDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClearAttacked))
+        );
+
         javax.swing.GroupLayout pHeaderLayout = new javax.swing.GroupLayout(pHeader);
         pHeader.setLayout(pHeaderLayout);
         pHeaderLayout.setHorizontalGroup(
             pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pHeaderLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pHeaderLayout.setVerticalGroup(
             pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pHeaderLayout.createSequentialGroup()
+                .addComponent(pUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 11, Short.MAX_VALUE))
+            .addComponent(pFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -339,20 +470,48 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(spVillages, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+            .addComponent(spVillages, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spVillages, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(spVillages))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tfMaxDistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMaxDistActionPerformed
+        try {
+            maxDist = Float.parseFloat(tfMaxDist.getText());
+        } catch (NumberFormatException e) {
+            tfMaxDist.setText("10");
+        }
+        transformAndShowVillages();
+    }//GEN-LAST:event_tfMaxDistActionPerformed
+
+    private void villageSelectionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_villageSelectionItemStateChanged
+        if (evt.getStateChange() != ItemEvent.SELECTED)
+            return;
+
+        if (evt.getSource() == rbFree)
+            villageSelectionMode = VillageSelecton.BARBARIC;
+        else if (evt.getSource() == rbOwned)
+            villageSelectionMode = VillageSelecton.PLAYER;
+        else if (evt.getSource() == rbAll)
+            villageSelectionMode = VillageSelecton.ALL;
+
+        transformAndShowVillages();
+    }//GEN-LAST:event_villageSelectionItemStateChanged
+
+    private void btnClearAttackedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAttackedActionPerformed
+        ((RaidTableModel)tblVillages.getModel()).clearAttacked();
+    }//GEN-LAST:event_btnClearAttackedActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClearAttacked;
+    private javax.swing.ButtonGroup btngrpSelectedVillages;
     private javax.swing.JLabel lblArcher;
     private javax.swing.JLabel lblArcherCount;
     private javax.swing.JLabel lblAxe;
@@ -367,6 +526,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblLightCount;
     private javax.swing.JLabel lblMarcher;
     private javax.swing.JLabel lblMarcherCount;
+    private javax.swing.JLabel lblMaxDist;
     private javax.swing.JLabel lblRam;
     private javax.swing.JLabel lblRamCount;
     private javax.swing.JLabel lblSnob;
@@ -377,8 +537,12 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblSpyCount;
     private javax.swing.JLabel lblSword;
     private javax.swing.JLabel lblSwordCount;
+    private javax.swing.JPanel pFilter;
     private javax.swing.JPanel pHeader;
     private javax.swing.JPanel pUnits;
+    private javax.swing.JRadioButton rbAll;
+    private javax.swing.JRadioButton rbFree;
+    private javax.swing.JRadioButton rbOwned;
     private javax.swing.JScrollPane spVillages;
     private javax.swing.JTable tblVillages;
     private javax.swing.JTextField tfArcher;
@@ -388,6 +552,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     private javax.swing.JTextField tfKnight;
     private javax.swing.JTextField tfLight;
     private javax.swing.JTextField tfMarcher;
+    private javax.swing.JTextField tfMaxDist;
     private javax.swing.JTextField tfRam;
     private javax.swing.JTextField tfSnob;
     private javax.swing.JTextField tfSpear;
@@ -403,8 +568,8 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     };
     
     void updateVillages(List<Village> villages) {
-        Collections.sort(villages, byDist);
-        ((RaidTableModel)tblVillages.getModel()).setVillages(villages);
+        worldVillages = villages;
+        transformAndShowVillages();
     }
 
     private void prepareAttack(Village to) {
@@ -440,6 +605,28 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         }
         
         attack.addUnit(new Unit(unitType, count));
+    }
+
+    private void transformAndShowVillages() {
+        if (worldVillages == null)
+            return;
+        
+        List<Village> transformed;
+        if (villageSelectionMode == VillageSelecton.ALL && maxDist == 0) {
+            transformed = new ArrayList<>(worldVillages);
+        } else {
+            transformed = new ArrayList<>(worldVillages.size() / 2);
+            for (Village v : worldVillages)
+                if ((villageSelectionMode == VillageSelecton.BARBARIC && !v.hasOwnerPlayer()) ||
+                       (villageSelectionMode == VillageSelecton.PLAYER && v.hasOwnerPlayer()) ||
+                        villageSelectionMode == VillageSelecton.ALL) {
+                    if (attacker.getDistance(v) <= maxDist)
+                        transformed.add(v);
+                }            
+        }
+        
+        Collections.sort(transformed, byDist);
+        ((RaidTableModel)tblVillages.getModel()).setVillages(transformed);
     }
 
 }

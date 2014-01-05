@@ -219,5 +219,9 @@ public class Village implements IValidable {
         }        
         return null;
     }
+
+    public boolean hasOwnerPlayer() {
+        return owner != null && owner.getId() != 0;
+    }
     
 }
