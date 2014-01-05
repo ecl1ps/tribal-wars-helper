@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.conn.HttpHostConnectException;
 
 /**
@@ -31,7 +32,7 @@ public class UpdateTask extends TimerTask {
             request.updateData(world);
         } catch (EOFException ex) {
             // request error (timeout?)              
-        } catch (UnknownHostException | HttpHostConnectException | NoRouteToHostException ex) {
+        } catch (UnknownHostException | HttpHostConnectException | NoRouteToHostException | HttpResponseException ex) {
             // without internet connection
             world.getPlayer().setName("Offline");
         } catch (Exception ex) { // prevents silent thread termination
