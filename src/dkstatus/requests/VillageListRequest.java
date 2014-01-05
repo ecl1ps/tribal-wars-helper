@@ -23,7 +23,7 @@ public class VillageListRequest extends AbstractUpdateRequest {
     
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = getResult("screen=overview_villages&mode=prod");
+        String resultHtml = executeGet("screen=overview_villages&mode=prod");
         
         Logger.getLogger(VillageListRequest.class.getName()).log(Level.FINER, resultHtml);
         

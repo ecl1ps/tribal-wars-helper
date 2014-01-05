@@ -32,7 +32,7 @@ public class MapRequest extends AbstractUpdateRequest {
 
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = getResult("village=" + v.getId() + "&screen=map#" + v.getPosition().getPosition().x + ";" + v.getPosition().getPosition().y);
+        String resultHtml = executeGet("village=" + v.getId() + "&screen=map#" + v.getPosition().getPosition().x + ";" + v.getPosition().getPosition().y);
 
         Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINER, resultHtml);
 

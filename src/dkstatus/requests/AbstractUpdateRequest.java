@@ -22,7 +22,7 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public abstract class AbstractUpdateRequest implements IUpdateRequest {
     
-    protected String getResult(String link) throws IOException {
+    protected String executeGet(String link) throws IOException {
         
         try (CloseableHttpClient httpclient = NetUtils.createClient()) {
             

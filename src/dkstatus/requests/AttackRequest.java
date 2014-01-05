@@ -46,7 +46,7 @@ public class AttackRequest extends AbstractUpdateRequest {
     
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = getResult("village=" + data.getAttacker().getId() + "&screen=place");
+        String resultHtml = executeGet("village=" + data.getAttacker().getId() + "&screen=place");
         
         Logger.getLogger(AttackRequest.class.getName()).log(Level.FINER, resultHtml);
         
