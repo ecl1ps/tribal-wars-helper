@@ -671,7 +671,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         } else {
             transformed = new ArrayList<>(worldVillages.size() / 2);
             for (Village v : worldVillages)
-                if ((villageSelectionMode == VillageSelecton.BARBARIC && !v.hasOwnerPlayer()) ||
+                if ((villageSelectionMode == VillageSelecton.BARBARIC && !v.hasOwnerPlayer() && v.getPoints() > 0) ||
                        (villageSelectionMode == VillageSelecton.PLAYER && v.hasOwnerPlayer()) ||
                         villageSelectionMode == VillageSelecton.ALL) {
                     if (attacker.getDistance(v) <= maxDist)
