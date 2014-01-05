@@ -2,6 +2,8 @@
 package dkstatus.ui.model;
 
 import dkstatus.world.Village;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,12 +16,15 @@ import javax.swing.table.AbstractTableModel;
  * @author Johny
  */
 public class RaidTableModel extends AbstractTableModel {
+    
     private static final String[] COLUMN_NAMES = new String[] {"Vesnice", "Vzdálenost", "Body", "", "Akce"};
-    private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, String.class, ImageIcon.class, Village.class};
+    private static final Class<?>[] COLUMN_TYPES = new Class<?>[] {String.class, String.class, Integer.class, ImageIcon.class, String.class};
     
     private static Map<Integer, ImageIcon> icons = new HashMap<>();
     private List<Village> villages = new ArrayList<>();
     private Village attacker = new Village();
+    
+    private DecimalFormat format;
 
     @Override
     public int getRowCount() {
@@ -39,7 +44,7 @@ public class RaidTableModel extends AbstractTableModel {
             case 0:
                 return villages.get(rowIndex).toStringSimple();
             case 1:
-                return String.format("%.2f", villages.get(rowIndex).getDistance(attacker));
+                return format.format(villages.get(rowIndex).getDistance(attacker));
             case 2:
                 return villages.get(rowIndex).getPoints();
             case 3:
@@ -54,12 +59,14 @@ public class RaidTableModel extends AbstractTableModel {
         }
     }
 
-    public RaidTableModel() {
-    }
-
     public RaidTableModel(List<Village> villages, Village attacker) {
         this.villages = villages;
         this.attacker = attacker;
+        
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        format = new DecimalFormat("0.00");
+        format.setDecimalFormatSymbols(symbols);         
     }
 
     @Override 

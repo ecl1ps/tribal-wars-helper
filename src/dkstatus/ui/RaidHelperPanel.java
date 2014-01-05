@@ -20,6 +20,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -47,20 +50,53 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         
         initComponents();
         
-        tblVillages.setModel(new RaidTableModel(new ArrayList<Village>(), attacker));
+        RaidTableModel model = new RaidTableModel(new ArrayList<Village>(), attacker);
+        tblVillages.setModel(model);
+        TableRowSorter<RaidTableModel> sorter = new TableRowSorter<>(model);
+        sorter.setComparator(1, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                Float f1 = Float.parseFloat(o1);
+                Float f2 = Float.parseFloat(o2);
+                return f1.compareTo(f2);
+            }
+        });
+        sorter.setComparator(2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });        
+        sorter.setComparator(3, new Comparator<ImageIcon>() {
+            @Override
+            public int compare(ImageIcon o1, ImageIcon o2) {
+                if (o1 == null && o2 == null)
+                    return 0;
+                
+                return o1 == null ? -1 : 1;
+            }
+        });
+        sorter.setSortable(4, false);
+        tblVillages.setRowSorter(sorter);
 
         ButtonColumn attackButton = new ButtonColumn(tblVillages, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable)e.getSource();
-                int modelRow = Integer.valueOf(e.getActionCommand());
+                int modelRow = table.convertRowIndexToView(Integer.valueOf(e.getActionCommand()));
                 Village v = (Village)((RaidTableModel)table.getModel()).getValueAt(modelRow, -1);
-                //prepareAttack(v);
                 
-                table.setValueAt(new ImageIcon(getClass().getResource("/resources/images/attack.png")), modelRow, 3);
+                if (prepareAndSendAttack(v))
+                    table.setValueAt(new ImageIcon(getClass().getResource("/resources/images/attack.png")), modelRow, 3);
             }
         });
         attackButton.setMnemonic(KeyEvent.VK_A);   
+        
+        tblVillages.getTableHeader().setReorderingAllowed(false);
+        
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+        tblVillages.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
         
         tblVillages.getColumn("Akce").setCellRenderer(attackButton);
         tblVillages.getColumn("Akce").setCellEditor(attackButton);
@@ -459,10 +495,10 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         );
         pHeaderLayout.setVerticalGroup(
             pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pHeaderLayout.createSequentialGroup()
-                .addComponent(pUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 11, Short.MAX_VALUE))
             .addComponent(pFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pHeaderLayout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
+                .addComponent(pUnits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -572,34 +608,41 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         transformAndShowVillages();
     }
 
-    private void prepareAttack(Village to) {
+    private boolean prepareAndSendAttack(Village to) {
         AttackData attack = new AttackData(attacker, to);
         addUnits(attack);
-        AttackManager.executeAttack(attack);
+        
+        for (Unit u : attack.getAttackingUnits())
+            if (u.getInVillage() > 0) {
+                AttackManager.executeAttack(attack);
+                return true;
+            }
+        
+        return false;
     }
 
     private void addUnits(AttackData attack) {
-        addUnit(attack, lblArcherCount, UnitType.ARCHER);
-        addUnit(attack, lblAxeCount, UnitType.AXEMAN);
-        addUnit(attack, lblCatapultCount, UnitType.CATAPULT);
-        addUnit(attack, lblHeavyCount, UnitType.HEAVY_CAVALRY);
-        addUnit(attack, lblKnightCount, UnitType.PALADIN);
-        addUnit(attack, lblLightCount, UnitType.LIGHT_CAVALRY);
-        addUnit(attack, lblMarcherCount, UnitType.MOUNTED_ARCHER);
-        addUnit(attack, lblRamCount, UnitType.RAM);
-        addUnit(attack, lblSnobCount, UnitType.NOBLE);
-        addUnit(attack, lblSpearCount, UnitType.SPEARMAN);
-        addUnit(attack, lblSpyCount, UnitType.SPY);
-        addUnit(attack, lblSwordCount, UnitType.SWORDSMAN);
+        addUnit(attack, tfArcher, UnitType.ARCHER);
+        addUnit(attack, tfAxe, UnitType.AXEMAN);
+        addUnit(attack, tfCatapult, UnitType.CATAPULT);
+        addUnit(attack, tfHeavy, UnitType.HEAVY_CAVALRY);
+        addUnit(attack, tfKnight, UnitType.PALADIN);
+        addUnit(attack, tfLight, UnitType.LIGHT_CAVALRY);
+        addUnit(attack, tfMarcher, UnitType.MOUNTED_ARCHER);
+        addUnit(attack, tfRam, UnitType.RAM);
+        addUnit(attack, tfSnob, UnitType.NOBLE);
+        addUnit(attack, tfSpear, UnitType.SPEARMAN);
+        addUnit(attack, tfSpy, UnitType.SPY);
+        addUnit(attack, tfSword, UnitType.SWORDSMAN);
     }
 
-    private void addUnit(AttackData attack, JLabel countLabel, UnitType unitType) {
-        if (countLabel.getText().equals(""))
+    private void addUnit(AttackData attack, JTextField countField, UnitType unitType) {
+        if (countField.getText().equals(""))
             return;
         
         int count;
         try {
-            count = Integer.parseInt(countLabel.getText());
+            count = Integer.parseInt(countField.getText());
         } catch (NumberFormatException e) {
             return;
         }
