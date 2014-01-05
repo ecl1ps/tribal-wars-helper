@@ -2,32 +2,25 @@
 package dkstatus.ui;
 
 import dkstatus.world.Village;
+import java.util.List;
 
 /**
  *
  * @author Johny
  */
-public class VillageTabsPanel extends javax.swing.JPanel {
+public class GameMapPanel extends javax.swing.JPanel {
 
     private final Village village;
+    private List<Village> worldVillages;
     
     /**
-     * Creates new form VillageTabsPanel
+     * Creates new form GameMap
      * @param village
      */
-    public VillageTabsPanel(Village village) {
+    public GameMapPanel(Village village) {
         this.village = village;
         
         initComponents();
-        
-        info = new VillageMainPanel(village.getId());
-        tpVillage.add("Informace", info);
-        
-        raid = new RaidHelperPanel(village);
-        tpVillage.add("Rabování", raid);
-        
-        map = new GameMapPanel(village);
-        tpVillage.add("Mapa", map);        
     }
 
     /**
@@ -39,41 +32,26 @@ public class VillageTabsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tpVillage = new javax.swing.JTabbedPane();
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpVillage, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+            .addGap(0, 544, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpVillage, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+            .addGap(0, 407, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane tpVillage;
     // End of variables declaration//GEN-END:variables
 
-    private final VillageMainPanel info;
-    private final RaidHelperPanel raid;
-    private final GameMapPanel map;
-    
-    public Integer getId() {
-        return village.getId();
-    }
-    
-    VillageMainPanel getVillagePanel() {
-        return info;
+    void updateVillages(List<Village> villages) {
+        worldVillages = villages;
+        
+        
     }
 
-    RaidHelperPanel getRaidpPanel() {
-        return raid;
-    }
-
-    GameMapPanel getMapPanel() {
-        return map;
-    }
 }

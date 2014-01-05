@@ -347,6 +347,7 @@ public class MainWindow extends javax.swing.JFrame {
                 for (int i = 0; i < tpVillages.getTabCount(); i++) {
                     VillageTabsPanel vp = (VillageTabsPanel) tpVillages.getComponentAt(i);
                     vp.getRaidpPanel().updateVillages(world.getVillages());
+                    vp.getMapPanel().updateVillages(world.getVillages());
                 }
             }
         });
