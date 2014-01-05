@@ -8,6 +8,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -36,4 +37,10 @@ public class NetUtils {
         BrowserManager.setHeaders(request);
         return request;
     }    
+    
+    public static HttpPost preparePostRequest(String requestParams) {
+        HttpPost request = new HttpPost(Utils.getLink(requestParams));
+        BrowserManager.setHeaders(request);
+        return request;
+    }     
 }

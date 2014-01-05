@@ -20,6 +20,12 @@ public class Unit implements Comparable<Unit> {
         recruiting = 0;
     }
 
+    public Unit(UnitType type, int count) {
+        this.type = type;
+        inVillage = count;
+        recruiting = 0;
+    }
+
     public int getInVillage() {
         return inVillage;
     }

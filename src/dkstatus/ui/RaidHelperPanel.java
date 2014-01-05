@@ -3,6 +3,10 @@ package dkstatus.ui;
 
 import dkstatus.ui.model.ButtonColumn;
 import dkstatus.ui.model.RaidTableModel;
+import dkstatus.world.AttackData;
+import dkstatus.world.AttackManager;
+import dkstatus.world.Unit;
+import dkstatus.world.UnitType;
 import dkstatus.world.Village;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -105,6 +109,8 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     }
 
     private void prepareAttack(Village to) {
-        System.out.println(to.toString());
+        AttackData attack = new AttackData(attacker, to);
+        attack.addUnit(new Unit(UnitType.SPY, 5));
+        AttackManager.executeAttack(attack);
     }
 }
