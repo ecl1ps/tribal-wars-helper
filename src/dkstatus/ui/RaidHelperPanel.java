@@ -181,72 +181,144 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         tfSpear.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblSpearCount.setText("(1000)");
+        lblSpearCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSpearCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblSword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_sword.png"))); // NOI18N
 
         tfSword.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblSwordCount.setText("(1000)");
+        lblSwordCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSwordCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblAxe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_axe.png"))); // NOI18N
 
         tfAxe.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblAxeCount.setText("(1000)");
+        lblAxeCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAxeCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblArcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_archer.png"))); // NOI18N
 
         tfArcher.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblArcherCount.setText("(1000)");
+        lblArcherCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblArcherCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblSpy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_spy.png"))); // NOI18N
 
         tfSpy.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblSpyCount.setText("(1000)");
+        lblSpyCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSpyCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_light.png"))); // NOI18N
 
         tfLight.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblLightCount.setText("(1000)");
+        lblLightCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLightCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblMarcher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_marcher.png"))); // NOI18N
 
         tfMarcher.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblMarcherCount.setText("(1000)");
+        lblMarcherCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMarcherCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblHeavy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_heavy.png"))); // NOI18N
 
         tfHeavy.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblHeavyCount.setText("(1000)");
+        lblHeavyCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHeavyCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblRam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_ram.png"))); // NOI18N
 
         tfRam.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblRamCount.setText("(1000)");
+        lblRamCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRamCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblCatapult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_catapult.png"))); // NOI18N
 
         tfCatapult.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblCatapultCount.setText("(1000)");
+        lblCatapultCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCatapultCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblKnight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_knight.png"))); // NOI18N
 
         tfKnight.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblKnightCount.setText("(1)");
+        lblKnightCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblKnightCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         lblSnob.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/unit_snob.png"))); // NOI18N
 
         tfSnob.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         lblSnobCount.setText("(10)");
+        lblSnobCount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSnobCount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAvailableMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pUnitsLayout = new javax.swing.GroupLayout(pUnits);
         pUnits.setLayout(pUnitsLayout);
@@ -546,6 +618,44 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         ((RaidTableModel)tblVillages.getModel()).clearAttacked();
     }//GEN-LAST:event_btnClearAttackedActionPerformed
 
+    private void lblAvailableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAvailableMouseClicked
+        JLabel lbl = (JLabel)evt.getSource();
+        if (lbl == lblArcherCount)
+            setVal(tfArcher, lbl, UnitType.ARCHER);
+        else if (lbl == lblAxeCount)
+            setVal(tfAxe, lbl, UnitType.AXEMAN);
+        else if (lbl == lblCatapultCount)
+            setVal(tfCatapult, lbl, UnitType.CATAPULT);
+        else if (lbl == lblHeavyCount)
+            setVal(tfHeavy, lbl, UnitType.HEAVY_CAVALRY);
+        else if (lbl == lblLightCount)
+            setVal(tfLight, lbl, UnitType.LIGHT_CAVALRY);
+        else if (lbl == lblMarcherCount)
+            setVal(tfMarcher, lbl, UnitType.MOUNTED_ARCHER);
+        else if (lbl == lblSnobCount)
+            setVal(tfSnob, lbl, UnitType.NOBLE);
+        else if (lbl == lblKnightCount)
+            setVal(tfKnight, lbl, UnitType.PALADIN);
+        else if (lbl == lblRamCount)
+            setVal(tfRam, lbl, UnitType.RAM);
+        else if (lbl == lblSpearCount)
+            setVal(tfSpear, lbl, UnitType.SPEARMAN);
+        else if (lbl == lblSpyCount)
+            setVal(tfSpy, lbl, UnitType.SPY);
+        else if (lbl == lblSwordCount)
+            setVal(tfSword, lbl, UnitType.SWORDSMAN);
+    }//GEN-LAST:event_lblAvailableMouseClicked
+    
+    private void setVal(JTextField to, JLabel from, UnitType unitType) {
+        if (from.getText().equalsIgnoreCase("(0)")) {
+            to.setText("");
+            from.setText(String.format("(%d)", attacker.getAvailableUnitCount(unitType)));
+        } else {
+            String count = from.getText();
+            to.setText(count.substring(1, count.length() - 1));
+            from.setText("(0)");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearAttacked;
@@ -657,6 +767,9 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         } catch (NumberFormatException e) {
             return;
         }
+        
+        if (count <= 0)
+            return;
         
         attack.addUnit(new Unit(unitType, count));
     }
