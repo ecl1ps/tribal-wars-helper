@@ -514,7 +514,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
         RecruitmentData d = v.getRecruitmentData();
         if (d.getBarracksCount() > 0) {
             lblBarracksCount.setText(String.format("+%d", d.getBarracksCount()));
-            lblBarracksTime.setText(d.getBarracksFinished().toString("HH:mm:ss"));
+            lblBarracksTime.setText(d.getBarracksFinished().toString("E HH:mm:ss"));
         } else {
             lblBarracksCount.setText("");
             lblBarracksTime.setText("");            
@@ -522,7 +522,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
         
         if (d.getStableCount()> 0) {
             lblStableCount.setText(String.format("+%d", d.getStableCount()));
-            lblStableTime.setText(d.getStableFinished().toString("HH:mm:ss"));
+            lblStableTime.setText(d.getStableFinished().toString("E HH:mm:ss"));
         } else {
             lblStableCount.setText("");
             lblStableTime.setText("");            
@@ -530,7 +530,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
         
         if (d.getGarageCount()> 0) {
             lblGarageCount.setText(String.format("+%d", d.getGarageCount()));
-            lblGarageTime.setText(d.getGarageFinished().toString("HH:mm:ss"));
+            lblGarageTime.setText(d.getGarageFinished().toString("E HH:mm:ss"));
         } else {
             lblGarageCount.setText("");
             lblGarageTime.setText("");            
