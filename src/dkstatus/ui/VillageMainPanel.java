@@ -79,6 +79,10 @@ public class VillageMainPanel extends javax.swing.JPanel {
         UIUtils.transformToHyperlink(lblPopulation, "village=" + id + "&screen=farm");
         
         UIUtils.transformToHyperlink(lblVillageName, "village=" + id + "&screen=overview");
+        
+        UIUtils.transformToHyperlink(lblBarracksImage, "village=" + id + "&screen=train");
+        UIUtils.transformToHyperlink(lblStableImage, "village=" + id + "&screen=train");
+        UIUtils.transformToHyperlink(lblGarageImage, "village=" + id + "&screen=train");
     }
 
     private void hideUnits() {
