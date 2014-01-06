@@ -148,6 +148,7 @@
               <Image iconType="3" name="/resources/images/wheel.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0"/>
+            <Property name="toolTipText" type="java.lang.String" value="Body hr&#xe1;&#x10d;e"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblAnnounce">
@@ -186,6 +187,7 @@
               <Image iconType="3" name="/resources/images/attacked.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#xda;to&#x10d;&#xed;c&#xed; vojska"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnUpdate">
@@ -202,6 +204,7 @@
               <Image iconType="3" name="/resources/images/time.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0"/>
+            <Property name="toolTipText" type="java.lang.String" value="P&#x159;&#xed;&#x161;t&#xed; aktualizace"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnResetAnnounces">

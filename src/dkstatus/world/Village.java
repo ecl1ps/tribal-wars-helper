@@ -21,6 +21,7 @@ public class Village implements IValidable {
     
     private final Resources resources = new Resources();
     private final Population population = new Population();
+    private final RecruitmentData recruitment = new RecruitmentData();
     
     private final Set<Unit> units = new TreeSet<>();
     
@@ -54,6 +55,10 @@ public class Village implements IValidable {
     public Population getPopulation() {
         return population;
     }    
+
+    public RecruitmentData getRecruitmentData() {
+        return recruitment;
+    }
     
     public boolean IsAttacked() {
         for (MarchingArmy att : incomingArmies)
@@ -237,5 +242,5 @@ public class Village implements IValidable {
             if (u.getType() == type)
                 u.setInVillage(u.getInVillage() - count);
     }
-    
+        
 }

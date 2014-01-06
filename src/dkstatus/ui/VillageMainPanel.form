@@ -11,7 +11,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-93,0,0,2,-102"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-101,0,0,2,-56"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -20,12 +20,14 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="pHeader">
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+        <Property name="axis" type="int" value="0"/>
+      </Layout>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="pVillageInfo">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 90]"/>
+              <Dimension value="[370, 90]"/>
             </Property>
           </Properties>
 
@@ -50,7 +52,7 @@
                       <Component id="lblVillageName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pResources" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -82,6 +84,7 @@
                       <Image iconType="3" name="/resources/images/wood.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="D&#x159;evo"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblStoneCount">
@@ -90,6 +93,7 @@
                       <Image iconType="3" name="/resources/images/stone.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Hl&#xed;na"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblIronCount">
@@ -98,6 +102,7 @@
                       <Image iconType="3" name="/resources/images/iron.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&#x17d;elezo"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblStorageCount">
@@ -106,6 +111,7 @@
                       <Image iconType="3" name="/resources/images/storage.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Skladi&#x161;t&#x11b;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPopulation">
@@ -114,10 +120,139 @@
                       <Image iconType="3" name="/resources/images/worker.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="0/0"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Selsk&#xfd; dv&#x16f;r"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pRecruitment">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblStableImage" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblStableCount" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblStableTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblBarracksImage" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblBarracksCount" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblBarracksTime" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="lblGarageImage" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblGarageCount" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGarageTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblBarracksImage" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblBarracksCount" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="lblBarracksTime" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblStableCount" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="lblStableTime" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblStableImage" min="-2" pref="31" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblGarageImage" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblGarageCount" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="lblGarageTime" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblBarracksImage">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/images/buildings/barracks3.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Kas&#xe1;rna"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblStableImage">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/images/buildings/stable3.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="St&#xe1;je"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblBarracksCount">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="+100"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblBarracksTime">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="16:45:00"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblStableCount">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="+23"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblStableTime">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="16:45:00"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblGarageImage">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/images/buildings/garage3.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="D&#xed;lna"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblGarageCount">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="+5"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblGarageTime">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="16:45:00"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.Box$Filler" name="filler2">
@@ -161,7 +296,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_spear.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="40000 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="40000 +100"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Kopin&#xed;ci"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblSword">
@@ -169,7 +305,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_sword.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="0 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="0 +100"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&#x160;erm&#xed;&#x159;i"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblAxe">
@@ -177,7 +314,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_axe.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3000 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3000 +32"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Sekern&#xed;ci"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblArcher">
@@ -185,7 +323,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_archer.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="0 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="0 +1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Lu&#x10d;i&#x161;tn&#xed;ci"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblRam">
@@ -193,7 +332,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_ram.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +10"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Beranidla"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblCatapult">
@@ -201,7 +341,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_catapult.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +1000"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Katapulty"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -217,7 +358,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_spy.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +10"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Zv&#x11b;di"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblLight">
@@ -225,7 +367,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_light.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +100 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +100"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Lehk&#xe1; kaval&#xe9;rie"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblMarcher">
@@ -234,6 +377,7 @@
                       <Image iconType="3" name="/resources/images/unit_marcher.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="3333"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Lu&#x10d;i&#x161;tn&#xed;ci na koni"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblHeavy">
@@ -241,7 +385,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_heavy.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3333 +1 (03:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3333 +5"/>
+                    <Property name="toolTipText" type="java.lang.String" value="T&#x11b;&#x17e;k&#xe1; kaval&#xe9;rie"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPaladin">
@@ -250,6 +395,7 @@
                       <Image iconType="3" name="/resources/images/unit_knight.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Paladin"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblNoble">
@@ -257,7 +403,8 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/images/unit_snob.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="3 +1 (16:45:11)"/>
+                    <Property name="text" type="java.lang.String" value="3 +1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&#x160;lechtic"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -305,7 +452,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="spIncoming" pref="666" max="32767" attributes="0"/>
+                  <Component id="spIncoming" pref="712" max="32767" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -338,15 +485,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="666" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="712" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Component id="spOutgoing" alignment="0" pref="666" max="32767" attributes="0"/>
+                  <Component id="spOutgoing" alignment="0" pref="712" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="179" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Component id="spOutgoing" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>

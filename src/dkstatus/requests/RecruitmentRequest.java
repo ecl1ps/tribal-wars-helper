@@ -37,6 +37,12 @@ import org.jsoup.select.Elements;
 public class RecruitmentRequest extends AbstractUpdateRequest {
     private final Village v;
 
+    private enum RecruitmentType {
+        BARRACS,
+        STABLES,
+        GARAGE
+    }
+    
     public RecruitmentRequest(Village village) {
         v = village;
     }
@@ -55,12 +61,21 @@ public class RecruitmentRequest extends AbstractUpdateRequest {
         for (Unit u : v.getUnits())
             u.reset();
         
-        Elements buildings = doc.select(".current_prod_wrapper");
-        for (Element building : buildings) {
-            
-            DateTime finish = new DateTime();
+        parseBuildingRecruitment(doc.select("#replace_barracks").first(), RecruitmentType.BARRACS);
+        parseBuildingRecruitment(doc.select("#replace_stable").first(), RecruitmentType.STABLES);
+        parseBuildingRecruitment(doc.select("#replace_garage").first(), RecruitmentType.GARAGE);
+
+        WebRequestService.scheduleTask(new RecruitmentRequest(v), Utils.randSec(60, 180));
+        WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_UNITS);
+    }
+
+    private void parseBuildingRecruitment(Element building, RecruitmentType type) throws NumberFormatException {
+        DateTime finish = new DateTime();
+        int recruitingUnits = 0;
+              
+        if (building != null) {
             Elements rows = building.select(".trainqueue_wrap tr");
-            
+
             for (Element row : rows) {
                 Element typeDiv = row.select("div").first();
                 if (typeDiv == null)
@@ -70,32 +85,46 @@ public class RecruitmentRequest extends AbstractUpdateRequest {
 
                 Unit unit = getUnitByClass(classes);
 
-                String count = row.select("td").first().text().split(" ")[0];
-                unit.setRecruiting(unit.getRecruiting() + Integer.parseInt(count));
+                String countString = row.select("td").first().text().split(" ")[0];
+                int count = Integer.parseInt(countString);
+                unit.setRecruiting(unit.getRecruiting() + count);
+                recruitingUnits += count;
 
                 String countdown = row.select("td").get(1).text();
 
                 PeriodFormatter format = new PeriodFormatterBuilder()
-                    .appendHours()
-                    .appendSeparator(":")
-                    .appendMinutes()
-                    .appendSeparator(":")
-                    .appendSeconds()
-                    .toFormatter();
+                        .appendHours()
+                        .appendSeparator(":")
+                        .appendMinutes()
+                        .appendSeparator(":")
+                        .appendSeconds()
+                        .toFormatter();
 
                 Period duration;
                 try {
                     duration = format.parsePeriod(countdown);
                     finish = finish.plus(duration);
-                    unit.setRecruitmentFinishes(finish);
                 } catch (IllegalArgumentException e) {
                     Logger.getLogger(RecruitmentRequest.class.getName()).log(Level.WARNING, "Error parsing period {0}", countdown);
                 }
             }
         }
-
-        WebRequestService.scheduleTask(new RecruitmentRequest(v), Utils.randSec(60, 180));
-        WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_UNITS);
+        
+        switch (type) {
+            case BARRACS:
+                v.getRecruitmentData().setBarracksCount(recruitingUnits);
+                v.getRecruitmentData().setBarracksFinished(finish);
+                break;
+            case STABLES:
+                v.getRecruitmentData().setStableCount(recruitingUnits);
+                v.getRecruitmentData().setStableFinished(finish);
+                break;
+            case GARAGE:
+                v.getRecruitmentData().setGarageCount(recruitingUnits);
+                v.getRecruitmentData().setGarageFinished(finish);
+                break;                
+        }
+        
     }
 
     private Unit getUnitByClass(Set<String> classes) {

@@ -90,6 +90,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         lblPointCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/wheel.png"))); // NOI18N
         lblPointCount.setText("0");
+        lblPointCount.setToolTipText("Body hráče");
 
         lblAnnounce.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/announce.png"))); // NOI18N
         lblAnnounce.setText("Oznámení");
@@ -104,6 +105,7 @@ public class MainWindow extends javax.swing.JFrame {
         lblIncomingAttackCount.setForeground(java.awt.Color.red);
         lblIncomingAttackCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/attacked.png"))); // NOI18N
         lblIncomingAttackCount.setText("0");
+        lblIncomingAttackCount.setToolTipText("Útočící vojska");
 
         btnUpdate.setText("Aktualizovat");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +116,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         lblNextUpdateIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/time.png"))); // NOI18N
         lblNextUpdateIn.setText("0");
+        lblNextUpdateIn.setToolTipText("Příští aktualizace");
 
         btnResetAnnounces.setText("Ukončit poplach");
         btnResetAnnounces.addActionListener(new java.awt.event.ActionListener() {
