@@ -30,10 +30,7 @@ public class VillageListRequest extends AbstractUpdateRequest {
         Document doc = Jsoup.parse(resultHtml);
         
         if (!Utils.checkUserLogged(doc, world)) {
-            int delay = Utils.randSec(30, 60);
-            world.setNextUpdateIn(new DateTime().plusMillis(delay));
-            WebRequestService.scheduleTask(new BasicDataRequest(), delay);
-            WindowManager.getWindow().updateWindow(world);
+            reschedule();
             return;
         }
         
@@ -74,6 +71,10 @@ public class VillageListRequest extends AbstractUpdateRequest {
 
     @Override
     public void reschedule() {
-        WebRequestService.scheduleTask(new BasicDataRequest(), Utils.randSec(60, 2 * 60));
+        World world = WebRequestService.getWorld();
+        int delay = Utils.randSec(60, 2 * 60);
+        world.setNextUpdateIn(new DateTime().plusMillis(delay));
+        WindowManager.getWindow().updateWindow(world);        
+        WebRequestService.scheduleTask(new BasicDataRequest(), delay);
     }
 }

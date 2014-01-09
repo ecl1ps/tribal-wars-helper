@@ -127,8 +127,4 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
                 return t;
         return CommandType.UNKNOWN_O;
     }
-
-    @Override
-    public void reschedule() {
-    }
 }

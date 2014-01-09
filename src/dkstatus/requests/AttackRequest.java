@@ -114,8 +114,4 @@ public class AttackRequest extends AbstractUpdateRequest {
         Logger.getLogger(AttackRequest.class.getName()).log(Level.FINE, "Executed attack on {0}", data.getTarget());
     }
 
-    @Override
-    public void reschedule() {
-    }
-   
 }

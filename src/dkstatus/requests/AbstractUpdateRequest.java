@@ -21,6 +21,10 @@ import org.apache.http.message.BasicNameValuePair;
  * @author Johny
  */
 public abstract class AbstractUpdateRequest implements IUpdateRequest {
+
+    @Override
+    public void reschedule() {
+    }
     
     protected String executeGet(String link) throws IOException {
         
