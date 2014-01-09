@@ -1,36 +1,18 @@
 package dkstatus.requests;
 
-import dkstatus.Config;
 import dkstatus.Utils;
-import dkstatus.WebRequestService;
-import dkstatus.browser.BrowserManager;
-import dkstatus.sms.SmsSender;
 import dkstatus.world.AttackData;
-import dkstatus.world.MapPosition;
 import dkstatus.world.Unit;
 import dkstatus.world.UnitType;
-import dkstatus.world.Village;
 import dkstatus.world.World;
 import java.io.IOException;
-import java.text.Normalizer;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.rmi.CORBA.Util;
-import org.apache.http.Consts;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  *
@@ -130,6 +112,10 @@ public class AttackRequest extends AbstractUpdateRequest {
         executePost(link, pairs, extraHeaders);
         
         Logger.getLogger(AttackRequest.class.getName()).log(Level.FINE, "Executed attack on {0}", data.getTarget());
+    }
+
+    @Override
+    public void reschedule() {
     }
    
 }

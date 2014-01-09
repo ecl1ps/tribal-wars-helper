@@ -2,7 +2,6 @@ package dkstatus.requests;
 
 import dkstatus.Config;
 import dkstatus.Utils;
-import dkstatus.WebRequestService;
 import dkstatus.sms.SmsSender;
 import dkstatus.ui.UpdateType;
 import dkstatus.ui.WindowManager;
@@ -127,5 +126,9 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
             if (t.isIncoming() == incoming && commandHeader.startsWith(t.getParseString()))
                 return t;
         return CommandType.UNKNOWN_O;
+    }
+
+    @Override
+    public void reschedule() {
     }
 }

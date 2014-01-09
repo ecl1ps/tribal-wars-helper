@@ -31,9 +31,11 @@ public class UpdateTask extends TimerTask {
         try {
             request.updateData(world);
         } catch (EOFException ex) {
-            // request error (timeout?)              
+            // request error (timeout?)   
+            Logger.getLogger(UpdateTask.class.getName()).log(Level.INFO, "{0} - rescheduling", ex.getMessage());
         } catch (UnknownHostException | HttpHostConnectException | NoRouteToHostException | HttpResponseException ex) {
             // without internet connection
+            Logger.getLogger(UpdateTask.class.getName()).log(Level.INFO, "{0} - rescheduling", ex.getMessage());
             world.getPlayer().setName("Offline");
         } catch (Exception ex) { // prevents silent thread termination
             Logger.getLogger(UpdateTask.class.getName()).log(Level.SEVERE, null, ex);

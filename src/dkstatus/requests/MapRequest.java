@@ -146,18 +146,23 @@ public class MapRequest extends AbstractUpdateRequest {
                         name = (String)n;
                     Player owner = new Player();
                     owner.setId(village.getInt(4));
-                    Village v = new Village(id, name, owner, new MapPosition(x + baseX, y + baseY));
+                    Village vil = new Village(id, name, owner, new MapPosition(x + baseX, y + baseY));
                     String points = Utils.clearNumber(village.getString(3));
                     if (points.equals(""))
-                        v.setPoints(0);
+                        vil.setPoints(0);
                     else
-                        v.setPoints(Integer.parseInt(points));
-                    world.addVillage(v);
+                        vil.setPoints(Integer.parseInt(points));
+                    world.addVillage(vil);
                 }                
             }
         }
         
         WindowManager.getWindow().updateRaidHelpers(world);
         WebRequestService.scheduleTask(new MapRequest(v), Utils.randSec(60 * 60 * 2, 60 * 60 * 3)); // 2 - 3 hours
+    }
+
+    @Override
+    public void reschedule() {
+        WebRequestService.scheduleTask(new MapRequest(v), Utils.randSec(60 * 3, 60 * 5)); // 3 - 5 min
     }
 }

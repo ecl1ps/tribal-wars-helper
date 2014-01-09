@@ -154,4 +154,8 @@ public class VillageDataRequest extends AbstractUpdateRequest {
                 u.setInVillage(Integer.parseInt(td.select("strong").first().text()));
         }
     }
+
+    @Override
+    public void reschedule() {
+    }
 }

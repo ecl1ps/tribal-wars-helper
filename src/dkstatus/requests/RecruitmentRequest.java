@@ -1,15 +1,9 @@
 package dkstatus.requests;
 
-import dkstatus.Config;
 import dkstatus.Utils;
 import dkstatus.WebRequestService;
-import dkstatus.sms.SmsSender;
 import dkstatus.ui.UpdateType;
 import dkstatus.ui.WindowManager;
-import dkstatus.world.CommandType;
-import dkstatus.world.MarchingArmy;
-import dkstatus.world.MapPosition;
-import dkstatus.world.Player;
 import dkstatus.world.Unit;
 import dkstatus.world.UnitType;
 import dkstatus.world.Village;
@@ -20,9 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.PeriodFormat;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.jsoup.Jsoup;
@@ -65,8 +56,8 @@ public class RecruitmentRequest extends AbstractUpdateRequest {
         parseBuildingRecruitment(doc.select("#replace_stable").first(), RecruitmentType.STABLES);
         parseBuildingRecruitment(doc.select("#replace_garage").first(), RecruitmentType.GARAGE);
 
-        WebRequestService.scheduleTask(new RecruitmentRequest(v), Utils.randSec(60, 180));
         WindowManager.getWindow().updateVillagePanel(v, UpdateType.VILLAGE_UNITS);
+        WebRequestService.scheduleTask(new RecruitmentRequest(v), Utils.randSec(60, 180));
     }
 
     private void parseBuildingRecruitment(Element building, RecruitmentType type) throws NumberFormatException {
@@ -144,4 +135,9 @@ public class RecruitmentRequest extends AbstractUpdateRequest {
         }
         return null;
     }
+    
+    @Override
+    public void reschedule() {
+        WebRequestService.scheduleTask(new RecruitmentRequest(v), Utils.randSec(3 * 60, 5 * 60));
+    }    
 }

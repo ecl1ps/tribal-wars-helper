@@ -71,4 +71,9 @@ public class VillageListRequest extends AbstractUpdateRequest {
         
         WebRequestService.scheduleTask(new BasicDataRequest(), 0);
     }
+
+    @Override
+    public void reschedule() {
+        WebRequestService.scheduleTask(new BasicDataRequest(), Utils.randSec(60, 2 * 60));
+    }
 }

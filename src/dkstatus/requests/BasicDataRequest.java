@@ -12,7 +12,7 @@ import org.joda.time.DateTime;
  *
  * @author Johny
  */
-public class BasicDataRequest implements IUpdateRequest{
+public class BasicDataRequest implements IUpdateRequest {
     
     @Override
     public void updateData(World world) throws IOException {
@@ -32,5 +32,10 @@ public class BasicDataRequest implements IUpdateRequest{
             world.setNextUpdateIn(new DateTime().plusMillis(delay));
             WebRequestService.scheduleTask(new BasicDataRequest(), delay);
         }
+    }
+
+    @Override
+    public void reschedule() {
+        WebRequestService.scheduleTask(new BasicDataRequest(), Utils.randSec(60, 2 * 60));
     }
 }
