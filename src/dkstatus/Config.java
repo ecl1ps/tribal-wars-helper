@@ -33,7 +33,9 @@ public class Config {
         BROWSER_CLASS,
         
         HAS_MESSAGE_ALERT,
-        HAS_MESSAGE_ALERT_CONTINUOUS
+        HAS_MESSAGE_ALERT_CONTINUOUS,
+        
+        VILLAGE_NAME_WITH_COORDS
     }
     
     public static void init() {
@@ -45,7 +47,8 @@ public class Config {
         properties.setProperty(ConfigKey.PROXY_PORT.name(), "8080");
         properties.setProperty(ConfigKey.BROWSER_CLASS.name(), FirefoxDataProvider.class.getName());
         properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT.name(), "false");
-        properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT_CONTINUOUS.name(), "false");   
+        properties.setProperty(ConfigKey.HAS_MESSAGE_ALERT_CONTINUOUS.name(), "false");  
+        properties.setProperty(ConfigKey.VILLAGE_NAME_WITH_COORDS.name(), "true"); 
         
         //init with defaults
         properties = new Properties(properties);

@@ -309,13 +309,19 @@ public class MainWindow extends javax.swing.JFrame {
             VillageTabsPanel vp = null;
             if (newIds.contains(v.getId())) {
                 vp = new VillageTabsPanel(v);
-                tpVillages.add(v.toString(), vp);
+                if (Config.getBoolProperty(Config.ConfigKey.VILLAGE_NAME_WITH_COORDS))
+                    tpVillages.add(v.toStringSimple(), vp);
+                else
+                    tpVillages.add(v.getName(), vp);                
             } else {
                 for (int i = 0; i < tpVillages.getTabCount(); i++) {
                     VillageTabsPanel tmp = (VillageTabsPanel) tpVillages.getComponentAt(i);
                     if (tmp.getId() == v.getId()) {
                         vp = tmp;
-                        tpVillages.setTitleAt(i, v.toString());
+                        if (Config.getBoolProperty(Config.ConfigKey.VILLAGE_NAME_WITH_COORDS))
+                            tpVillages.setTitleAt(i, v.toStringSimple());
+                        else
+                            tpVillages.setTitleAt(i, v.getName());
                         break;
                     }
                 }

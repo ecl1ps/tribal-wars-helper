@@ -7,6 +7,7 @@ import dkstatus.world.RecruitmentData;
 import dkstatus.world.Unit;
 import dkstatus.world.UnitType;
 import dkstatus.world.Village;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
@@ -198,9 +199,9 @@ public class VillageMainPanel extends javax.swing.JPanel {
             .addGroup(pVillageInfoLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(lblVillageName)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
             .addGroup(pVillageInfoLayout.createSequentialGroup()
-                .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pResources, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pVillageInfoLayout.setVerticalGroup(
@@ -482,11 +483,31 @@ public class VillageMainPanel extends javax.swing.JPanel {
     private void updateCommonData(Village v) {
         lblVillageName.setText(v.toString());
         
-        lblWoodCount.setText(String.valueOf(v.getResources().getWood()));
-        lblStoneCount.setText(String.valueOf(v.getResources().getStone()));
-        lblIronCount.setText(String.valueOf(v.getResources().getIron()));
-        lblStorageCount.setText(String.valueOf(v.getResources().getStorage()));
-        lblPopulation.setText(v.getPopulation().toString());
+        if (v.getPopulation().getMax() > 0 && v.getResources().getStorage() > 0) {
+            lblWoodCount.setText(String.valueOf(v.getResources().getWood()));
+            if (v.getResources().getWood() * 100 / v.getResources().getStorage() >= 95)
+                lblWoodCount.setForeground(Color.red);
+            else
+                lblWoodCount.setForeground(Color.black);        
+            lblStoneCount.setText(String.valueOf(v.getResources().getStone()));
+            if (v.getResources().getStone() * 100 / v.getResources().getStorage() >= 95)
+                lblStoneCount.setForeground(Color.red);
+            else
+                lblStoneCount.setForeground(Color.black);         
+            lblIronCount.setText(String.valueOf(v.getResources().getIron()));
+            if (v.getResources().getIron() * 100 / v.getResources().getStorage() >= 95)
+                lblIronCount.setForeground(Color.red);
+            else
+                lblIronCount.setForeground(Color.black);         
+            lblStorageCount.setText(String.valueOf(v.getResources().getStorage()));
+        
+            int pct = v.getPopulation().getCurrent() * 100 / v.getPopulation().getMax();
+            lblPopulation.setText(String.format("%s/%s (%d%%)", v.getPopulation().getCurrent(), v.getPopulation().getMax(), pct));
+            if (pct >= 95)
+                lblPopulation.setForeground(Color.red);
+            else
+                lblPopulation.setForeground(Color.black);
+        }
         
         Collections.sort(v.getIncomingArmies());
         Collections.sort(v.getOutgoingArmies());
