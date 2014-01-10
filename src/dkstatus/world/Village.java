@@ -18,6 +18,7 @@ public class Village implements IValidable {
     private String name = "";
     private Player owner = new Player();
     private MapPosition position = new MapPosition();
+    private int warningFlags = 0;
     
     private final Resources resources = new Resources();
     private final Population population = new Population();
@@ -242,5 +243,20 @@ public class Village implements IValidable {
             if (u.getType() == type)
                 u.setInVillage(u.getInVillage() - count);
     }
-        
+
+    public int getWarningFlags() {
+        return warningFlags;
+    }
+
+    public void setWarningFlag(int flag) {
+        warningFlags |= flag;
+    }
+    
+    public void removeWarningFlag(int flag) {
+        warningFlags &= ~flag;
+    }    
+    
+    public boolean hasWarning() {
+        return warningFlags > 0;
+    }
 }

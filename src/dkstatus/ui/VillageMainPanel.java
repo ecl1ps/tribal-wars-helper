@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -468,15 +469,26 @@ public class VillageMainPanel extends javax.swing.JPanel {
     void updateVillage(Village v, UpdateType type) {
         switch (type) {
             case VILLAGE_COMMON:
+                v.removeWarningFlag(0x1);
                 updateCommonData(v);
                 updateUnits(v);
                 break;
             case VILLAGE_UNITS:
+                v.removeWarningFlag(0x2);
                 updateUnits(v);
                 break;    
             case VILLAGE_BUILDINGS:
+                v.removeWarningFlag(0x4);
                 updateBuildings(v);
                 break;                 
+        }
+
+        if (v.hasWarning()) {
+            UIUtils.setTabForeground(getParent().getParent(), 
+                    (JTabbedPane)getParent().getParent().getParent(), Color.red);
+        } else {
+            UIUtils.setTabForeground(getParent().getParent(), 
+                    (JTabbedPane)getParent().getParent().getParent(), Color.black);
         }
     }
 
@@ -484,28 +496,36 @@ public class VillageMainPanel extends javax.swing.JPanel {
         lblVillageName.setText(v.toString());
         
         if (v.getPopulation().getMax() > 0 && v.getResources().getStorage() > 0) {
+            
             lblWoodCount.setText(String.valueOf(v.getResources().getWood()));
-            if (v.getResources().getWood() * 100 / v.getResources().getStorage() >= 95)
+            if (v.getResources().getWood() * 100 / v.getResources().getStorage() >= 95) {
+                v.setWarningFlag(0x1);
                 lblWoodCount.setForeground(Color.red);
-            else
-                lblWoodCount.setForeground(Color.black);        
+            } else
+                lblWoodCount.setForeground(Color.black); 
+            
             lblStoneCount.setText(String.valueOf(v.getResources().getStone()));
-            if (v.getResources().getStone() * 100 / v.getResources().getStorage() >= 95)
+            if (v.getResources().getStone() * 100 / v.getResources().getStorage() >= 95) {
+                v.setWarningFlag(0x1);
                 lblStoneCount.setForeground(Color.red);
-            else
-                lblStoneCount.setForeground(Color.black);         
+            } else
+                lblStoneCount.setForeground(Color.black); 
+            
             lblIronCount.setText(String.valueOf(v.getResources().getIron()));
-            if (v.getResources().getIron() * 100 / v.getResources().getStorage() >= 95)
+            if (v.getResources().getIron() * 100 / v.getResources().getStorage() >= 95) {
+                v.setWarningFlag(0x1);
                 lblIronCount.setForeground(Color.red);
-            else
+            } else
                 lblIronCount.setForeground(Color.black);         
+            
             lblStorageCount.setText(String.valueOf(v.getResources().getStorage()));
         
             int pct = v.getPopulation().getCurrent() * 100 / v.getPopulation().getMax();
             lblPopulation.setText(String.format("%s/%s (%d%%)", v.getPopulation().getCurrent(), v.getPopulation().getMax(), pct));
-            if (pct >= 95)
+            if (pct >= 95) {
+                v.setWarningFlag(0x1);
                 lblPopulation.setForeground(Color.red);
-            else
+            } else
                 lblPopulation.setForeground(Color.black);
         }
         
@@ -536,9 +556,12 @@ public class VillageMainPanel extends javax.swing.JPanel {
         if (d.getBarracksCount() > 0) {
             lblBarracksCount.setText(String.format("+%d", d.getBarracksCount()));
             lblBarracksTime.setText(d.getBarracksFinished().toString("E HH:mm:ss"));
+            lblBarracksCount.setForeground(Color.black);
         } else {
-            lblBarracksCount.setText("");
-            lblBarracksTime.setText("");            
+            v.setWarningFlag(0x2);
+            lblBarracksCount.setText("+0");
+            lblBarracksTime.setText("");  
+            lblBarracksCount.setForeground(Color.red);
         }
         
         if (d.getStableCount()> 0) {

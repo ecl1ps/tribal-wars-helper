@@ -1,6 +1,8 @@
 package dkstatus.ui;
 
 import dkstatus.Utils;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.MouseAdapter;
@@ -11,6 +13,7 @@ import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -34,4 +37,16 @@ public class UIUtils {
             }
         });
     }
+    
+    public static void setTabForeground(Component componentToColorize, JTabbedPane parent, Color newColor) {
+        for (int i = 0; i < parent.getComponentCount(); ++i)
+            if (parent.getComponentAt(i) == componentToColorize)
+                parent.setForegroundAt(i, newColor);
+    }
+    
+    public static void setTabBackground(Component componentToColorize, JTabbedPane parent, Color newColor) {
+        for (int i = 0; i < parent.getComponentCount(); ++i)
+            if (parent.getComponentAt(i) == componentToColorize)
+                parent.setBackgroundAt(i, newColor);
+    }    
 }

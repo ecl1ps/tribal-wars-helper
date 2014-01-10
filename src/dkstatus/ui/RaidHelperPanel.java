@@ -483,7 +483,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         lblMaxDist.setText("Max. vzdálenost");
 
         tfMaxDist.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        tfMaxDist.setText("10");
+        tfMaxDist.setText("15");
         tfMaxDist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfMaxDistActionPerformed(evt);
