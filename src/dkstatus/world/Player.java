@@ -107,11 +107,9 @@ public class Player {
 
     public int getIncomingAttackCount() {
         int incomingAttacks = 0;
-        for (Village v : villages) {
-            for (MarchingArmy a : v.getIncomingArmies())
-                if (a.getCommandType() == CommandType.INCOMING_ATTACK)
-                    incomingAttacks++;
-        }
+        for (Village v : villages)
+            incomingAttacks += v.getIncomingAttackCount();
+
         return incomingAttacks;
     }
     

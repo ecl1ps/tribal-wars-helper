@@ -482,6 +482,11 @@ public class VillageMainPanel extends javax.swing.JPanel {
                 updateBuildings(v);
                 break;                 
         }
+        
+        if (v.getIncomingAttackCount() > 0)
+            v.setWarningFlag(0x8);
+        else
+            v.removeWarningFlag(0x8);
 
         if (v.hasWarning()) {
             UIUtils.setTabForeground(getParent().getParent(), 

@@ -259,4 +259,13 @@ public class Village implements IValidable {
     public boolean hasWarning() {
         return warningFlags > 0;
     }
+    
+    public int getIncomingAttackCount() {
+        int count = 0;
+        for (MarchingArmy a : getIncomingArmies())
+            if (a.getCommandType() == CommandType.INCOMING_ATTACK)
+                count++;
+        
+        return count;
+    }
 }
