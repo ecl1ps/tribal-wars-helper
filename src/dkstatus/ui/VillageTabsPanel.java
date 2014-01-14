@@ -26,6 +26,9 @@ public class VillageTabsPanel extends javax.swing.JPanel {
         raid = new RaidHelperPanel(village);
         tpVillage.add("Rabování", raid);
         
+        sniper = new SniperPanel(village);
+        tpVillage.add("Plánovač", sniper); 
+        
         map = new GameMapPanel(village);
         tpVillage.add("Mapa", map);        
     }
@@ -59,6 +62,7 @@ public class VillageTabsPanel extends javax.swing.JPanel {
 
     private final VillageMainPanel info;
     private final RaidHelperPanel raid;
+    private final SniperPanel sniper;
     private final GameMapPanel map;
     
     public Integer getId() {
@@ -71,6 +75,10 @@ public class VillageTabsPanel extends javax.swing.JPanel {
 
     RaidHelperPanel getRaidpPanel() {
         return raid;
+    }
+
+    SniperPanel getSniper() {
+        return sniper;
     }
 
     GameMapPanel getMapPanel() {

@@ -22,12 +22,12 @@ public enum ArmyType {
     
     private final String name;
     private final String shortName;
-    private final int speed; //  minutes per length unit
+    private final int travelTime; //  minutes per length unit
     
     private ArmyType(String name, String shortName, int speed) {
         this.name = name;
         this.shortName = shortName;
-        this.speed = speed;
+        this.travelTime = speed;
     }
     
     public String getName() {
@@ -40,7 +40,11 @@ public enum ArmyType {
     
     public Period getTimeToTravell(MapPosition from, MapPosition to) {
         double distance = from.distance(to);
-        long ms = (long)(((speed * 60 * 1000 * distance) / Config.WORLD_SPEED) / Config.WORLD_MARCH_SPEED);
+        long ms = (long)(((travelTime * 60 * 1000 * distance) / Config.WORLD_SPEED) / Config.WORLD_MARCH_SPEED);
         return new Period(ms, PeriodType.time());
+    }
+
+    public boolean isSlowerThan(ArmyType other) {
+        return travelTime > other.travelTime;
     }
 }
