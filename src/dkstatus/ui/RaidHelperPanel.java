@@ -39,7 +39,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     private List<Village> worldVillages;
     private final Village attacker;
     private VillageSelecton villageSelectionMode = VillageSelecton.BARBARIC;
-    private float maxDist = 10;
+    private float maxDist = 0;
     
     /**
      * Creates new form RaidHelperPanel
@@ -483,7 +483,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         lblMaxDist.setText("Max. vzdálenost");
 
         tfMaxDist.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        tfMaxDist.setText("15");
+        tfMaxDist.setText("0");
         tfMaxDist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfMaxDistActionPerformed(evt);
@@ -786,7 +786,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
                 if ((villageSelectionMode == VillageSelecton.BARBARIC && !v.hasOwnerPlayer() && v.getPoints() > 0) ||
                        (villageSelectionMode == VillageSelecton.PLAYER && v.hasOwnerPlayer()) ||
                         villageSelectionMode == VillageSelecton.ALL) {
-                    if (attacker.getDistance(v) <= maxDist)
+                    if (maxDist == 0 || attacker.getDistance(v) <= maxDist)
                         transformed.add(v);
                 }            
         }
