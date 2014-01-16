@@ -489,7 +489,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
             v.removeWarningFlag(0x8);
 
         if (v.hasWarning()) {
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Warning: {0} {1}", new Object[]{v.getName(), v.getWarningFlags()});
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Village warning: {0} {1}", new Object[]{v.getName(), v.getWarningFlags()});
             UIUtils.setTabForeground(getParent().getParent(), 
                     (JTabbedPane)getParent().getParent().getParent(), Color.red);
         } else {

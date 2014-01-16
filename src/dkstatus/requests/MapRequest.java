@@ -64,6 +64,7 @@ public class MapRequest extends AbstractUpdateRequest {
         //System.out.println(data.toString(4));
         for (int i = 0; i < data.length(); ++i) {
             JSONObject continent = data.getJSONObject(i).getJSONObject("data");
+            //System.out.println(continent.toString(4));
             int baseX = continent.getInt("x");
             int baseY = continent.getInt("y");
             
