@@ -61,6 +61,7 @@ public class MapRequest extends AbstractUpdateRequest {
             return;
             
         JSONArray data = new JSONArray(jsonData);
+        //System.out.println(data.toString(4));
         for (int i = 0; i < data.length(); ++i) {
             JSONObject continent = data.getJSONObject(i).getJSONObject("data");
             int baseX = continent.getInt("x");
@@ -96,9 +97,10 @@ public class MapRequest extends AbstractUpdateRequest {
                     "konec ochrany" nebo 0
                 ],* 
              */
-            JSONObject villages = continent.getJSONObject("villages");
-            /*
-                "19": {
+            JSONArray villages = continent.getJSONArray("villages");
+            //System.out.println(villages.toString(4));
+            /*          
+                {
                     "10": [
                         "35761",
                         9,
@@ -108,7 +110,7 @@ public class MapRequest extends AbstractUpdateRequest {
                         "100"
                     ],
                  }
-                "x souradnice (plus baseX)": {
+                 {
                     "y souradnice (plus baseY)": [
                         "id vesnice",
                         9 nezname, nejaka konstanta,
@@ -126,11 +128,8 @@ public class MapRequest extends AbstractUpdateRequest {
                     ],
                  }            
              */
-            Iterator<String> it1 = villages.keys();
-            while (it1.hasNext()) {
-                String key = it1.next();
-                int x = Integer.parseInt(key);
-                JSONObject villagesX = villages.getJSONObject(key);
+            for (int x = 0; x < villages.length(); ++x) {
+                JSONObject villagesX = villages.getJSONObject(x);
                 Iterator<String> it2 = villagesX.keys();
                 while (it2.hasNext()) {
                     String key2 = it2.next();
