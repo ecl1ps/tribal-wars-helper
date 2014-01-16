@@ -31,12 +31,15 @@ public class UpdateTask extends TimerTask {
         try {
             request.updateData(world);
         } catch (EOFException ex) {
-            // request error (timeout?)   
-            Logger.getLogger(UpdateTask.class.getName()).log(Level.INFO, "Exception: {0} - rescheduling", ex.toString());
+            // request error (timeout?)  
+            // Unexpected end of ZLIB input stream
+            Logger.getLogger(UpdateTask.class.getName()).log(Level.INFO, "Exception in {0}: {1} - rescheduling", 
+                    new Object[]{request.getClass().getName(), ex.toString()});
             request.reschedule();
         } catch (UnknownHostException | HttpHostConnectException | NoRouteToHostException | HttpResponseException ex) {
             // without internet connection
-            Logger.getLogger(UpdateTask.class.getName()).log(Level.INFO, "Exception: {0} - rescheduling", ex.toString());
+            Logger.getLogger(UpdateTask.class.getName()).log(Level.INFO, "Exception in {0}: {1} - rescheduling", 
+                    new Object[]{request.getClass().getName(), ex.toString()});
             world.getPlayer().setName("Offline");
             request.reschedule();
         } catch (Exception ex) { // prevents silent thread termination
