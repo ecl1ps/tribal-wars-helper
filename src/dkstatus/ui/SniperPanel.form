@@ -662,6 +662,7 @@
         <Component class="javax.swing.JButton" name="btnAttack">
           <Properties>
             <Property name="text" type="java.lang.String" value="Poslat"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbAttack">
@@ -717,7 +718,6 @@
         <Component class="javax.swing.JTextField" name="tfSummary">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="&#xda;tok na 123|456 Nejpomalej&#x161;&#xed;: Lehk&#xe1; kaval&#xe9;rie P&#x159;esun: 15:30:35:158 &#xda;tok: Po 14:25:11:356 Dopad: Po 17:40:00:000"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

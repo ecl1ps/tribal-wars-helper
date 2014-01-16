@@ -440,6 +440,7 @@ public class SniperPanel extends javax.swing.JPanel {
         rbAttackTime.setText("čas útoku");
 
         btnAttack.setText("Poslat");
+        btnAttack.setEnabled(false);
 
         buttonGroup2.add(rbAttack);
         rbAttack.setSelected(true);
@@ -506,7 +507,6 @@ public class SniperPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         tfSummary.setEditable(false);
-        tfSummary.setText("Útok na 123|456 Nejpomalejší: Lehká kavalérie Přesun: 15:30:35:158 Útok: Po 14:25:11:356 Dopad: Po 17:40:00:000");
         tfSummary.setBorder(null);
 
         javax.swing.GroupLayout pTimesLayout = new javax.swing.GroupLayout(pTimes);
