@@ -471,11 +471,11 @@ public class VillageMainPanel extends javax.swing.JPanel {
             case VILLAGE_COMMON:
                 v.removeWarningFlag(0x1);
                 updateCommonData(v);
-                updateUnits(v);
+                updateUnits(v, false);
                 break;
             case VILLAGE_UNITS:
                 v.removeWarningFlag(0x2);
-                updateUnits(v);
+                updateUnits(v, true);
                 break;    
             case VILLAGE_BUILDINGS:
                 v.removeWarningFlag(0x4);
@@ -483,12 +483,13 @@ public class VillageMainPanel extends javax.swing.JPanel {
                 break;                 
         }
         
-        if (v.getIncomingAttackCount() > 0)
+        if (v.IsAttacked())
             v.setWarningFlag(0x8);
         else
             v.removeWarningFlag(0x8);
 
         if (v.hasWarning()) {
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Warning: {0} {1}", new Object[]{v.getName(), v.getWarningFlags()});
             UIUtils.setTabForeground(getParent().getParent(), 
                     (JTabbedPane)getParent().getParent().getParent(), Color.red);
         } else {
@@ -527,7 +528,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
         
             int pct = v.getPopulation().getCurrent() * 100 / v.getPopulation().getMax();
             lblPopulation.setText(String.format("%s/%s (%d%%)", v.getPopulation().getCurrent(), v.getPopulation().getMax(), pct));
-            if (pct >= 95) {
+            if (pct >= 95 && v.getPopulation().getMax() != 24000) {
                 v.setWarningFlag(0x1);
                 lblPopulation.setForeground(Color.red);
             } else
@@ -543,7 +544,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
             requestFocusInWindow(); // TODO: not working
     }
 
-    private void updateUnits(Village v) {
+    private void updateUnits(Village v, boolean withWarnings) {
         hideUnits();
         
         for (Unit u : v.getUnits()) {
@@ -561,12 +562,12 @@ public class VillageMainPanel extends javax.swing.JPanel {
         if (d.getBarracksCount() > 0) {
             lblBarracksCount.setText(String.format("+%d", d.getBarracksCount()));
             lblBarracksTime.setText(d.getBarracksFinished().toString("E HH:mm:ss"));
-            lblBarracksCount.setForeground(Color.black);
         } else {
-            v.setWarningFlag(0x2);
-            lblBarracksCount.setText("+0");
+            // dont't show warning when farm is at max rank and it is almost full
+            if (withWarnings && (v.getPopulation().getMax() != 24000 || v.getPopulation().getCurrent() * 100 / v.getPopulation().getMax() < 95))
+                v.setWarningFlag(0x2);
+            lblBarracksCount.setText("");
             lblBarracksTime.setText("");  
-            lblBarracksCount.setForeground(Color.red);
         }
         
         if (d.getStableCount()> 0) {
