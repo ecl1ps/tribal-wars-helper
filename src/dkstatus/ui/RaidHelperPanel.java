@@ -21,6 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
@@ -39,7 +41,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     private List<Village> worldVillages;
     private final Village attacker;
     private VillageSelecton villageSelectionMode = VillageSelecton.BARBARIC;
-    private float maxDist = 0;
+    private float maxDist = 20;
     
     /**
      * Creates new form RaidHelperPanel
@@ -79,6 +81,9 @@ public class RaidHelperPanel extends javax.swing.JPanel {
             }
         });
         sorter.setSortable(4, false);
+        List<RowSorter.SortKey> keys = new ArrayList<>();
+        keys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
+        sorter.setSortKeys(keys);
         tblVillages.setRowSorter(sorter);
 
         ButtonColumn attackButton = new ButtonColumn(tblVillages, new AbstractAction() {
@@ -483,7 +488,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
         lblMaxDist.setText("Max. vzdálenost");
 
         tfMaxDist.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        tfMaxDist.setText("0");
+        tfMaxDist.setText(String.valueOf((int)maxDist));
         tfMaxDist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfMaxDistActionPerformed(evt);
@@ -707,14 +712,7 @@ public class RaidHelperPanel extends javax.swing.JPanel {
     private javax.swing.JTextField tfSpy;
     private javax.swing.JTextField tfSword;
     // End of variables declaration//GEN-END:variables
-
-    Comparator<Village> byDist = new Comparator<Village>() {
-        @Override
-        public int compare(Village o1, Village o2) {
-            return attacker.getDistance(o1) < attacker.getDistance(o2) ? -1 : 1;
-        }
-    };
-    
+  
     void updateVillages(List<Village> villages) {
         worldVillages = villages;
         transformAndShowVillages();
@@ -791,7 +789,6 @@ public class RaidHelperPanel extends javax.swing.JPanel {
                 }            
         }
         
-        Collections.sort(transformed, byDist);
         ((RaidTableModel)tblVillages.getModel()).setVillages(transformed);
     }
     
