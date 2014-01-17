@@ -41,7 +41,7 @@ public class CommandInfoRequest extends AbstractUpdateRequest {
 
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = executeGet("village=" + villageId + "&id=" + commandId + "&type=" + (incoming ? "other" : "own") + "&screen=info_command");
+        String resultHtml = executeGet(Utils.getGameLink("village=" + villageId + "&id=" + commandId + "&type=" + (incoming ? "other" : "own") + "&screen=info_command"));
         
         Logger.getLogger(CommandInfoRequest.class.getName()).log(Level.FINER, resultHtml);
         

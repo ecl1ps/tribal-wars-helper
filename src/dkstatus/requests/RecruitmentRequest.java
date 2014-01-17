@@ -40,7 +40,7 @@ public class RecruitmentRequest extends AbstractUpdateRequest {
 
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = executeGet("village=" + v.getId() + "&screen=train");
+        String resultHtml = executeGet(Utils.getGameLink("village=" + v.getId() + "&screen=train"));
         
         Logger.getLogger(RecruitmentRequest.class.getName()).log(Level.FINER, resultHtml);
         

@@ -28,7 +28,7 @@ public class AttackRequest extends AbstractUpdateRequest {
     
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = executeGet("village=" + data.getAttacker().getId() + "&screen=place");
+        String resultHtml = executeGet(Utils.getGameLink("village=" + data.getAttacker().getId() + "&screen=place"));
         
         Logger.getLogger(AttackRequest.class.getName()).log(Level.FINER, resultHtml);
         
@@ -55,7 +55,7 @@ public class AttackRequest extends AbstractUpdateRequest {
             pairs.put(unit.getType().getShortcut(), String.valueOf(unit.getInVillage()));
         
         Map<String, String> extraHeaders = new HashMap<>();
-        extraHeaders.put("Referer", Utils.getLink("village=" + data.getAttacker().getId() + "&screen=place"));
+        extraHeaders.put("Referer", Utils.getGameLink("village=" + data.getAttacker().getId() + "&screen=place"));
         
             /*
             archer	0
@@ -82,7 +82,7 @@ public class AttackRequest extends AbstractUpdateRequest {
         } catch (InterruptedException ex) {
         }
         
-        resultHtml = executePost("village=" + data.getAttacker().getId() + "&try=confirm&screen=place", pairs, extraHeaders);
+        resultHtml = executePost(Utils.getGameLink("village=" + data.getAttacker().getId() + "&try=confirm&screen=place"), pairs, extraHeaders);
         
         Logger.getLogger(AttackRequest.class.getName()).log(Level.FINER, resultHtml);
         
@@ -102,7 +102,7 @@ public class AttackRequest extends AbstractUpdateRequest {
             pairs.put(input.attr("name"), input.attr("value"));
         
         extraHeaders.clear();
-        extraHeaders.put("Referer", Utils.getLink("village=" + data.getAttacker().getId() + "&try=confirm&screen=place"));
+        extraHeaders.put("Referer", Utils.getGameLink("village=" + data.getAttacker().getId() + "&try=confirm&screen=place"));
 
         try {    
             Thread.sleep(Utils.randSec(1, 2));

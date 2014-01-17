@@ -8,16 +8,15 @@ import dkstatus.world.MapPosition;
 import dkstatus.world.Player;
 import dkstatus.world.Village;
 import dkstatus.world.World;
+import java.awt.Point;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 /**
  *
@@ -25,43 +24,81 @@ import org.jsoup.nodes.Element;
  */
 public class MapRequest extends AbstractUpdateRequest {
 
-    private final Village v;
+    private final int MAP_STEP_SIZE = 20;
     
-    public MapRequest(Village village) {
-        v = village;
-    }
+    private final int LOADED_NEIGHBOUR_DISTANCE = 40;
+    private final boolean WITH_TILES = false;
+    private final boolean WITH_POLITICAL = false;
+    
 
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = executeGet("village=" + v.getId() + "&screen=map#" + v.getPosition().getPosition().x + ";" + v.getPosition().getPosition().y);
-
-        Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINER, resultHtml);
-
-        Document doc = Jsoup.parse(resultHtml);
-
-        if (!Utils.checkUserLogged(doc, world))
+        if (world.getPlayer().getVillages().isEmpty()) {
+            Logger.getLogger(MapRequest.class.getName()).log(Level.INFO, "Player villages are empty -> rescheduling");
+            reschedule();
             return;
-
-
-        Element script = doc.select("#content_value script").first();
-        if (script == null)
-            return;
-
-        String content = script.html();
-        String[] lines = content.split("[\\r\\n]+");
-        String jsonData = null;
-        for (String line : lines) {
-            line = line.trim();
-            if (line.startsWith("TWMap.sectorPrefech")) {
-                jsonData = line.substring(22);
-                break;
+        }
+        
+        int xMin = 1000, xMax = 0, yMin = 1000, yMax = 0;
+        
+        for (Village v : world.getPlayer().getVillages()) {
+            Point p = v.getPosition().getPosition();
+            if (p.x < xMin)
+                xMin = p.x;
+            if (p.x > xMax)
+                xMax = p.x;   
+            if (p.y < yMin)
+                yMin = p.y;
+            if (p.y > yMax)
+                yMax = p.y;             
+        }
+        
+        // convert coords to tiles: 53 / 20 = 2; 2 * 20 = 40
+        xMin = (xMin / MAP_STEP_SIZE) * MAP_STEP_SIZE - LOADED_NEIGHBOUR_DISTANCE;
+        xMax = (xMax / MAP_STEP_SIZE) * MAP_STEP_SIZE + LOADED_NEIGHBOUR_DISTANCE + MAP_STEP_SIZE;
+        yMin = (yMin / MAP_STEP_SIZE) * MAP_STEP_SIZE - LOADED_NEIGHBOUR_DISTANCE;
+        yMax = (yMax / MAP_STEP_SIZE) * MAP_STEP_SIZE + LOADED_NEIGHBOUR_DISTANCE + MAP_STEP_SIZE;
+        
+        if (xMin < 0)
+            xMin = 0;
+        if (xMax > 980)
+            xMax = 980;
+        if (yMin < 0)
+            yMin = 0;
+        if (yMax > 980)
+            yMax = 980;        
+        
+        int type = 0;
+        if (WITH_TILES)
+            type += 1;
+        if (WITH_POLITICAL)
+            type += 2;
+        
+        StringBuilder sb = new StringBuilder("v=2&e=");
+        sb.append(DateTime.now().getMillis());
+        for (int x = xMin; x <= xMax; x += MAP_STEP_SIZE) {
+            for (int y = yMin; y <= yMax; y += MAP_STEP_SIZE) {
+               sb.append("&");
+               sb.append(x);
+               sb.append("_");
+               sb.append(y);
+               sb.append("=");
+               sb.append(type);
             }
         }
+        
+        // http://cs33.divokekmeny.cz/map.php?v=2&e=1389952055927&460_560=1&460_580=1
+        String jsonData = executeGet(Utils.getMapLink(sb.toString()));
 
-        if (jsonData == null)
+        if (jsonData == null || jsonData.isEmpty())
             return;
+        
+        Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINER, jsonData);
             
         JSONArray data = new JSONArray(jsonData);
+        if (data == null)
+            return;
+        
         //System.out.println(data.toString(4));
         for (int i = 0; i < data.length(); ++i) {
             JSONObject continent = data.getJSONObject(i).getJSONObject("data");
@@ -102,6 +139,18 @@ public class MapRequest extends AbstractUpdateRequest {
             Object villages = continent.get("villages");
             //System.out.println(villages.toString(4));
             /*          
+                    var xy = (sx + x) * 1000 + sy + y;
+                    TWMap.villageKey[v[0]] = xy;
+                    TWMap.villages[xy] = {
+                        id: v[0],
+                        img: v[1],
+                        name: v[2],
+                        points: v[3],
+                        owner: v[4],
+                        mood: v[5],
+                        bonus: v[6],
+                        xy: xy
+                    };            
                 {
                     "10": [
                         "35761",
@@ -146,7 +195,7 @@ public class MapRequest extends AbstractUpdateRequest {
         }
         
         WindowManager.getWindow().updateRaidHelpers(world);
-        WebRequestService.scheduleTask(new MapRequest(v), Utils.randSec(60 * 60 * 2, 60 * 60 * 3)); // 2 - 3 hours
+        WebRequestService.scheduleTask(new MapRequest(), Utils.randSec(60 * 60 * 2, 60 * 60 * 3)); // 2 - 3 hours
     }
 
     private void parseVillageData(JSONObject villagesX, int x, int baseX, int baseY, World world) throws NumberFormatException, JSONException {
@@ -177,6 +226,6 @@ public class MapRequest extends AbstractUpdateRequest {
 
     @Override
     public void reschedule() {
-        WebRequestService.scheduleTask(new MapRequest(v), Utils.randSec(60 * 3, 60 * 5)); // 3 - 5 min
+        WebRequestService.scheduleTask(new MapRequest(), Utils.randSec(60 * 10, 60 * 15)); // 10 - 15 min
     }
 }

@@ -22,7 +22,7 @@ import javax.swing.JTabbedPane;
 public class UIUtils {
 
     public static void transformToHyperlink(JLabel element, String url) {
-        final String fullUrl = Utils.getLink(url);
+        final String fullUrl = Utils.getGameLink(url);
         //element.setText("<html><a href=\"" + fullUrl + "\">" + element.getText() + "</a></html>");
         element.setCursor(new Cursor(Cursor.HAND_CURSOR));
         element.addMouseListener(new MouseAdapter() {

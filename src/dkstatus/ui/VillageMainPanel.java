@@ -50,7 +50,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
                     return;
                 
                 try {
-                    Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=other&screen=info_command")));
+                    Desktop.getDesktop().browse(new URI(Utils.getGameLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=other&screen=info_command")));
                 } catch (URISyntaxException | IOException ex) {
                     Logger.getLogger(UIUtils.class.getName()).log(Level.INFO, null, ex);
                 }
@@ -67,7 +67,7 @@ public class VillageMainPanel extends javax.swing.JPanel {
                     return;
                 
                 try {
-                    Desktop.getDesktop().browse(new URI(Utils.getLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=own&screen=info_command")));
+                    Desktop.getDesktop().browse(new URI(Utils.getGameLink("village=" + villageId + "&id=" + att.getCommandId() + "&type=own&screen=info_command")));
                 } catch (URISyntaxException | IOException ex) {
                     Logger.getLogger(UIUtils.class.getName()).log(Level.INFO, null, ex);
                 }

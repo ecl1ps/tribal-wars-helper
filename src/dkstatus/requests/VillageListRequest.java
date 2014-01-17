@@ -23,7 +23,7 @@ public class VillageListRequest extends AbstractUpdateRequest {
     
     @Override
     public void updateData(World world) throws IOException {
-        String resultHtml = executeGet("screen=overview_villages&mode=prod");
+        String resultHtml = executeGet(Utils.getGameLink("screen=overview_villages&mode=prod"));
         
         Logger.getLogger(VillageListRequest.class.getName()).log(Level.FINER, resultHtml);
         
@@ -39,7 +39,6 @@ public class VillageListRequest extends AbstractUpdateRequest {
         Elements villageRows = doc.select(".overview_table tr");
         
         int delay = 0;
-        int mapDelay = Utils.randSec(3, 8);
         for (Element row : villageRows) {
             if (!row.hasAttr("class"))
                 continue;
@@ -59,13 +58,11 @@ public class VillageListRequest extends AbstractUpdateRequest {
 
             world.getPlayer().addVillage(v);
             
-            WebRequestService.scheduleTask(new MapRequest(v), mapDelay);
-            mapDelay += Utils.randSec(60, 2 * 60);
-            
             delay += Utils.randSec(4, 6);
             WebRequestService.scheduleTask(new RecruitmentRequest(v), delay);
         }
         
+        WebRequestService.scheduleTask(new MapRequest(), Utils.randSec(10, 15));
         WebRequestService.scheduleTask(new BasicDataRequest(), 0);
     }
 

@@ -39,7 +39,7 @@ public class VillageDataRequest extends AbstractUpdateRequest {
         
             v.invalidate();
             
-            String resultHtml = executeGet("village=" + v.getId() + "&screen=overview");
+            String resultHtml = executeGet(Utils.getGameLink("village=" + v.getId() + "&screen=overview"));
             Logger.getLogger(BasicDataRequest.class.getName()).log(Level.FINER, resultHtml);
             Document doc = Jsoup.parse(resultHtml);
             

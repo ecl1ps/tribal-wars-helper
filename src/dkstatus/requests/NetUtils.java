@@ -32,14 +32,14 @@ public class NetUtils {
         return builder.build();
     }
     
-    public static HttpGet prepareGetRequest(String requestParams) {
-        HttpGet request = new HttpGet(Utils.getLink(requestParams));
+    public static HttpGet prepareGetRequest(String link) {
+        HttpGet request = new HttpGet(link);
         BrowserManager.setHeaders(request);
         return request;
     }    
     
-    public static HttpPost preparePostRequest(String requestParams) {
-        HttpPost request = new HttpPost(Utils.getLink(requestParams));
+    public static HttpPost preparePostRequest(String link) {
+        HttpPost request = new HttpPost(link);
         BrowserManager.setHeaders(request);
         return request;
     }     
