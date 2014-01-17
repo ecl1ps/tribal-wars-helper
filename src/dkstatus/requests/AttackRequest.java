@@ -95,7 +95,7 @@ public class AttackRequest extends AbstractUpdateRequest {
         if (confirmForm == null)
             return;
         
-        String link = confirmForm.attr("action").substring(10); // /game.php?village=9845&action=command&h=a8ae&screen=place
+        String link = Utils.getRootLink() + confirmForm.attr("action").substring(1); // /game.php?village=9845&action=command&h=a8ae&screen=place
         
         pairs.clear();
         for (Element input : confirmForm.select("input"))
