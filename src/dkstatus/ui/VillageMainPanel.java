@@ -563,9 +563,6 @@ public class VillageMainPanel extends javax.swing.JPanel {
             lblBarracksCount.setText(String.format("+%d", d.getBarracksCount()));
             lblBarracksTime.setText(d.getBarracksFinished().toString("E HH:mm:ss"));
         } else {
-            // dont't show warning when farm is at max rank and it is almost full
-            if (withWarnings && (v.getPopulation().getMax() != 24000 || v.getPopulation().getCurrent() * 100 / v.getPopulation().getMax() < 95))
-                v.setWarningFlag(0x2);
             lblBarracksCount.setText("");
             lblBarracksTime.setText("");  
         }
@@ -584,7 +581,12 @@ public class VillageMainPanel extends javax.swing.JPanel {
         } else {
             lblGarageCount.setText("");
             lblGarageTime.setText("");            
-        }        
+        }     
+        
+        // dont't show warning when farm is at max rank and it is almost full
+        if (withWarnings && d.getBarracksCount() == 0 && d.getStableCount()== 0 && 
+                (v.getPopulation().getMax() != 24000 || v.getPopulation().getCurrent() * 100 / v.getPopulation().getMax() < 95))
+            v.setWarningFlag(0x2);        
     }
 
     private JLabel getUnitLabel(UnitType type) {
